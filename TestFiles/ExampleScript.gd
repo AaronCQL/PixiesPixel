@@ -30,16 +30,16 @@ func _ready():
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
 
 func _physics_process(delta):
-	direction_input()							# horizontal mvmt
-	sprint_input()
-	jump_input()								# jump	
-	acceleration_curve()
-	attack_input()								# attack
-	on_death()									# handles death	
-	flip_sprite(x_dir)
-	play_animation(x_dir)	
-	better_camera()								# camera
-	velocity.y += gravity * delta 				# gravity
+	direction_input()				# horizontal mvmt
+	sprint_input()					# sprint
+	jump_input()					# jump	
+	acceleration_curve()				# simluate acceleration when moving
+	attack_input()					# attack
+	on_death()					# handles death	
+	flip_sprite(x_dir)				# flips sprite when turning direction
+	play_animation(x_dir)				# handles animations
+	better_camera()					# camera
+	velocity.y += gravity * delta 			# gravity
 	velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 	
 	# DEBUGGING
