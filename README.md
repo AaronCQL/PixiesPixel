@@ -1,9 +1,10 @@
 # PixiesPixel
 
 ## Naming conventions
-- Pascal case for classes/scenes <`MyScene`>  
-- Camel case for variables <`myVar`>  
-- Upper caps for constants <`MY_CONSTANT`>  
+- **Classes/scenes/nodes**: pascal case <`MyScene`>  
+- **Variables/functions**: snake case <`my_var`>  
+- **Signals**: past tense <`door_opened`>  
+- **Constants**: upper caps snake case <`MY_CONSTANT`>  
 
 
 ## Warnings
