@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Maps/TestMap.gd" type="Script" id=1]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 336, 10 )
 
 [node name="TestMap" type="Node2D"]
 script = ExtResource( 1 )
@@ -38,3 +41,9 @@ position = Vector2( 298, 154 )
 
 [node name="3" type="Position2D" parent="SpawnPoints"]
 position = Vector2( 474, 154 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2( 320, 288 )
+shape = SubResource( 1 )
