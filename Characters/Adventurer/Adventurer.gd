@@ -25,7 +25,7 @@ var velocity : Vector2 = Vector2(0, 0)
 
 puppet var repl_position = Vector2()
 puppet var repl_animation = "idle"
-puppet var repl_flip_h = false
+puppet var repl_scale_x = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,7 +49,7 @@ func _physics_process(delta):
 	else:
 		position = repl_position
 		$AnimationPlayer.current_animation = repl_animation
-		$Sprite.flip_h = repl_flip_h		
+		$Sprite.scale.x = repl_scale_x
 	
 func direction_input():
 	x_dir = 0
@@ -119,11 +119,11 @@ func jump_input():
 		
 func flip_sprite(x_dir):
 	if x_dir > 0:
-		$Sprite.flip_h = false
-		rset("repl_flip_h", false)
+		$Sprite.scale.x = 1
+		rset("repl_scale_x", 1)
 	elif x_dir < 0:
-		$Sprite.flip_h = true
-		rset("repl_flip_h", true)
+		$Sprite.scale.x = -1
+		rset("repl_scale_x", -1)
 		
 func play_animation(x_dir):
 	if is_on_floor():
@@ -153,3 +153,4 @@ func play_animation(x_dir):
 
 func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
+
