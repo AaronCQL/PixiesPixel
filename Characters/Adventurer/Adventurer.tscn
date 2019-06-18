@@ -1,94 +1,160 @@
-[gd_scene load_steps=41 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-idle-2-00.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-idle-2-01.png" type="Texture" id=3]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-idle-2-02.png" type="Texture" id=4]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-idle-2-03.png" type="Texture" id=5]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-jump-01.png" type="Texture" id=6]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-jump-02.png" type="Texture" id=7]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-jump-03.png" type="Texture" id=8]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-fall-00.png" type="Texture" id=9]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-fall-01.png" type="Texture" id=10]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run3-00.png" type="Texture" id=11]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run3-01.png" type="Texture" id=12]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run3-02.png" type="Texture" id=13]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run3-03.png" type="Texture" id=14]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run3-04.png" type="Texture" id=15]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run3-05.png" type="Texture" id=16]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack3-01.png" type="Texture" id=17]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack3-02.png" type="Texture" id=18]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack3-03.png" type="Texture" id=19]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack3-04.png" type="Texture" id=20]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack2-02.png" type="Texture" id=21]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack2-03.png" type="Texture" id=22]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack2-04.png" type="Texture" id=23]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack2-05.png" type="Texture" id=24]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-smrslt-00.png" type="Texture" id=25]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-smrslt-01.png" type="Texture" id=26]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-smrslt-02.png" type="Texture" id=27]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-smrslt-03.png" type="Texture" id=28]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run-00.png" type="Texture" id=29]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run-01.png" type="Texture" id=30]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run-02.png" type="Texture" id=31]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run-03.png" type="Texture" id=32]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run-04.png" type="Texture" id=33]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-run-05.png" type="Texture" id=34]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack1-01.png" type="Texture" id=35]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack1-02.png" type="Texture" id=36]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack1-03.png" type="Texture" id=37]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-attack1-04.png" type="Texture" id=38]
+[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.04966, 12.3489 )
 
-[sub_resource type="SpriteFrames" id=2]
-animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
-"loop": true,
-"name": "idle",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
-"loop": false,
-"name": "jump",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "fall",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
-"loop": true,
-"name": "run",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
-"loop": false,
-"name": "attack3",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
-"loop": false,
-"name": "attack2",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ) ],
-"loop": true,
-"name": "double_jump",
-"speed": 10.0
-}, {
-"frames": [ ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
-"loop": true,
-"name": "sprint",
-"speed": 13.0
-}, {
-"frames": [ ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
-"loop": false,
-"name": "attack1",
-"speed": 10.0
-} ]
+[sub_resource type="Animation" id=8]
+resource_name = "attack1"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 42, 43, 44, 45, 46 ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "attack2"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 48, 49, 50, 51, 52 ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "attack3"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 53, 54, 55, 56, 57 ]
+}
+
+[sub_resource type="Animation" id=6]
+resource_name = "double_jump"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 18, 19, 20, 21 ]
+}
+
+[sub_resource type="Animation" id=7]
+resource_name = "fall"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 22, 23 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 38, 39, 40, 41 ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "jump"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 15, 16, 17 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "run"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 112, 113, 114, 115, 116, 117 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "sprint"
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 8, 9, 10, 11, 12 ]
+}
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -100,11 +166,20 @@ __meta__ = {
 position = Vector2( -0.429871, 4.88975 )
 shape = SubResource( 1 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-frames = SubResource( 2 )
-animation = "double_jump"
-playing = true
-__meta__ = {
-"_edit_lock_": true
-}
-[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+vframes = 17
+hframes = 7
+frame = 23
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack1 = SubResource( 8 )
+anims/attack2 = SubResource( 9 )
+anims/attack3 = SubResource( 10 )
+anims/double_jump = SubResource( 6 )
+anims/fall = SubResource( 7 )
+anims/idle = SubResource( 2 )
+anims/jump = SubResource( 5 )
+anims/run = SubResource( 3 )
+anims/sprint = SubResource( 4 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
