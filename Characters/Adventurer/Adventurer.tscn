@@ -285,6 +285,7 @@ frame = 55
 position = Vector2( 5, 6 )
 scale = Vector2( 2.6, 1.2 )
 shape = SubResource( 11 )
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/attack1 = SubResource( 2 )
