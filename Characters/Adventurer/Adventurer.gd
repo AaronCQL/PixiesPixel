@@ -37,7 +37,7 @@ func _physics_process(delta):
 	if is_network_master():
 		direction_input()				# horizontal mvmt
 		sprint_input()
-		jump_input()					# jump	
+		jump_input()					# jump
 		acceleration_curve()			# simluate acceleration when moving
 		attack_input()
 		flip_sprite(x_dir)				# flips sprite when turning direction
@@ -45,10 +45,11 @@ func _physics_process(delta):
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset("repl_position", position)
+		print($AnimationPlayer.current_animation)
 	else:
 		position = repl_position
-		$AnimatedSprite.animation = repl_animation
-		$AnimatedSprite.flip_h = repl_flip_h		
+		$AnimationPlayer.current_animation = repl_animation
+		$Sprite.flip_h = repl_flip_h		
 	
 func direction_input():
 	x_dir = 0
@@ -84,15 +85,15 @@ func attack_input():
 		is_attacking = true
 
 		if attack_combo == 0:
-			$AnimatedSprite.animation = "attack1"
+			$AnimationPlayer.current_animation = "attack1"
 			rset("repl_animation", "attack1")		
 			attack_combo = 1
 		elif attack_combo == 1:
-			$AnimatedSprite.animation = "attack2"
+			$AnimationPlayer.current_animation = "attack2"
 			rset("repl_animation", "attack2")
 			attack_combo = 2
 		elif attack_combo == 2:
-			$AnimatedSprite.animation = "attack3"
+			$AnimationPlayer.current_animation = "attack3"
 			rset("repl_animation", "attack3")
 			attack_combo = 0
 	
@@ -118,38 +119,37 @@ func jump_input():
 		
 func flip_sprite(x_dir):
 	if x_dir > 0:
-		$AnimatedSprite.flip_h = false
+		$Sprite.flip_h = false
 		rset("repl_flip_h", false)
 	elif x_dir < 0:
-		$AnimatedSprite.flip_h = true
+		$Sprite.flip_h = true
 		rset("repl_flip_h", true)
 		
 func play_animation(x_dir):
 	if is_on_floor():
 		if !is_attacking:
 			if x_dir == 0:
-				$AnimatedSprite.animation = "idle"
+				$AnimationPlayer.current_animation = "idle"
 				rset("repl_animation", "idle")		
 			else:
 				if is_sprinting:
-					$AnimatedSprite.animation = "sprint"
+					$AnimationPlayer.current_animation = "sprint"
 					rset("repl_animation", "sprint")
 				else:
-					$AnimatedSprite.animation = "run"
+					$AnimationPlayer.current_animation = "run"
 					rset("repl_animation", "run")
 	else:
 		if !is_attacking:
 			if velocity.y < 0:
 				if is_double_jumping:
-					$AnimatedSprite.animation = "double_jump"
+					$AnimationPlayer.current_animation = "double_jump"
 					rset("repl_animation", "double_jump")
 				else:
-					$AnimatedSprite.animation = "jump"
+					$AnimationPlayer.current_animation = "jump"
 					rset("repl_animation", "jump")
 			if velocity.y > 0:
-				$AnimatedSprite.animation = "fall"
+				$AnimationPlayer.current_animation = "fall"
 				rset("repl_animation", "fall")
 
-
-func _on_AnimatedSprite_animation_finished():
+func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
