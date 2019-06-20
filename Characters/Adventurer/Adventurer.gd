@@ -23,6 +23,8 @@ var attack_combo : int = 0
 
 var velocity : Vector2 = Vector2(0, 0)
 
+var net_id : int = 1
+
 puppet var repl_position = Vector2()
 puppet var repl_animation = "idle"
 puppet var repl_scale_x = 1
@@ -32,6 +34,7 @@ func _ready():
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
+	net_id = GameState.player_info.net_id
 	
 func _physics_process(delta):
 	if is_network_master():
@@ -45,7 +48,6 @@ func _physics_process(delta):
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset("repl_position", position)
-		print($AnimationPlayer.current_animation)
 	else:
 		position = repl_position
 		$AnimationPlayer.current_animation = repl_animation
@@ -154,3 +156,12 @@ func play_animation(x_dir):
 func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
 
+func _on_PlayerHitBox_area_entered(area):
+	# Check if its owner of player
+	if is_network_master():
+		# Check if its player's own sword
+		if area != $Sprite.get_node("SwordHitBox"):
+			# Check if its players colliding with other players
+			if area.name != "PlayerHitBox":
+				# OUR PLAYER GOT HIT
+				print("Our player got hit!")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
@@ -6,11 +6,10 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.04966, 12.3489 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 8.60363, 6.60212 )
 
-[sub_resource type="Animation" id=2]
-resource_name = "attack1"
+[sub_resource type="Animation" id=3]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -25,7 +24,7 @@ tracks/0/keys = {
 "values": [ 42, 43, 44, 45, 46 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/Area2D/SwordHitBox:disabled")
+tracks/1/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -37,7 +36,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Area2D/SwordHitBox:position")
+tracks/2/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -49,7 +48,7 @@ tracks/2/keys = {
 "values": [ Vector2( 16.872, -3.32056 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite/Area2D/SwordHitBox:scale")
+tracks/3/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -61,8 +60,7 @@ tracks/3/keys = {
 "values": [ Vector2( 1, 2.4 ) ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "attack2"
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -77,7 +75,7 @@ tracks/0/keys = {
 "values": [ 48, 49, 50, 51, 52 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/Area2D/SwordHitBox:disabled")
+tracks/1/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -89,7 +87,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Area2D/SwordHitBox:position")
+tracks/2/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -101,7 +99,7 @@ tracks/2/keys = {
 "values": [ Vector2( 16.7, 0.7 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite/Area2D/SwordHitBox:scale")
+tracks/3/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -113,8 +111,7 @@ tracks/3/keys = {
 "values": [ Vector2( 1, 2.2 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "attack3"
+[sub_resource type="Animation" id=5]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -129,7 +126,7 @@ tracks/0/keys = {
 "values": [ 53, 54, 55, 56, 57 ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("Sprite/Area2D/SwordHitBox:disabled")
+tracks/1/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:disabled")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -141,7 +138,7 @@ tracks/1/keys = {
 "values": [ true, false, true ]
 }
 tracks/2/type = "value"
-tracks/2/path = NodePath("Sprite/Area2D/SwordHitBox:position")
+tracks/2/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/imported = false
@@ -153,7 +150,7 @@ tracks/2/keys = {
 "values": [ Vector2( 5, 6 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("Sprite/Area2D/SwordHitBox:scale")
+tracks/3/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:scale")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -165,8 +162,7 @@ tracks/3/keys = {
 "values": [ Vector2( 2.6, 1.2 ) ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "double_jump"
+[sub_resource type="Animation" id=6]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -182,8 +178,7 @@ tracks/0/keys = {
 "values": [ 18, 19, 20, 21 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "fall"
+[sub_resource type="Animation" id=7]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -199,7 +194,7 @@ tracks/0/keys = {
 "values": [ 22, 23 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.6
 loop = true
 step = 0.15
@@ -216,7 +211,7 @@ tracks/0/keys = {
 "values": [ 38, 39, 40, 41 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -231,7 +226,7 @@ tracks/0/keys = {
 "values": [ 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -247,7 +242,7 @@ tracks/0/keys = {
 "values": [ 112, 113, 114, 115, 116, 117 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -262,6 +257,10 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 8, 9, 10, 11, 12 ]
 }
+
+[sub_resource type="CapsuleShape2D" id=12]
+radius = 7.74242
+height = 9.11432
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 script = ExtResource( 1 )
@@ -279,22 +278,38 @@ vframes = 17
 hframes = 7
 frame = 55
 
-[node name="Area2D" type="Area2D" parent="Sprite"]
+[node name="SwordHitBox" type="Area2D" parent="Sprite"]
 
-[node name="SwordHitBox" type="CollisionShape2D" parent="Sprite/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/SwordHitBox"]
 position = Vector2( 5, 6 )
 scale = Vector2( 2.6, 1.2 )
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack1 = SubResource( 2 )
-anims/attack2 = SubResource( 3 )
-anims/attack3 = SubResource( 4 )
-anims/double_jump = SubResource( 5 )
-anims/fall = SubResource( 6 )
-anims/idle = SubResource( 7 )
-anims/jump = SubResource( 8 )
-anims/run = SubResource( 9 )
-anims/sprint = SubResource( 10 )
+anims/attack1 = SubResource( 3 )
+anims/attack2 = SubResource( 4 )
+anims/attack3 = SubResource( 5 )
+anims/double_jump = SubResource( 6 )
+anims/fall = SubResource( 7 )
+anims/idle = SubResource( 8 )
+anims/jump = SubResource( 9 )
+anims/run = SubResource( 10 )
+anims/sprint = SubResource( 11 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
+smoothing_speed = 8.0
+drag_margin_left = 0.1
+drag_margin_top = 0.1
+drag_margin_right = 0.1
+drag_margin_bottom = 0.1
+
+[node name="PlayerHitBox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
+position = Vector2( 0.814739, 3.3843 )
+shape = SubResource( 12 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="PlayerHitBox" to="." method="_on_PlayerHitBox_area_entered"]
