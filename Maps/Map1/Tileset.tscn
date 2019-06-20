@@ -721,17 +721,12 @@ __meta__ = {
 }
 
 [node name="Beam00" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 371.483, 9.00085 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 256, 192, 32, 32 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Beam00"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Beam00/StaticBody2D"]
 position = Vector2( 0.656311, -9.68472 )
