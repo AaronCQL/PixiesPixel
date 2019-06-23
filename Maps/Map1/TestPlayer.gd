@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-const SPEED = 60
+const SPEED = 100
 const GRAVITY = 10
 const JUMP_POWER = -250
 const FLOOR = Vector2(0, -1)

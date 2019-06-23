@@ -3,13 +3,12 @@
 [ext_resource path="res://Maps/Map1/Tile-Sets (64-64).png" type="Texture" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 15.5198, 6.29205 )
+extents = Vector2( 15.8563, 14.5474 )
 
 [node name="Tileset" type="Node2D"]
 position = Vector2( 16, 16 )
 
 [node name="Tile00" type="Sprite" parent="."]
-editor/display_folded = true
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 32, 32 )
@@ -18,8 +17,6 @@ __meta__ = {
 }
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Tile00"]
-editor/display_folded = true
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tile00/StaticBody2D"]
 position = Vector2( 3.8147e-06, 0 )
@@ -721,7 +718,7 @@ __meta__ = {
 }
 
 [node name="Beam00" type="Sprite" parent="."]
-position = Vector2( 371.483, 9.00085 )
+position = Vector2( 371.483, 0.0693731 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 256, 192, 32, 32 )
@@ -729,7 +726,7 @@ region_rect = Rect2( 256, 192, 32, 32 )
 [node name="StaticBody2D" type="StaticBody2D" parent="Beam00"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Beam00/StaticBody2D"]
-position = Vector2( 0.656311, -9.68472 )
+position = Vector2( 2.0228, -1.5266 )
 shape = SubResource( 1 )
 
 [node name="Beam01" type="Sprite" parent="."]
@@ -768,7 +765,7 @@ shape = SubResource( 1 )
 
 [node name="Beam03" type="Sprite" parent="."]
 editor/display_folded = true
-position = Vector2( 516.109, 7.17017 )
+position = Vector2( 515.441, 1.16111 )
 texture = ExtResource( 1 )
 region_enabled = true
 region_rect = Rect2( 352, 192, 32, 32 )
