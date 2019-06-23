@@ -25,6 +25,7 @@ var is_double_jumping : bool = false
 var is_attacking : bool = false
 var attack_combo : int = 0
 var health : int = MAX_HEALTH
+var is_dead : bool = false
 
 var velocity : Vector2 = Vector2(0, 0)
 
@@ -50,6 +51,8 @@ func _physics_process(delta):
 		attack_input()
 		flip_sprite(x_dir)				# flips sprite when turning direction
 		play_animation(x_dir)
+		check_death()
+		$Camera2D.current = true
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset("repl_position", position)
@@ -60,10 +63,11 @@ func _physics_process(delta):
 	
 func direction_input():
 	x_dir = 0
-	if Input.is_action_pressed("ui_right"):
-		x_dir += 1
-	if Input.is_action_pressed("ui_left"):
-		x_dir += -1
+	if !is_dead:
+		if Input.is_action_pressed("ui_right"):
+			x_dir += 1
+		if Input.is_action_pressed("ui_left"):
+			x_dir += -1
 		
 func sprint_input():
 	# only resets sprint when on the floor, retain sprint speed when in air
@@ -88,7 +92,7 @@ func acceleration_curve():
 			velocity.x = lerp(velocity.x, move_speed * x_dir, 0.01)
 
 func attack_input():
-	if Input.is_action_pressed("ui_focus_next") && !is_attacking:
+	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
 		is_attacking = true
 
 		if attack_combo == 0:
@@ -105,25 +109,26 @@ func attack_input():
 			attack_combo = 0
 	
 func jump_input():
-	# resets the double jump when landing
-	if is_on_floor():
-		can_double_jump = true
-		is_double_jumping = false
-	
-	if Input.is_action_just_pressed("ui_up"):
-		if !is_attacking:
-			if !is_on_floor():
-				if can_double_jump:
-					can_double_jump = false
-					is_double_jumping = true
-					velocity.y = (min_jump_velocity + max_jump_velocity) / 2
-			else:
-				velocity.y = max_jump_velocity
-	
-	# variable jump height
-	if Input.is_action_just_released("ui_up") && velocity.y < min_jump_velocity:
-		velocity.y = min_jump_velocity
+	if !is_dead:
+		# resets the double jump when landing
+		if is_on_floor():
+			can_double_jump = true
+			is_double_jumping = false
 		
+		if Input.is_action_just_pressed("ui_up"):
+			if !is_attacking:
+				if !is_on_floor():
+					if can_double_jump:
+						can_double_jump = false
+						is_double_jumping = true
+						velocity.y = (min_jump_velocity + max_jump_velocity) / 2
+				else:
+					velocity.y = max_jump_velocity
+		
+		# variable jump height
+		if Input.is_action_just_released("ui_up") && velocity.y < min_jump_velocity:
+			velocity.y = min_jump_velocity
+			
 func flip_sprite(x_dir):
 	if x_dir > 0:
 		$Sprite.scale.x = 1
@@ -133,30 +138,31 @@ func flip_sprite(x_dir):
 		rset("repl_scale_x", -1)
 		
 func play_animation(x_dir):
-	if is_on_floor():
-		if !is_attacking:
-			if x_dir == 0:
-				$AnimationPlayer.current_animation = "idle"
-				rset("repl_animation", "idle")		
-			else:
-				if is_sprinting:
-					$AnimationPlayer.current_animation = "sprint"
-					rset("repl_animation", "sprint")
+	if !is_dead:
+		if is_on_floor():
+			if !is_attacking:
+				if x_dir == 0:
+					$AnimationPlayer.current_animation = "idle"
+					rset("repl_animation", "idle")		
 				else:
-					$AnimationPlayer.current_animation = "run"
-					rset("repl_animation", "run")
-	else:
-		if !is_attacking:
-			if velocity.y < 0:
-				if is_double_jumping:
-					$AnimationPlayer.current_animation = "double_jump"
-					rset("repl_animation", "double_jump")
-				else:
-					$AnimationPlayer.current_animation = "jump"
-					rset("repl_animation", "jump")
-			if velocity.y > 0:
-				$AnimationPlayer.current_animation = "fall"
-				rset("repl_animation", "fall")
+					if is_sprinting:
+						$AnimationPlayer.current_animation = "sprint"
+						rset("repl_animation", "sprint")
+					else:
+						$AnimationPlayer.current_animation = "run"
+						rset("repl_animation", "run")
+		else:
+			if !is_attacking:
+				if velocity.y < 0:
+					if is_double_jumping:
+						$AnimationPlayer.current_animation = "double_jump"
+						rset("repl_animation", "double_jump")
+					else:
+						$AnimationPlayer.current_animation = "jump"
+						rset("repl_animation", "jump")
+				if velocity.y > 0:
+					$AnimationPlayer.current_animation = "fall"
+					rset("repl_animation", "fall")
 
 func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
@@ -169,11 +175,11 @@ func take_damage(amount):
 func set_health(value):
 	health = clamp(value, 0, MAX_HEALTH)
 	emit_signal("health_updated", health)
-	if health <= 0:
-		on_death()
-		emit_signal("killed")
 	print(health)
 
-func on_death():
-	pass
+func check_death():
+	if health <= 0:
+		is_dead = true
+		$AnimationPlayer.current_animation = "die"
+		rset("repl_animation", "die")
 
