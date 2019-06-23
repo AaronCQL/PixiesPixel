@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+signal health_updated(health)
+signal killed()
+
+const MAX_HEALTH = 100
 const RUN_SPEED = 100
 const SPRINT_SPEED = 150
 const FLOOR = Vector2(0, -1)
@@ -20,7 +24,7 @@ var can_double_jump : bool = true
 var is_double_jumping : bool = false
 var is_attacking : bool = false
 var attack_combo : int = 0
-var health : int = 100
+var health : int = MAX_HEALTH
 
 var velocity : Vector2 = Vector2(0, 0)
 
@@ -158,12 +162,18 @@ func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
 
 func take_damage(amount):
-	# Our player got hit
+	$DamageAnimation.current_animation = "damage"
 	if is_network_master():
-		health -= amount
-		print(health)
-		$DamageAnimation.current_animation = "damage"
-	# Out player got hit
-	else:
-		$DamageAnimation.current_animation = "damage"
+		set_health(health - amount)
+		
+func set_health(value):
+	health = clamp(value, 0, MAX_HEALTH)
+	emit_signal("health_updated", health)
+	if health <= 0:
+		on_death()
+		emit_signal("killed")
+	print(health)
+
+func on_death():
+	pass
 
