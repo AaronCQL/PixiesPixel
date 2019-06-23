@@ -43,6 +43,11 @@ ui_select={
  ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Ground"
+2d_physics/layer_2="Player"
+
 [rendering]
 
 quality/2d/use_pixel_snap=true

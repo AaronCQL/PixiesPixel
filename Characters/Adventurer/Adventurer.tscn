@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
@@ -7,9 +7,13 @@
 extents = Vector2( 7.04966, 12.3489 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8.60363, 6.60212 )
+extents = Vector2( 13.4793, 6.60212 )
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 7.74242
+height = 9.11432
+
+[sub_resource type="Animation" id=4]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -45,7 +49,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 16.872, -3.32056 ) ]
+"values": [ Vector2( 13, -3.321 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:scale")
@@ -60,7 +64,7 @@ tracks/3/keys = {
 "values": [ Vector2( 1, 2.4 ) ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -96,7 +100,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 16.7, 0.7 ) ]
+"values": [ Vector2( 11, 2 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:scale")
@@ -111,7 +115,7 @@ tracks/3/keys = {
 "values": [ Vector2( 1, 2.2 ) ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -147,7 +151,7 @@ tracks/2/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 5, 6 ) ]
+"values": [ Vector2( 4, 6 ) ]
 }
 tracks/3/type = "value"
 tracks/3/path = NodePath("Sprite/SwordHitBox/CollisionShape2D:scale")
@@ -159,10 +163,10 @@ tracks/3/keys = {
 "times": PoolRealArray( 0.2 ),
 "transitions": PoolRealArray( 1 ),
 "update": 0,
-"values": [ Vector2( 2.6, 1.2 ) ]
+"values": [ Vector2( 1.7, 1.3 ) ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.4
 loop = true
 tracks/0/type = "value"
@@ -178,7 +182,7 @@ tracks/0/keys = {
 "values": [ 18, 19, 20, 21 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -194,7 +198,7 @@ tracks/0/keys = {
 "values": [ 22, 23 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=9]
 length = 0.6
 loop = true
 step = 0.15
@@ -211,7 +215,7 @@ tracks/0/keys = {
 "values": [ 38, 39, 40, 41 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=10]
 length = 5.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -226,7 +230,7 @@ tracks/0/keys = {
 "values": [ 15, 16, 17 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=11]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -242,7 +246,7 @@ tracks/0/keys = {
 "values": [ 112, 113, 114, 115, 116, 117 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=12]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -258,11 +262,25 @@ tracks/0/keys = {
 "values": [ 8, 9, 10, 11, 12 ]
 }
 
-[sub_resource type="CapsuleShape2D" id=12]
-radius = 7.74242
-height = 9.11432
+[sub_resource type="Animation" id=13]
+resource_name = "damage"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
@@ -276,26 +294,17 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 17
 hframes = 7
-frame = 55
+frame = 38
 
 [node name="SwordHitBox" type="Area2D" parent="Sprite"]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/SwordHitBox"]
-position = Vector2( 5, 6 )
-scale = Vector2( 2.6, 1.2 )
+position = Vector2( 13, -3.321 )
+scale = Vector2( 1, 2.4 )
 shape = SubResource( 2 )
 disabled = true
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack1 = SubResource( 3 )
-anims/attack2 = SubResource( 4 )
-anims/attack3 = SubResource( 5 )
-anims/double_jump = SubResource( 6 )
-anims/fall = SubResource( 7 )
-anims/idle = SubResource( 8 )
-anims/jump = SubResource( 9 )
-anims/run = SubResource( 10 )
-anims/sprint = SubResource( 11 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
@@ -307,9 +316,25 @@ drag_margin_right = 0.1
 drag_margin_bottom = 0.1
 
 [node name="PlayerHitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 position = Vector2( 0.814739, 3.3843 )
-shape = SubResource( 12 )
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack1 = SubResource( 4 )
+anims/attack2 = SubResource( 5 )
+anims/attack3 = SubResource( 6 )
+anims/double_jump = SubResource( 7 )
+anims/fall = SubResource( 8 )
+anims/idle = SubResource( 9 )
+anims/jump = SubResource( 10 )
+anims/run = SubResource( 11 )
+anims/sprint = SubResource( 12 )
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="."]
+anims/damage = SubResource( 13 )
 [connection signal="area_entered" from="PlayerHitBox" to="." method="_on_PlayerHitBox_area_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

@@ -52,7 +52,7 @@ remote func spawn_players(pinfo, spawn_index):
 remote func despawn_player(pinfo):
 	if (get_tree().is_network_server()):
 		for id in Network.players:
-			# Skip disconnecte player and server from replication code
+			# Skip disconnected player and server from replication code
 			if (id == pinfo.net_id || id == 1):
 				continue
 			

@@ -43,6 +43,7 @@ position = Vector2( 298, 154 )
 position = Vector2( 474, 154 )
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 320, 288 )

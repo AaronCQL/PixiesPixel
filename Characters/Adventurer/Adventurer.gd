@@ -12,7 +12,7 @@ var move_speed : float = RUN_SPEED
 var gravity : float
 var max_jump_velocity : float
 var min_jump_velocity : float
-var x_dir # direction in which player is facing in the x-axis
+var x_dir : int # direction in which player is facing in the x-axis
 
 var is_grounded : bool = true
 var is_sprinting : bool = false
@@ -20,14 +20,15 @@ var can_double_jump : bool = true
 var is_double_jumping : bool = false
 var is_attacking : bool = false
 var attack_combo : int = 0
+var health : int = 100
 
 var velocity : Vector2 = Vector2(0, 0)
 
 var net_id : int = 1
 
-puppet var repl_position = Vector2()
-puppet var repl_animation = "idle"
-puppet var repl_scale_x = 1
+puppet var repl_position : Vector2 = Vector2()
+puppet var repl_animation : String = "idle"
+puppet var repl_scale_x : int = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -49,9 +50,9 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset("repl_position", position)
 	else:
-		position = repl_position
-		$AnimationPlayer.current_animation = repl_animation
-		$Sprite.scale.x = repl_scale_x
+		position = repl_position									# to replitcate current position
+		$AnimationPlayer.current_animation = repl_animation 		# to replicate current animation
+		$Sprite.scale.x = repl_scale_x 								# to replicate change in x direction
 	
 func direction_input():
 	x_dir = 0
@@ -157,11 +158,17 @@ func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
 
 func _on_PlayerHitBox_area_entered(area):
-	# Check if its owner of player
-	if is_network_master():
-		# Check if its player's own sword
-		if area != $Sprite.get_node("SwordHitBox"):
-			# Check if its players colliding with other players
-			if area.name != "PlayerHitBox":
-				# OUR PLAYER GOT HIT
-				print("Our player got hit!")
+	# Check if its player's own sword
+	if area != $Sprite.get_node("SwordHitBox"):
+		# Check if its players colliding with other players
+		if area.name != "PlayerHitBox":
+			# OUR PLAYER GOT HIT
+			if is_network_master():
+				health -= 10
+				print(health)
+				$DamageAnimation.current_animation = "damage"
+			# OTHER PLAYER GOT HIT
+			else:
+				$DamageAnimation.current_animation = "damage"
+				
+
