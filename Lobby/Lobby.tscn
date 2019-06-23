@@ -1,0 +1,99 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Lobby/Jungle Asset Pack/parallax background/plx-1.png" type="Texture" id=1]
+[ext_resource path="res://Lobby/Jungle Asset Pack/parallax background/plx-2.png" type="Texture" id=2]
+[ext_resource path="res://Lobby/Jungle Asset Pack/parallax background/plx-3.png" type="Texture" id=3]
+[ext_resource path="res://Lobby/Jungle Asset Pack/parallax background/plx-4.png" type="Texture" id=4]
+[ext_resource path="res://Lobby/Jungle Asset Pack/parallax background/plx-5.png" type="Texture" id=5]
+[ext_resource path="res://Lobby/adventurer-v1.5-Sheet-1.png.png" type="Texture" id=6]
+[ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Lobby/brick.png" type="Texture" id=8]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 7 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+editor/display_folded = true
+position = Vector2( 320.012, 180.015 )
+scale = Vector2( 1.66661, 1.66653 )
+
+[node name="Bg" type="Sprite" parent="Background"]
+scale = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Bg2" type="Sprite" parent="Background"]
+position = Vector2( 0, -7.62939e-06 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+
+[node name="Bg3" type="Sprite" parent="Background"]
+position = Vector2( -0.00695801, -0.00906372 )
+scale = Vector2( 1.00004, 1.00008 )
+texture = ExtResource( 3 )
+
+[node name="Bg4" type="Sprite" parent="Background"]
+position = Vector2( -0.00697327, -0.0340118 )
+scale = Vector2( 1.00004, 0.999685 )
+texture = ExtResource( 4 )
+
+[node name="Bg5" type="Sprite" parent="Background"]
+position = Vector2( -0.00695801, -7.62939e-06 )
+scale = Vector2( 1.00004, 1 )
+texture = ExtResource( 5 )
+
+[node name="Adventurer" type="Sprite" parent="."]
+position = Vector2( 58, 175 )
+scale = Vector2( 2.09, 2.14189 )
+texture = ExtResource( 6 )
+
+[node name="Text" type="Sprite" parent="."]
+
+[node name="Select Character" type="TextEdit" parent="Text"]
+margin_left = 30.0
+margin_top = 34.0
+margin_right = 145.0
+margin_bottom = 65.0
+rect_pivot_offset = Vector2( 668, 50 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/background_color = Color( 0, 0, 0, 1 )
+text = "Select Character"
+
+[node name="Select Map" type="TextEdit" parent="Text"]
+margin_left = 490.0
+margin_top = 30.0
+margin_right = 605.0
+margin_bottom = 61.0
+rect_pivot_offset = Vector2( 668, 50 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/background_color = Color( 0, 0, 0, 1 )
+text = "Select Map"
+
+[node name="Quit" type="TextEdit" parent="Text"]
+margin_left = 37.0
+margin_top = 309.0
+margin_right = 86.0
+margin_bottom = 343.0
+rect_pivot_offset = Vector2( 668, 50 )
+custom_fonts/font = SubResource( 1 )
+custom_colors/background_color = Color( 0, 0, 0, 1 )
+text = "Quit
+"
+
+[node name="Start" type="TextEdit" parent="Text"]
+margin_left = 569.0
+margin_top = 314.0
+margin_right = 615.0
+margin_bottom = 344.0
+rect_pivot_offset = Vector2( 668, 50 )
+custom_fonts/font = SubResource( 1 )
+text = "Start"
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 527, 178 )
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 8 )
