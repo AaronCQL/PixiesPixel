@@ -157,18 +157,13 @@ func play_animation(x_dir):
 func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
 
-func _on_PlayerHitBox_area_entered(area):
-	# Check if its player's own sword
-	if area != $Sprite.get_node("SwordHitBox"):
-		# Check if its players colliding with other players
-		if area.name != "PlayerHitBox":
-			# OUR PLAYER GOT HIT
-			if is_network_master():
-				health -= 10
-				print(health)
-				$DamageAnimation.current_animation = "damage"
-			# OTHER PLAYER GOT HIT
-			else:
-				$DamageAnimation.current_animation = "damage"
-				
+func take_damage(amount):
+	# Our player got hit
+	if is_network_master():
+		health -= amount
+		print(health)
+		$DamageAnimation.current_animation = "damage"
+	# Out player got hit
+	else:
+		$DamageAnimation.current_animation = "damage"
 
