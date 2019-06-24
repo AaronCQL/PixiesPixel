@@ -9,8 +9,9 @@ func take_damage(amount):
 func _on_PlayerHitBox_area_entered(area):
 	if area.name != "PlayerHitBox": 				 	# check is not other player bodies
 		if area != get_node("../Sprite/SwordHitBox"): 	# check is not own sword
-			var amount : int = rng.randi_range(1, 20)
-			take_damage(50)
+			if area.name == "SwordHitBox":
+				var amount : int = rng.randi_range(1, 20)
+				take_damage(amount)
 
 func _ready():
 	rng.randomize()

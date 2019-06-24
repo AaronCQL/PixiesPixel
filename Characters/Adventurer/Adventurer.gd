@@ -29,8 +29,6 @@ var is_dead : bool = false
 
 var velocity : Vector2 = Vector2(0, 0)
 
-var net_id : int = 1
-
 puppet var repl_position : Vector2 = Vector2()
 puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
@@ -40,7 +38,7 @@ func _ready():
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
-	net_id = GameState.player_info.net_id
+	$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
 	
 func _physics_process(delta):
 	if is_network_master():
@@ -55,11 +53,11 @@ func _physics_process(delta):
 		$Camera2D.current = true
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
-		rset("repl_position", position)
+		rset_unreliable("repl_position", position)
 	else:
-		position = repl_position									# to replitcate current position
-		$AnimationPlayer.current_animation = repl_animation 		# to replicate current animation
-		$Sprite.scale.x = repl_scale_x 								# to replicate change in x direction
+		position = repl_position							# to replitcate current position
+		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
+		$Sprite.scale.x = repl_scale_x 						# to replicate change in x direction
 	
 func direction_input():
 	x_dir = 0
@@ -182,4 +180,5 @@ func check_death():
 		is_dead = true
 		$AnimationPlayer.current_animation = "die"
 		rset("repl_animation", "die")
+		
 
