@@ -1,3 +1,47 @@
-[gd_scene format=2]
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Characters/Pirate/bomb.png" type="Texture" id=1]
+
+[sub_resource type="Animation" id=1]
+resource_name = "activate"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0732401, 0.143332, 0.226017, 0.296109, 0.38509, 0.45833, 0.539441, 0.622125, 0.70481 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "explode"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0802797, 0.166856, 0.270747, 0.385657, 0.495845, 0.572977, 0.67372, 0.744555 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 10, 11, 12, 13, 14, 15, 16, 17, 18 ]
+}
 
 [node name="Bomb" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 19
+frame = 18
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
+anims/activate = SubResource( 1 )
+anims/explode = SubResource( 2 )
