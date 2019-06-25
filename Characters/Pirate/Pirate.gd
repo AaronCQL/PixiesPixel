@@ -8,7 +8,7 @@ const RUN_SPEED = 100
 const SPRINT_SPEED = 150
 const FLOOR = Vector2(0, -1)
 
-const MAX_JUMP_HEIGHT = 6 * 16
+const MAX_JUMP_HEIGHT = 7 * 16
 const MIN_JUMP_HEIGHT = 2 * 16
 const TIME_TO_JUMP_APEX = 0.45
 
@@ -39,17 +39,18 @@ func _ready():
 	
 func _physics_process(delta):
 
-		direction_input()				# horizontal mvmt
-		jump_input()					# jump
-		acceleration_curve()			# simluate acceleration when moving
-		attack_input()
-		flip_sprite(x_dir)				# flips sprite when turning direction
-		play_animation(x_dir)
+	direction_input()				# horizontal mvmt
+	jump_input()					# jump
+	acceleration_curve()			# simluate acceleration when moving
+	attack_input()
+	flip_sprite(x_dir)				# flips sprite when turning direction
+	play_animation(x_dir)
 		
-		print(is_on_floor())
-		$Camera2D.current = true
-		velocity.y += gravity * delta 	# gravity
-		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
+	print(is_on_floor())
+	print($AnimationPlayer.current_animation)
+	$Camera2D.current = true
+	velocity.y += gravity * delta 	# gravity
+	velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 	
 	
 func direction_input():
@@ -82,7 +83,7 @@ func jump_input():
 	if !is_dead:	
 		if Input.is_action_just_pressed("ui_up"):
 			if !is_attacking:
-				if !is_on_floor():
+				if is_on_floor():
 					velocity.y = max_jump_velocity
 		
 		# variable jump height

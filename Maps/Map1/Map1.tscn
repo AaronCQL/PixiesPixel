@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Maps/Map1/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://Maps/Map1/TestPlayer.gd" type="Script" id=2]
 [ext_resource path="res://Maps/Map1/1.png" type="Texture" id=3]
+[ext_resource path="res://Characters/Pirate/Pirate.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.0353, 27.3242 )
@@ -44,3 +45,6 @@ position = Vector2( 74.1524, 27.9839 )
 current = true
 zoom = Vector2( 2.5, 2.5 )
 smoothing_enabled = true
+
+[node name="KinematicBody2D" parent="." instance=ExtResource( 4 )]
+position = Vector2( 609.803, -157.925 )
