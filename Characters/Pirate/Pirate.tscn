@@ -133,7 +133,7 @@ frame = 10
 [node name="HeldItemPosition" type="Position2D" parent="Sprite"]
 
 [node name="Bomb" parent="Sprite/HeldItemPosition" instance=ExtResource( 3 )]
-position = Vector2( 29.6198, -5.38543 )
+position = Vector2( 27.1515, -4.03908 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
