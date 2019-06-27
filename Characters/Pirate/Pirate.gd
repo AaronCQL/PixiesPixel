@@ -2,9 +2,6 @@ extends KinematicBody2D
 
 #signal health_updated(health)
 #signal killed()
-signal throw_item()
-
-const Bomb = preload("res://Characters/Pirate/Bomb.tscn")
 
 const MAX_HEALTH = 100
 const RUN_SPEED = 100
@@ -33,9 +30,6 @@ puppet var repl_position : Vector2 = Vector2()
 puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
 
-var held_item = null
-onready var held_item_position = $Sprite/HeldItemPosition
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
@@ -52,6 +46,8 @@ func _physics_process(delta):
 	flip_sprite(x_dir)				# flips sprite when turning direction
 	play_animation(x_dir)
 		
+	print(is_on_floor())
+	print($AnimationPlayer.current_animation)
 	$Camera2D.current = true
 	velocity.y += gravity * delta 	# gravity
 	velocity = move_and_slide(velocity, FLOOR)	# godot's physics
@@ -117,12 +113,3 @@ func play_animation(x_dir):
 
 func _on_AnimationPlayer_animation_finished(attack):
 	is_attacking = false
-
-func spawn_rock():
-	if held_item == null:		#check if there's already a bomb in hand
-		held_item = Bomb.instance()
-		held_item_position.add_child(held_item)
-
-func _throw_held_item():
-	held_item.launch(x_dir)
-	held_item = null

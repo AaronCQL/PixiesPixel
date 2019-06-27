@@ -8,14 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Area2D",
-"class": "Hitbox",
-"language": "GDScript",
-"path": "res://Characters/Pirate/PirateHitBox.gd"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"Hitbox": ""
+
 }
 
 [application]

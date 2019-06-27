@@ -1,9 +1,8 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Characters/Pirate/Pirate.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pirate/pirate.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Pirate/Bomb.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Characters/Pirate/PirateHitBox.gd" type="Script" id=4]
+[ext_resource path="res://Characters/Pirate/PirateHitBox.gd" type="Script" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 19.0308, 24.6597 )
@@ -26,20 +25,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 10, 11, 12, 13, 14 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath(".")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"values": [ {
-"args": [ "throw_item" ],
-"method": "emit_signal"
-} ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -121,30 +106,27 @@ tracks/0/keys = {
 }
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
-position = Vector2( 0, 1.36235 )
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 2
 hframes = 29
-frame = 10
-
-[node name="HeldItemPosition" type="Position2D" parent="Sprite"]
-
-[node name="Bomb" parent="Sprite/HeldItemPosition" instance=ExtResource( 3 )]
-position = Vector2( 27.1515, -4.03908 )
-scale = Vector2( 0.5, 0.5 )
+frame = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 2.93851, 2.8069 )
+visible = false
+position = Vector2( 2.93851, 2.21275 )
 shape = SubResource( 1 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 0, -1.36234 )
 
 [node name="PirateHitBox" type="Area2D" parent="."]
-script = ExtResource( 4 )
+visible = false
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PirateHitBox"]
 position = Vector2( 4.63766, 0.724678 )
@@ -157,5 +139,4 @@ anims/fall = SubResource( 5 )
 anims/idle = SubResource( 6 )
 anims/jump = SubResource( 7 )
 anims/run = SubResource( 8 )
-[connection signal="throw_item" from="." to="." method="_throw_held_item"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
