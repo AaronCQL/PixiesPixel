@@ -1,6 +1,10 @@
 extends Area2D
+class_name Hitbox
 
 var rng = RandomNumberGenerator.new()
+
+export (NodePath) var entity_path = ".."
+onready var entity = get_node(entity_path)
 
 func take_damage(amount):
 	var root_node = get_node("../")
