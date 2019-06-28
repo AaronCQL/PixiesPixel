@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="Tileset" type="Node2D"]
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Sprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/StaticBody2D"]
