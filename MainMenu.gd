@@ -27,7 +27,7 @@ func set_player_info():
 		GameState.player_info.name = $NetworkPanel/PlayerName.text
 	
 func _on_ready_to_play():
-	get_tree().change_scene("res://Maps/TestMap.tscn")
+	get_tree().change_scene("res://Maps/Map2/Map2.tscn")
 	
 func _on_join_fail():
 	# Change to displaying error message when finalising
