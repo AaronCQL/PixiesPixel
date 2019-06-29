@@ -28,8 +28,10 @@ remote func spawn_players(pinfo, spawn_index):
 	# Load the scene and create an instance
 	var pclass = load(pinfo.actor_path)
 	var nactor = pclass.instance()
+	print(pinfo.name)
 	# set actor position
 	nactor.position = $SpawnPoints.get_node(str(spawn_index)).position
+	nactor.get_node("PlayerNameLabel").text = pinfo.name
 	# If this actor does not belong to the server, change the node name and network master accordingly
 	if (pinfo.net_id != 1):
 		nactor.set_network_master(pinfo.net_id)
