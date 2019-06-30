@@ -54,7 +54,6 @@ remote func register_player(pinfo):
 	# Now to code that will be executed regardless of being on client or server
 	print("Registering player ", pinfo.name, " (", pinfo.net_id, ") to internal player table")
 	players[pinfo.net_id] = pinfo          # Create the player entry in the dictionary
-	emit_signal("player_list_changed")     # And notify that the player list has been changed
 
 remote func unregister_player(id):
 	print(players[id].name, " removed from from internal table")
@@ -62,8 +61,6 @@ remote func unregister_player(id):
 	var pinfo = players[id]
 	# Remove the player from the list
 	players.erase(id)
-	# And notify the list has been changed
-	emit_signal("player_list_changed")
 	# Emit the signal that is meant to be intercepted only by the server
 	emit_signal("player_removed", pinfo)
 
