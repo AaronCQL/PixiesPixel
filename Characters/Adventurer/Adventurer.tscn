@@ -172,7 +172,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id=7]
 resource_name = "die"
-length = 1.07374e+009
+length = 1.07374e+09
 step = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -343,6 +343,10 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+limit_left = 0
+limit_top = 0
+limit_right = 704
+limit_bottom = 592
 smoothing_enabled = true
 smoothing_speed = 8.0
 drag_margin_left = 0.1
