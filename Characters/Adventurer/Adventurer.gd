@@ -54,6 +54,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset_unreliable("repl_position", position)
+		rset("repl_animation", $AnimationPlayer.current_animation)
 	else:
 		position = repl_position							# to replitcate current position
 		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
@@ -95,15 +96,12 @@ func attack_input():
 
 		if attack_combo == 0:
 			$AnimationPlayer.current_animation = "attack1"
-			rset("repl_animation", "attack1")		
 			attack_combo = 1
 		elif attack_combo == 1:
 			$AnimationPlayer.current_animation = "attack2"
-			rset("repl_animation", "attack2")
 			attack_combo = 2
 		elif attack_combo == 2:
 			$AnimationPlayer.current_animation = "attack3"
-			rset("repl_animation", "attack3")
 			attack_combo = 0
 	
 func jump_input():
@@ -141,26 +139,20 @@ func play_animation(x_dir):
 			if !is_attacking:
 				if x_dir == 0:
 					$AnimationPlayer.current_animation = "idle"
-					rset("repl_animation", "idle")		
 				else:
 					if is_sprinting:
 						$AnimationPlayer.current_animation = "sprint"
-						rset("repl_animation", "sprint")
 					else:
 						$AnimationPlayer.current_animation = "run"
-						rset("repl_animation", "run")
 		else:
 			if !is_attacking:
 				if velocity.y < 0:
 					if is_double_jumping:
 						$AnimationPlayer.current_animation = "double_jump"
-						rset("repl_animation", "double_jump")
 					else:
 						$AnimationPlayer.current_animation = "jump"
-						rset("repl_animation", "jump")
 				if velocity.y > 0:
 					$AnimationPlayer.current_animation = "fall"
-					rset("repl_animation", "fall")
 
 func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
@@ -179,6 +171,5 @@ func check_death():
 	if health <= 0:
 		is_dead = true
 		$AnimationPlayer.current_animation = "die"
-		rset("repl_animation", "die")
 		
 
