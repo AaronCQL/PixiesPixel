@@ -165,7 +165,6 @@ func take_damage(amount):
 func set_health(value):
 	health = clamp(value, 0, MAX_HEALTH)
 	emit_signal("health_updated", health)
-	print(health)
 
 func check_death():
 	if health <= 0:

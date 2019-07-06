@@ -15,6 +15,7 @@ signal join_success	    		# When the peer successfully joins a server
 signal join_fail   				# Failed to join a server
 signal player_list_changed		# List of players has been changed
 signal player_removed(pinfo)	# A player has been removed from the list
+signal disconnected				# To allow code outside to act when disconnected
 
 func create_server():
 	# Initialize the networking system
@@ -98,6 +99,12 @@ func _on_connection_failed():
 # Peer is notified when disconnected from server
 func _on_disconnected_from_server():
 	print("Disconnected from server")
+	# Stop processing any node in the world, so the client remains responsive
+	get_tree().paused = true
+	# Clear the network object
+	get_tree().set_network_peer(null)
+	# Allow outside code to know about the disconnection
+	emit_signal("disconnected")
 	# Clear the internal player list
 	players.clear()
 	# Reset the player info network ID

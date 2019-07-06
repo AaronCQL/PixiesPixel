@@ -32,11 +32,10 @@ remote func spawn_players(pinfo, spawn_index):
 	# set actor position
 	nactor.position = $SpawnPoints.get_node(str(spawn_index)).position
 	nactor.get_node("PlayerNameLabel").text = pinfo.name
-	# If this actor does not belong to the server, change the node name and network master accordingly
-	if (pinfo.net_id != 1):
+	if (pinfo.net_id != 1): # actor does not belong to server; let client control
 		nactor.set_network_master(pinfo.net_id)
-		nactor.set_name(str(pinfo.net_id))
 	# Finally add the actor into the world
+	nactor.set_name(str(pinfo.net_id))
 	add_child(nactor)
 	
 remote func despawn_player(pinfo):
