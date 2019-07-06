@@ -56,10 +56,14 @@ remote func despawn_player(pinfo):
 	
 	# Mark the node for deletion
 	player_node.queue_free()
+	
+func _on_disconnected():
+	# Ideally pause the internal simulation and display a message box here.
+	# From the answer in the message box change back into the main menu scene
+	get_tree().change_scene("res://MainMenu.tscn")
 
 func _ready():
-	# Connect event handler to the player_list_changed signal
-	Network.connect("player_list_changed", self, "_on_player_list_changed")
+	Network.connect("disconnected", self, "_on_disconnected")
 	# If we are in the server, connect to the event that will deal with player despawning
 	if (get_tree().is_network_server()):
 		Network.connect("player_removed", self, "_on_player_removed")

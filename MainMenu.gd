@@ -37,5 +37,6 @@ func _ready():
 	Network.connect("server_created", self, "_on_ready_to_play")
 	Network.connect("join_success", self, "_on_ready_to_play")
 	Network.connect("join_fail", self, "_on_join_fail")
+	get_tree().paused = false
 
 
