@@ -1,12 +1,10 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Adventurer/SwordHitBox.gd" type="Script" id=3]
-[ext_resource path="res://Characters/Adventurer/PlayerHitBox.gd" type="Script" id=4]
-[ext_resource path="res://Characters/Adventurer/HealthBar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Characters/Adventurer/HealthBar.gd" type="Script" id=6]
-[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Characters/Adventurer/HealthBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Characters/Adventurer/HealthBar.gd" type="Script" id=4]
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.04966, 12.3489 )
@@ -313,7 +311,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=15]
-font_data = ExtResource( 7 )
+font_data = ExtResource( 5 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 collision_layer = 2
@@ -335,7 +333,6 @@ frame = 38
 [node name="SwordHitBox" type="Area2D" parent="Sprite"]
 collision_layer = 0
 collision_mask = 2
-script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/SwordHitBox"]
 position = Vector2( 13, -3.321 )
@@ -359,7 +356,6 @@ drag_margin_bottom = 0.1
 [node name="PlayerHitBox" type="Area2D" parent="."]
 collision_layer = 2
 collision_mask = 2
-script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 position = Vector2( 0.814739, 3.3843 )
@@ -380,9 +376,9 @@ anims/sprint = SubResource( 13 )
 [node name="DamageAnimation" type="AnimationPlayer" parent="."]
 anims/damage = SubResource( 14 )
 
-[node name="HealthBar" parent="." instance=ExtResource( 5 )]
+[node name="HealthBar" parent="." instance=ExtResource( 3 )]
 position = Vector2( -14.2062, -16.5975 )
-script = ExtResource( 6 )
+script = ExtResource( 4 )
 
 [node name="PlayerNameLabel" type="Label" parent="."]
 margin_left = -24.86
@@ -396,6 +392,5 @@ text = "Player"
 align = 1
 valign = 1
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
-[connection signal="area_entered" from="Sprite/SwordHitBox" to="Sprite/SwordHitBox" method="_on_SwordHitBox_area_entered"]
-[connection signal="area_entered" from="PlayerHitBox" to="PlayerHitBox" method="_on_PlayerHitBox_area_entered"]
+[connection signal="area_entered" from="Sprite/SwordHitBox" to="." method="_on_SwordHitBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

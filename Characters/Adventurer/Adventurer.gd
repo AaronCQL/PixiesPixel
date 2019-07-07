@@ -33,12 +33,15 @@ puppet var repl_position : Vector2 = Vector2()
 puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
 
+var rng = RandomNumberGenerator.new()
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
 	$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
+	rng.randomize()
 	
 func _physics_process(delta):
 	if is_network_master():
@@ -157,10 +160,10 @@ func play_animation(x_dir):
 func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
 
-func take_damage(amount):
-	$DamageAnimation.current_animation = "damage"
-	if is_network_master():
-		set_health(health - amount)
+remotesync func take_damage(p_id_hit, amount):
+	var actor = get_node("./../" + str(p_id_hit))
+	actor.get_node("./DamageAnimation").current_animation = "damage"
+	actor.set_health(health - amount)
 		
 func set_health(value):
 	health = clamp(value, 0, MAX_HEALTH)
@@ -170,5 +173,16 @@ func check_death():
 	if health <= 0:
 		is_dead = true
 		$AnimationPlayer.current_animation = "die"
-		
+
+# detects when a player's sword enters another player's actor
+# then, remotely calls the take_damage function on that player's actor
+# for other attacks, use the same logic, just change the damage taken to vary damage
+func _on_SwordHitBox_area_entered(area):
+	if is_network_master():
+		if area.name == "PlayerHitBox":	
+			if area != get_node("./PlayerHitBox"): # Check if is not own hit box
+				var actor = area.get_node("./../")
+				var p_id_hit : int = int(actor.get_name())
+				var damage : int = rng.randi_range(1, 20)
+				rpc("take_damage", p_id_hit, damage)
 
