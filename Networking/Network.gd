@@ -52,21 +52,23 @@ func _on_connected_to_server():
 	emit_signal("join_success")
 	# Update the player_info dictionary with the obtained unique network ID
 	GameState.player_info.net_id = get_tree().get_network_unique_id()
-	# Request the server to register this new player across all connected players
+	# Call all players to register this player
 	rpc("register_player", GameState.player_info)
 
-remote func register_player(pinfo):
-	if (get_tree().is_network_server()):
+remotesync func register_player(pinfo):
+	if get_tree().is_network_server():
 		# Distribute the player list information throughout the connected players
 		for id in players:
-			if (id != 1): # Skip the server
-				# Send currently iterated player info to the new player
-				rpc_id(pinfo.net_id, "register_player", players[id])
+			# Send currently iterated player info to the new player
+			rpc_id(pinfo.net_id, "register_player", players[id])
+			if id != 1:
 				# Send new player info to currently iterated player
 				rpc_id(id, "register_player", pinfo)
 	
 	# Now to code that will be executed regardless of being on client or server
 	players[pinfo.net_id] = pinfo	# Actually create the player entry in the dictionary
+	emit_signal("player_list_changed") # Tell Lobby that player list is updated
+	print("UPDATE")
 
 # Everyone gets notified whenever someone disconnects from the server
 func _on_player_disconnected(id):

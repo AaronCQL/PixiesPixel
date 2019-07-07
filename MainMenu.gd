@@ -27,10 +27,10 @@ func set_player_info():
 
 func _on_connect_success():
 	# FOR INSTANT CHANGE SCENE
-	get_tree().change_scene("res://Maps/Dungeon/Dungeon.tscn")
+	# get_tree().change_scene("res://Maps/Dungeon/Dungeon.tscn")
 	
 	# FOR GOING TO LOBBY, NOT IMPLEMENTED YET:
-	# get_tree().change_scene("res://Lobby/PreGameLobby.tscn")
+	get_tree().change_scene("res://Lobby/PreGameLobby.tscn")
 
 func _on_join_fail():
 	# Change to displaying error message when finalising
