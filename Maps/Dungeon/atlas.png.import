@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/atlas.png-5edbb589898d0fd14f724307bda4547f.stex"
+path="res://.import/atlas.png-9b0de4a4c7425d604a4973f172da9203.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Maps/Map2/atlas.png"
-dest_files=[ "res://.import/atlas.png-5edbb589898d0fd14f724307bda4547f.stex" ]
+source_file="res://Maps/Dungeon/atlas.png"
+dest_files=[ "res://.import/atlas.png-9b0de4a4c7425d604a4973f172da9203.stex" ]
 
 [params]
 

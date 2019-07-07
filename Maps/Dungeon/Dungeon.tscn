@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Maps/Map2/Map2.gd" type="Script" id=1]
-[ext_resource path="res://Maps/Map2/Background.tres" type="TileSet" id=2]
-[ext_resource path="res://Maps/Map2/Walls and Blocks.tres" type="TileSet" id=3]
+[ext_resource path="res://Maps/Dungeon/Dungeon.gd" type="Script" id=1]
+[ext_resource path="res://Maps/Dungeon/Background.tres" type="TileSet" id=2]
+[ext_resource path="res://Maps/Dungeon/Walls and Blocks.tres" type="TileSet" id=3]
+
+
 
 [node name="Map2" type="Node2D"]
 position = Vector2( 16, 16 )
