@@ -34,6 +34,7 @@ puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
 
 var rng = RandomNumberGenerator.new()
+var p_id_last_hit # Last player to hit this guy, for KDR
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -160,19 +161,12 @@ func play_animation(x_dir):
 func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
 
-remotesync func take_damage(p_id_hit, amount):
-	var actor = get_node("./../" + str(p_id_hit))
-	actor.get_node("./DamageAnimation").current_animation = "damage"
-	actor.set_health(health - amount)
-		
-func set_health(value):
-	health = clamp(value, 0, MAX_HEALTH)
-	emit_signal("health_updated", health)
-
 func check_death():
 	if health <= 0:
 		is_dead = true
 		$AnimationPlayer.current_animation = "die"
+		$PlayerHitBox/CollisionShape2D.disabled = true
+		print("Slain by " + p_id_last_hit)
 
 # detects when a player's sword enters another player's actor
 # then, remotely calls the take_damage function on that player's actor
@@ -181,8 +175,20 @@ func _on_SwordHitBox_area_entered(area):
 	if is_network_master():
 		if area.name == "PlayerHitBox":	
 			if area != get_node("./PlayerHitBox"): # Check if is not own hit box
-				var actor = area.get_node("./../")
-				var p_id_hit : int = int(actor.get_name())
+				var actor = area.get_node("./../") # Get this Adventurer node that was hit
+				var p_id_hit : String = str(actor.get_name()) # Get the network_id
+				var p_id_sender : String = get_node('./').get_name() # Get self id
 				var damage : int = rng.randi_range(1, 20)
-				rpc("take_damage", p_id_hit, damage)
+				rpc("take_damage", p_id_hit, damage, p_id_sender)
+
+remotesync func take_damage(p_id_hit, amount, p_id_sender):
+	# Get the actual player node that was hit using the network_id
+	var player_hit = get_node("./../" + p_id_hit)
+	player_hit.get_node("./DamageAnimation").current_animation = "damage"
+	player_hit.set_health(player_hit.health - amount)
+	player_hit.p_id_last_hit = p_id_sender
+		
+func set_health(value):
+	health = clamp(value, 0, MAX_HEALTH)
+	emit_signal("health_updated", health)
 

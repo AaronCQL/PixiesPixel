@@ -7,7 +7,12 @@ var server_info = {
 }
 
 var players = {
-	# dictionary to store all players in server
+# dictionary to store all players in server, looks like:
+#	network_unique_id: {
+#		name = "Player",
+#		net_id = 1,
+#		actor_path = "res://Characters/Adventurer/Adventurer.tscn",
+#	}
 }
 
 signal server_created	  		# when server is successfully created
