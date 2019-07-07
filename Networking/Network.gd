@@ -47,20 +47,37 @@ func join_server(ip, port):
 		
 	get_tree().set_network_peer(net)
 
+# When client successfully connects to server
+func _on_connected_to_server():
+	emit_signal("join_success")
+	# Update the player_info dictionary with the obtained unique network ID
+	GameState.player_info.net_id = get_tree().get_network_unique_id()
+	# Request the server to register this new player across all connected players
+	rpc("register_player", GameState.player_info)
+
 remote func register_player(pinfo):
 	if (get_tree().is_network_server()):
-		# We are on the server, so distribute the player list information throughout the connected players
+		# Distribute the player list information throughout the connected players
 		for id in players:
-			if (id != 1):
+			if (id != 1): # Skip the server
 				# Send currently iterated player info to the new player
 				rpc_id(pinfo.net_id, "register_player", players[id])
-				# Send new player info to currently iterated player, skipping the server (which will get the info shortly)
+				# Send new player info to currently iterated player
 				rpc_id(id, "register_player", pinfo)
 	
 	# Now to code that will be executed regardless of being on client or server
-	print("Registering player ", pinfo.name, " (", pinfo.net_id, ") to internal player table")
-	players[pinfo.net_id] = pinfo          # Create the player entry in the dictionary
+	players[pinfo.net_id] = pinfo	# Actually create the player entry in the dictionary
 
+# Everyone gets notified whenever someone disconnects from the server
+func _on_player_disconnected(id):
+	print("Player ", players[id].name, " disconnected from server")
+	# Update the player tables
+	if (get_tree().is_network_server()):
+		# Unregister the player from the server's list
+		unregister_player(id)
+		# Then on all remaining peers
+		rpc("unregister_player", id)
+		
 remote func unregister_player(id):
 	print(players[id].name, " removed from from internal table")
 	# Cache the player info because it's still necessary for some upkeeping
@@ -73,26 +90,6 @@ remote func unregister_player(id):
 # Everyone gets notified whenever a new client joins the server
 func _on_player_connected(id):
 	pass
-
-
-# Everyone gets notified whenever someone disconnects from the server
-func _on_player_disconnected(id):
-	print("Player ", players[id].name, " disconnected from server")
-	# Update the player tables
-	if (get_tree().is_network_server()):
-		# Unregister the player from the server's list
-		unregister_player(id)
-		# Then on all remaining peers
-		rpc("unregister_player", id)
-
-
-# Peer trying to connect to server is notified on success
-func _on_connected_to_server():
-	emit_signal("join_success")
-	# Update the player_info dictionary with the obtained unique network ID
-	GameState.player_info.net_id = get_tree().get_network_unique_id()
-	# Request the server to register this new player across all connected players
-	rpc("register_player", GameState.player_info)
 
 # Peer trying to connect to server is notified on failure
 func _on_connection_failed():
