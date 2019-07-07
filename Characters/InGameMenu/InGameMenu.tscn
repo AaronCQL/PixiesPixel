@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Characters/HUD/PopupMenu.gd" type="Script" id=1]
+[ext_resource path="res://Characters/InGameMenu/InGameMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
@@ -11,7 +11,7 @@ font_data = ExtResource( 2 )
 size = 32
 font_data = ExtResource( 2 )
 
-[node name="PopupMenu" type="CanvasLayer"]
+[node name="InGameMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]

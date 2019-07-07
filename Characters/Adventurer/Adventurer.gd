@@ -44,7 +44,7 @@ func _ready():
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
 	$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
 	rng.randomize()
-	get_node("./PopupMenu/Panel").hide()
+	get_node("./InGameMenu/Panel").hide()
 	
 func _physics_process(delta):
 	if is_network_master():
@@ -168,11 +168,11 @@ func toggle_menu():
 	if Input.is_action_just_pressed("ui_cancel"):
 		show_menu = !show_menu
 	if show_menu:
-		get_node('./PopupMenu/Panel').show()
+		get_node('./InGameMenu/Panel').show()
 	else:
-		get_node('./PopupMenu/Panel').hide()
-
-func _on_PopupMenu_on_resume_button_pressed():
+		get_node('./InGameMenu/Panel').hide()
+		
+func _on_InGameMenu_on_resume_button_pressed():
 	show_menu = false
 
 func check_death():
@@ -205,7 +205,4 @@ remotesync func take_damage(p_id_hit, amount, p_id_sender):
 func set_health(value):
 	health = clamp(value, 0, MAX_HEALTH)
 	emit_signal("health_updated", health)
-
-
-
 
