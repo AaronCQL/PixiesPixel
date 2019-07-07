@@ -9,7 +9,6 @@ func _on_HostButton_pressed():
 		Network.server_info.name = $NetworkPanel/ServerIP.text
 	Network.server_info.used_port = int($NetworkPanel/ServerPort.text)
 	Network.server_info.max_players = 6		
-	# Network.server_info.max_players = int($NetworkPanel/txtMaxPlayers.value)
 	
 	# And create the server, using the function previously added into the code
 	Network.create_server()
