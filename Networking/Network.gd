@@ -51,10 +51,10 @@ remote func register_player(pinfo):
 	if (get_tree().is_network_server()):
 		# We are on the server, so distribute the player list information throughout the connected players
 		for id in players:
-			# Send currently iterated player info to the new player
-			rpc_id(pinfo.net_id, "register_player", players[id])
-			# Send new player info to currently iterated player, skipping the server (which will get the info shortly)
 			if (id != 1):
+				# Send currently iterated player info to the new player
+				rpc_id(pinfo.net_id, "register_player", players[id])
+				# Send new player info to currently iterated player, skipping the server (which will get the info shortly)
 				rpc_id(id, "register_player", pinfo)
 	
 	# Now to code that will be executed regardless of being on client or server
@@ -92,9 +92,7 @@ func _on_connected_to_server():
 	# Update the player_info dictionary with the obtained unique network ID
 	GameState.player_info.net_id = get_tree().get_network_unique_id()
 	# Request the server to register this new player across all connected players
-	rpc_id(1, "register_player", GameState.player_info)
-	# And register itself on the local list
-	register_player(GameState.player_info)
+	rpc("register_player", GameState.player_info)
 
 # Peer trying to connect to server is notified on failure
 func _on_connection_failed():
