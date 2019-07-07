@@ -31,10 +31,11 @@ remote func spawn_players(pinfo, spawn_index):
 	print(pinfo.name)
 	# set actor position
 	nactor.position = $SpawnPoints.get_node(str(spawn_index)).position
+	# set actor infomation
 	nactor.get_node("PlayerNameLabel").text = pinfo.name
 	nactor.set_network_master(pinfo.net_id)
-	# Finally add the actor into the world
 	nactor.set_name(str(pinfo.net_id))
+	# Finally add the actor into the world
 	add_child(nactor)
 	
 remote func despawn_player(pinfo):

@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 signal health_updated(health)
-signal killed()
 
 const MAX_HEALTH = 100
 const RUN_SPEED = 100
@@ -18,7 +17,6 @@ var max_jump_velocity : float
 var min_jump_velocity : float
 var x_dir : int # direction in which player is facing in the x-axis
 
-var is_grounded : bool = true
 var is_sprinting : bool = false
 var can_double_jump : bool = true
 var is_double_jumping : bool = false
@@ -161,6 +159,7 @@ func play_animation(x_dir):
 				if velocity.y > 0:
 					$AnimationPlayer.current_animation = "fall"
 
+# warning-ignore:unused_argument
 func _on_AnimationPlayer_animation_finished(attack1):
 	is_attacking = false
 	
@@ -203,6 +202,7 @@ remotesync func take_damage(p_id_hit, amount, p_id_sender):
 	player_hit.p_id_last_hit = p_id_sender
 		
 func set_health(value):
+# warning-ignore:narrowing_conversion
 	health = clamp(value, 0, MAX_HEALTH)
 	emit_signal("health_updated", health)
 
