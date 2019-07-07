@@ -24,18 +24,21 @@ func _on_JoinButton_pressed():
 func set_player_info():
 	if (!$NetworkPanel/PlayerName.text.empty()):
 		GameState.player_info.name = $NetworkPanel/PlayerName.text
-	
-func _on_ready_to_play():
+
+func _on_connect_success():
+	# FOR INSTANT CHANGE SCENE
 	get_tree().change_scene("res://Maps/Dungeon/Dungeon.tscn")
 	
+	# FOR GOING TO LOBBY, NOT IMPLEMENTED YET:
+	# get_tree().change_scene("res://Lobby/PreGameLobby.tscn")
+
 func _on_join_fail():
 	# Change to displaying error message when finalising
 	print("Failed to join server")
 	
 func _ready():
-	Network.connect("server_created", self, "_on_ready_to_play")
-	Network.connect("join_success", self, "_on_ready_to_play")
+	Network.connect("server_created", self, "_on_connect_success")
+	Network.connect("join_success", self, "_on_connect_success")
 	Network.connect("join_fail", self, "_on_join_fail")
 	get_tree().paused = false
-
 
