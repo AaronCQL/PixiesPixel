@@ -38,22 +38,9 @@ remote func spawn_players(pinfo, spawn_index):
 	# Finally add the actor into the world
 	add_child(nactor)
 	
-remote func despawn_player(pinfo):
-	if (get_tree().is_network_server()):
-		for id in Network.players:
-			# Skip disconnected player and server from replication code
-			if (id == pinfo.net_id || id == 1):
-				continue
-			
-			# Replicate despawn into currently iterated player
-			rpc_id(id, "despawn_player", pinfo)
-	
-	# Try to locate the player actor
+func despawn_player(pinfo):
+	# Locate the player actor
 	var player_node = get_node(str(pinfo.net_id))
-	if (!player_node):
-		print("Unable to remove invalid node from tree")
-		return
-	
 	# Mark the node for deletion
 	player_node.queue_free()
 	
@@ -64,9 +51,7 @@ func _on_disconnected():
 
 func _ready():
 	Network.connect("disconnected", self, "_on_disconnected")
-	# If we are in the server, connect to the event that will deal with player despawning
-	if (get_tree().is_network_server()):
-		Network.connect("player_removed", self, "_on_player_removed")
+	Network.connect("player_removed", self, "_on_player_removed")
 	
 	# Spawn the players
 	if (get_tree().is_network_server()):
