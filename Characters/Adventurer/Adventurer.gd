@@ -204,5 +204,5 @@ remotesync func take_damage(p_id_hit, amount, p_id_sender):
 func set_health(value):
 # warning-ignore:narrowing_conversion
 	health = clamp(value, 0, MAX_HEALTH)
-	emit_signal("health_updated", health)
+	emit_signal("health_updated", health) # For health bar
 
