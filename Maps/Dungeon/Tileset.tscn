@@ -2,7 +2,6 @@
 
 [ext_resource path="res://Maps/Dungeon/tileset.png" type="Texture" id=1]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.05298, 8.02645 )
 
@@ -10,7 +9,6 @@ extents = Vector2( 8.05298, 8.02645 )
 position = Vector2( 18.5951, 22.9704 )
 
 [node name="Top left corner" type="Sprite" parent="."]
-editor/display_folded = true
 position = Vector2( 0.364609, -1.45844 )
 texture = ExtResource( 1 )
 region_enabled = true
