@@ -6,9 +6,17 @@ var server_info = {
 	used_port = 0         # Listening port
 }
 
-var players = {
-# dictionary to store all players in server, looks like:
-#	network_unique_id: {
+# Stores my player's info for the game
+var my_info = {
+	name = "Player",                   # How this player will be shown within the GUI
+	net_id = 1,                        # By default everyone receives "server ID"
+	actor_path = "res://Characters/Adventurer/Adventurer.tscn",  # The class used to represent the player in the game world
+	actor_name = "Adventurer"
+}
+
+# Stores ALL players' info, including self. Looks like:
+var players_info = {
+#	<network_unique_id>: {
 #		name = "Player",
 #		net_id = 1,
 #		actor_path = "res://Characters/Adventurer/Adventurer.tscn",
@@ -22,6 +30,13 @@ signal player_list_changed		# List of players has been changed
 signal player_removed(pinfo)	# A player has been removed from the list
 signal disconnected				# To allow code outside to act when disconnected
 
+func _ready():
+	get_tree().connect("network_peer_connected", self, "_on_player_connected")
+	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
+	get_tree().connect("connected_to_server", self, "_on_connected_to_server")
+	get_tree().connect("connection_failed", self, "_on_connection_failed")
+	get_tree().connect("server_disconnected", self, "on_disconnected_from_server")
+
 func create_server():
 	# Initialize the networking system
 	var net = NetworkedMultiplayerENet.new()
@@ -33,7 +48,7 @@ func create_server():
 		# Tell the server has been created successfully
 		emit_signal("server_created")
 		# Register the server's player in the local player list
-		register_player(GameState.player_info)
+		register_player(my_info)
 	else:
 		print("Failed to create server")
 		
@@ -51,21 +66,21 @@ func join_server(ip, port):
 func _on_connected_to_server():
 	emit_signal("join_success")
 	# Update the local player_info dictionary
-	GameState.player_info.net_id = get_tree().get_network_unique_id()
+	my_info.net_id = get_tree().get_network_unique_id()
 	# Call all peers to register this player
-	rpc("register_player", GameState.player_info)
+	rpc("register_player", my_info)
 
 remotesync func register_player(pinfo):
 	if get_tree().is_network_server():
 		# Distribute the player list information throughout the connected players
-		for id in players:
+		for id in players_info:
 			# Send currently iterated player info to the new player
-			rpc_id(pinfo.net_id, "register_player", players[id])
+			rpc_id(pinfo.net_id, "register_player", players_info[id])
 			if id != 1:
 				# Send new player info to currently iterated player
 				rpc_id(id, "register_player", pinfo)
 	
-	players[pinfo.net_id] = pinfo		# Actually create the player entry in the dictionary
+	players_info[pinfo.net_id] = pinfo		# Actually create the player entry in the dictionary
 	emit_signal("player_list_changed") 	# Tell Lobby that player list is updated
 
 # Everyone gets notified whenever a new client joins the server
@@ -79,9 +94,9 @@ func _on_connection_failed():
 
 # Executed on all the connected peers when another peer disconnects
 func _on_player_disconnected(id):
-	print("Player ", players[id].name, " disconnected from server")
+	print("Player ", players_info[id].name, " disconnected from server")
 	# Remove the player from the player list
-	players.erase(id)
+	players_info.erase(id)
 	# Tell Lobby to update the list
 	emit_signal("player_list_changed")
 
@@ -95,13 +110,7 @@ func on_disconnected_from_server():
 	# Allow outside code to know about the disconnection
 	emit_signal("disconnected")
 	# Clear the internal player list
-	players.clear()
+	players_info.clear()
 	# Reset the player info network ID
-	GameState.player_info.net_id = 1
+	my_info.net_id = 1
 
-func _ready():
-	get_tree().connect("network_peer_connected", self, "_on_player_connected")
-	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
-	get_tree().connect("connected_to_server", self, "_on_connected_to_server")
-	get_tree().connect("connection_failed", self, "_on_connection_failed")
-	get_tree().connect("server_disconnected", self, "on_disconnected_from_server")

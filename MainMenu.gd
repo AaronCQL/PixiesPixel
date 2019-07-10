@@ -23,13 +23,10 @@ func _on_JoinButton_pressed():
 	
 func set_player_info():
 	if (!$NetworkPanel/PlayerName.text.empty()):
-		GameState.player_info.name = $NetworkPanel/PlayerName.text
+		Network.my_info.name = $NetworkPanel/PlayerName.text
 
 func _on_connect_success():
-	# FOR INSTANT CHANGE SCENE:
-	# get_tree().change_scene("res://Maps/Dungeon/Dungeon.tscn")
-	
-	# FOR GOING TO LOBBY:
+	# Go to pre game lobby:
 	get_tree().change_scene("res://Lobby/PreGameLobby.tscn")
 
 func _on_join_fail():

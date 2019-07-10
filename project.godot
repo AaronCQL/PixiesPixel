@@ -20,7 +20,6 @@ run/main_scene="res://MainMenu.tscn"
 
 [autoload]
 
-GameState="*res://Networking/GameState.gd"
 Network="*res://Networking/Network.gd"
 
 [display]

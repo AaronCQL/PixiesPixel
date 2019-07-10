@@ -9,8 +9,8 @@ func setup_player_info():
 func refresh_player_list():
 	var PlayerList = get_node("./Panel/PlayerInfoPanel/PlayerList")
 	PlayerList.text = ""
-	for id in Network.players:
-		PlayerList.text += Network.players[id].name + " (" + Network.players[id].actor_name + ") " + "\n"
+	for id in Network.players_info:
+		PlayerList.text += Network.players_info[id].name + " (" + Network.players_info[id].actor_name + ") " + "\n"
 
 func _on_ready_to_play():
 	get_tree().change_scene(chosen_map)
@@ -26,27 +26,26 @@ remotesync func start_game():
 	get_tree().change_scene("res://Maps/Dungeon/Dungeon.tscn")
 
 remotesync func update_player_list(net_id_to_change, new_player_info):
-	Network.players[net_id_to_change] = new_player_info
+	Network.players_info[net_id_to_change] = new_player_info
 	refresh_player_list()
 
 func _on_PirateButton_pressed():
 	# get network id of the person who pressed
-	var net_id_to_change : int = GameState.player_info.net_id
+	var net_id_to_change : int = Network.my_info.net_id
 	# change local state
-	GameState.player_info.actor_name = "Pirate"
-	GameState.player_info.actor_path = "res://Characters/Pirate/Pirate.tscn"
+	Network.my_info.actor_name = "Pirate"
+	Network.my_info.actor_path = "res://Characters/Pirate/Pirate.tscn"
 	# ask everybody else to change their player list
-	rpc("update_player_list", net_id_to_change, GameState.player_info)
+	rpc("update_player_list", net_id_to_change, Network.my_info)
 
 func _on_AdventurerButton_pressed():
 	# get network id of the person who pressed
-	var net_id_to_change : int = GameState.player_info.net_id
+	var net_id_to_change : int = Network.my_info.net_id
 	# change local state
-	GameState.player_info.actor_name = "Adventurer"
-	GameState.player_info.actor_path = "res://Characters/Adventurer/Adventurer.tscn"
+	Network.my_info.actor_name = "Adventurer"
+	Network.my_info.actor_path = "res://Characters/Adventurer/Adventurer.tscn"
 	# ask everybody else to change their player list
-	rpc("update_player_list", net_id_to_change, GameState.player_info)
-
+	rpc("update_player_list", net_id_to_change, Network.my_info)
 
 func _on_ExitButton_pressed():
 	Network.on_disconnected_from_server()
