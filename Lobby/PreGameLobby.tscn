@@ -55,18 +55,26 @@ text = "Pirate"
 
 [node name="StartButton" type="Button" parent="Panel"]
 margin_left = 432.0
-margin_top = 272.0
-margin_right = 576.0
-margin_bottom = 320.0
-text = "Start Game"
-
-[node name="ExitButton" type="Button" parent="Panel"]
-margin_left = 432.0
 margin_top = 208.0
 margin_right = 576.0
 margin_bottom = 256.0
+text = "Sync Spawnpoint"
+
+[node name="ExitButton" type="Button" parent="Panel"]
+margin_left = 432.0
+margin_top = 272.0
+margin_right = 576.0
+margin_bottom = 320.0
 text = "EXIT"
+
+[node name="MapButton" type="Button" parent="Panel"]
+margin_left = 432.0
+margin_top = 160.0
+margin_right = 576.0
+margin_bottom = 192.0
+text = "Go To Map"
 [connection signal="pressed" from="Panel/AdventurerButton" to="." method="_on_AdventurerButton_pressed"]
 [connection signal="pressed" from="Panel/PirateButton" to="." method="_on_PirateButton_pressed"]
 [connection signal="pressed" from="Panel/StartButton" to="." method="_on_Button2_pressed"]
 [connection signal="pressed" from="Panel/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="Panel/MapButton" to="." method="_on_MapButton_pressed"]

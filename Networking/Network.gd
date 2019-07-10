@@ -11,7 +11,8 @@ var my_info = {
 	name = "Player",                   # How this player will be shown within the GUI
 	net_id = 1,                        # By default everyone receives "server ID"
 	actor_path = "res://Characters/Adventurer/Adventurer.tscn",  # The class used to represent the player in the game world
-	actor_name = "Adventurer"
+	actor_name = "Adventurer",
+	spawnpoint = 0
 }
 
 # Stores ALL players' info, including self. Looks like:
@@ -113,4 +114,5 @@ func on_disconnected_from_server():
 	players_info.clear()
 	# Reset the player info network ID
 	my_info.net_id = 1
+	my_info.spawnpoint = 0
 
