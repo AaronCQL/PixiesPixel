@@ -28,7 +28,7 @@ signal server_created	  		# when server is successfully created
 signal join_success	    		# When the peer successfully joins a server
 signal join_fail   				# Failed to join a server
 signal player_list_changed		# List of players has been changed
-signal player_removed(pinfo)	# A player has been removed from the list
+signal player_removed(id)		# A player has been removed from the list
 signal disconnected				# To allow code outside to act when disconnected
 
 func _ready():
@@ -100,6 +100,7 @@ func _on_player_disconnected(id):
 	players_info.erase(id)
 	# Tell Lobby to update the list
 	emit_signal("player_list_changed")
+	emit_signal("player_removed", id)
 
 # Executed on the current machine when the current machine disconnects
 func on_disconnected_from_server():
