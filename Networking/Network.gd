@@ -27,65 +27,46 @@ func create_server():
 	var net = NetworkedMultiplayerENet.new()
 	
 	# Try to create the server
-	if (net.create_server(server_info.used_port, server_info.max_players) != OK):
-		print("Failed to create server")
-	else:
+	if (net.create_server(server_info.used_port, server_info.max_players) == OK):
 		# Assign it into the tree
 		get_tree().set_network_peer(net)
 		# Tell the server has been created successfully
 		emit_signal("server_created")
 		# Register the server's player in the local player list
 		register_player(GameState.player_info)
+	else:
+		print("Failed to create server")
+		
 
 func join_server(ip, port):
 	var net = NetworkedMultiplayerENet.new()
 	
-	if (net.create_client(ip, port) != OK):
+	if (net.create_client(ip, port) == OK):
+		get_tree().set_network_peer(net)
+	else:
 		print("Failed to create client")
 		emit_signal("join_fail")
-		return
-		
-	get_tree().set_network_peer(net)
 
-# When client successfully connects to server
+# When current machine successfully connects to server
 func _on_connected_to_server():
 	emit_signal("join_success")
-	# Update the player_info dictionary with the obtained unique network ID
+	# Update the local player_info dictionary
 	GameState.player_info.net_id = get_tree().get_network_unique_id()
-	# Request the server to register this new player across all connected players
+	# Call all peers to register this player
 	rpc("register_player", GameState.player_info)
 
-remote func register_player(pinfo):
-	if (get_tree().is_network_server()):
+remotesync func register_player(pinfo):
+	if get_tree().is_network_server():
 		# Distribute the player list information throughout the connected players
 		for id in players:
-			if (id != 1): # Skip the server
-				# Send currently iterated player info to the new player
-				rpc_id(pinfo.net_id, "register_player", players[id])
+			# Send currently iterated player info to the new player
+			rpc_id(pinfo.net_id, "register_player", players[id])
+			if id != 1:
 				# Send new player info to currently iterated player
 				rpc_id(id, "register_player", pinfo)
 	
-	# Now to code that will be executed regardless of being on client or server
-	players[pinfo.net_id] = pinfo	# Actually create the player entry in the dictionary
-
-# Everyone gets notified whenever someone disconnects from the server
-func _on_player_disconnected(id):
-	print("Player ", players[id].name, " disconnected from server")
-	# Update the player tables
-	if (get_tree().is_network_server()):
-		# Unregister the player from the server's list
-		unregister_player(id)
-		# Then on all remaining peers
-		rpc("unregister_player", id)
-		
-remote func unregister_player(id):
-	print(players[id].name, " removed from from internal table")
-	# Cache the player info because it's still necessary for some upkeeping
-	var pinfo = players[id]
-	# Remove the player from the list
-	players.erase(id)
-	# Emit the signal that is meant to be intercepted only by the server
-	emit_signal("player_removed", pinfo)
+	players[pinfo.net_id] = pinfo		# Actually create the player entry in the dictionary
+	emit_signal("player_list_changed") 	# Tell Lobby that player list is updated
 
 # Everyone gets notified whenever a new client joins the server
 func _on_player_connected(id):
@@ -96,8 +77,16 @@ func _on_connection_failed():
 	emit_signal("join_fail")
 	get_tree().set_network_peer(null)
 
-# Peer is notified when disconnected from server
-func _on_disconnected_from_server():
+# Executed on all the connected peers when another peer disconnects
+func _on_player_disconnected(id):
+	print("Player ", players[id].name, " disconnected from server")
+	# Remove the player from the player list
+	players.erase(id)
+	# Tell Lobby to update the list
+	emit_signal("player_list_changed")
+
+# Executed on the current machine when the current machine disconnects
+func on_disconnected_from_server():
 	print("Disconnected from server")
 	# Stop processing any node in the world, so the client remains responsive
 	get_tree().paused = true
@@ -115,4 +104,4 @@ func _ready():
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
 	get_tree().connect("connected_to_server", self, "_on_connected_to_server")
 	get_tree().connect("connection_failed", self, "_on_connection_failed")
-	get_tree().connect("server_disconnected", self, "_on_disconnected_from_server")
+	get_tree().connect("server_disconnected", self, "on_disconnected_from_server")
