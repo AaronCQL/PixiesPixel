@@ -55,6 +55,7 @@ margin_right = 512.0
 margin_bottom = 132.0
 rect_pivot_offset = Vector2( 202.058, 8.67853 )
 custom_fonts/font = SubResource( 1 )
+max_length = 12
 placeholder_text = "Enter name"
 caret_blink = true
 caret_blink_speed = 0.35

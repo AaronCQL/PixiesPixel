@@ -117,3 +117,15 @@ func on_disconnected_from_server():
 	my_info.net_id = 1
 	my_info.spawnpoint = 0
 
+func sync_spawnpoints():
+	# Ask server to generate the spawnpoints
+	if get_tree().is_network_server():
+		var i = 1
+		for id in players_info:
+			# Ask server to sync all connected peers
+			rpc("sync_client", id, i)
+			i += 1
+
+remotesync func sync_client(id, i):
+	players_info[id].spawnpoint = i
+	emit_signal("player_list_changed")

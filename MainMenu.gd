@@ -27,7 +27,7 @@ func set_player_info():
 
 func _on_connect_success():
 	# Go to pre game lobby:
-	get_tree().change_scene("res://Lobby/PreGameLobby.tscn")
+	get_tree().change_scene("res://Lobby/NetworkLobby/NetworkLobby.tscn")
 
 func _on_join_fail():
 	# Change to displaying error message when finalising
