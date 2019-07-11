@@ -43,6 +43,8 @@ func _ready():
 	$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
 	rng.randomize()
 	get_node("./InGameMenu/Panel").hide()
+	if is_network_master():
+		self.z_index = 1 # Make character you control display in front of peers
 	
 func _physics_process(delta):
 	if is_network_master():
@@ -137,6 +139,7 @@ func flip_sprite(x_dir):
 	elif x_dir < 0:
 		$Sprite.scale.x = -1
 		rset("repl_scale_x", -1)
+	
 		
 func play_animation(x_dir):
 	if !is_dead:

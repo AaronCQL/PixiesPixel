@@ -70,4 +70,4 @@ remotesync func go_to_map():
 		player.set_name(str(p))
 		player.set_network_master(p) # Will be explained later
 		world.add_child(player)
-	get_node(".").queue_free()
+	self.queue_free()
