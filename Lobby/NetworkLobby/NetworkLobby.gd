@@ -5,13 +5,14 @@ func _ready():
 	Network.connect("player_list_changed", self, "refresh_player_list")
 
 func refresh_player_list():
-	var PlayerList = get_node("./Panel/PlayerInfoPanel/PlayerList")
-	PlayerList.text = ""
+	var player_list = get_node("./Panel/PlayerInfoPanel/PlayerList")
+	var text_to_display : String
 	for id in Network.players_info:
 		if id == 1:
-			PlayerList.text += Network.players_info[id].name + " S:" + str(Network.players_info[id].spawnpoint) + " (Host)" + "\n"
+			text_to_display += Network.players_info[id].name + " (Host)" + "\n"
 		else:
-			PlayerList.text += Network.players_info[id].name  + " S:" + str(Network.players_info[id].spawnpoint) + "\n"
+			text_to_display += Network.players_info[id].name + "\n"
+	player_list.text = text_to_display
 	
 func _on_StartButton_pressed():
 	rpc("go_to_pre_game_lobby")
