@@ -4,7 +4,7 @@
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=3]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 32
 outline_size = 1
 outline_color = Color( 0.717647, 0.215686, 0.215686, 0.74902 )
@@ -16,14 +16,14 @@ outline_size = 2
 outline_color = Color( 0.447059, 0.447059, 0.729412, 0.717647 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFontData" id=5]
+[sub_resource type="DynamicFontData" id=3]
 font_path = "res://Fonts/m5x7.ttf"
 
-[sub_resource type="DynamicFont" id=6]
+[sub_resource type="DynamicFont" id=4]
 size = 32
-font_data = SubResource( 5 )
+font_data = SubResource( 3 )
 
-[sub_resource type="DynamicFont" id=7]
+[sub_resource type="DynamicFont" id=5]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -49,7 +49,7 @@ margin_left = 32.0
 margin_top = 48.0
 margin_right = 336.0
 margin_bottom = 320.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "Player"
 
 [node name="PlayerLabel" type="Label" parent="Panel/PlayerInfoPanel"]
@@ -66,7 +66,7 @@ margin_left = 464.0
 margin_top = 272.0
 margin_right = 560.0
 margin_bottom = 320.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 4 )
 text = "EXIT"
 
 [node name="StartButton" type="Button" parent="Panel"]
@@ -74,7 +74,7 @@ margin_left = 464.0
 margin_top = 208.0
 margin_right = 560.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_pressed = Color( 0, 1, 0.0313726, 1 )
 text = "Start"
 [connection signal="pressed" from="Panel/ExitButton" to="." method="_on_ExitButton_pressed"]
