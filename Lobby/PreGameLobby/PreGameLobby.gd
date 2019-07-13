@@ -46,7 +46,7 @@ remotesync func go_to_map():
 		var spawnpoint : String = str(Network.players_info[p].spawnpoint)
 		var player_name : String = Network.players_info[p].name
 		var player = load(actor_path).instance()
-		player.position = get_node("/root/Map2/SpawnPoints").get_node(spawnpoint).position
+		player.position = get_node("/root/Map/SpawnPoints").get_node(spawnpoint).position
 		player.set_name(str(p)) # Sets the name of the node in the scene to be net_id
 		player.set_network_master(p)
 		player.get_node("./PlayerNameLabel").text = player_name
