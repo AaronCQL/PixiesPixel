@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Extension_blue.png-6d79b0c15810e42e3aec51394f3d943e.stex"
+path="res://.import/Tileset.png-20b7def45e7a23a0942d75a0fa77d42a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Maps/Grassy Plains/PNG/Extension_blue.png"
-dest_files=[ "res://.import/Extension_blue.png-6d79b0c15810e42e3aec51394f3d943e.stex" ]
+source_file="res://Maps/GrassyPlains/PNG/Tileset.png"
+dest_files=[ "res://.import/Tileset.png-20b7def45e7a23a0942d75a0fa77d42a.stex" ]
 
 [params]
 
@@ -20,7 +20,7 @@ compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
-flags/filter=true
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0
