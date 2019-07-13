@@ -34,9 +34,8 @@ func _on_AdventurerButton_pressed():
 remotesync func update_player_list(net_id_to_change, new_player_info):
 	Network.players_info[net_id_to_change] = new_player_info
 	refresh_player_list()
-	
 
-func _on_MapButton_pressed():
+func _on_StartButton_pressed():
 	rpc("go_to_map")
 
 remotesync func go_to_map():
@@ -53,3 +52,4 @@ remotesync func go_to_map():
 		player.get_node("./PlayerNameLabel").text = player_name
 		world.add_child(player)
 	self.queue_free()
+
