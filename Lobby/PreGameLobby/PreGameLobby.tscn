@@ -42,3 +42,12 @@ margin_top = 32.0
 margin_right = 256.0
 margin_bottom = 96.0
 text = "Pirate"
+
+[node name="StartButton" type="Button" parent="."]
+margin_left = 160.0
+margin_top = 288.0
+margin_right = 272.0
+margin_bottom = 336.0
+text = "Start"
+[connection signal="pressed" from="CharacterPanel/AdventurerButton" to="." method="_on_AdventurerButton_pressed"]
+[connection signal="pressed" from="CharacterPanel/PirateButton" to="." method="_on_PirateButton_pressed"]

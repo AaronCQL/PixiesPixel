@@ -17,10 +17,17 @@ var my_info = {
 
 # Stores ALL players' info, including self. Looks like:
 var players_info = {
-#	<network_unique_id>: {
+#	1 = {
 #		name = "Player",
 #		net_id = 1,
 #		actor_path = "res://Characters/Adventurer/Adventurer.tscn",
+#		...
+#	}
+#   823475982372 = {
+#		name = "Player",
+#		net_id = 823475982372,
+#		actor_path = "res://Characters/Adventurer/Adventurer.tscn",
+#	 	...
 #	}
 }
 
@@ -68,7 +75,7 @@ func _on_connected_to_server():
 	emit_signal("join_success")
 	# Update the local player_info dictionary
 	my_info.net_id = get_tree().get_network_unique_id()
-	# Call all peers to register this player
+	# Call all peers to register my player
 	rpc("register_player", my_info)
 
 remotesync func register_player(pinfo):
@@ -81,7 +88,7 @@ remotesync func register_player(pinfo):
 				# Send new player info to currently iterated player
 				rpc_id(id, "register_player", pinfo)
 	
-	players_info[pinfo.net_id] = pinfo		# Actually create the player entry in the dictionary
+	players_info[pinfo.net_id] = pinfo	# Actually create the player entry in the dictionary
 	emit_signal("player_list_changed") 	# Tell Lobby that player list is updated
 
 # Everyone gets notified whenever a new client joins the server
