@@ -10,23 +10,23 @@ outline_size = 1
 outline_color = Color( 0.717647, 0.215686, 0.215686, 0.74902 )
 font_data = ExtResource( 2 )
 
-[sub_resource type="Theme" id=6]
+[sub_resource type="Theme" id=2]
 Label/fonts/font = null
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 outline_size = 2
 outline_color = Color( 0.447059, 0.447059, 0.729412, 0.717647 )
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="DynamicFontData" id=4]
 font_path = "res://Fonts/m5x7.ttf"
 
-[sub_resource type="DynamicFont" id=4]
-size = 32
-font_data = SubResource( 3 )
-
 [sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = SubResource( 4 )
+
+[sub_resource type="DynamicFont" id=6]
 size = 32
 font_data = ExtResource( 3 )
 
@@ -58,8 +58,8 @@ text = "Player names here"
 [node name="PlayerLabel" type="Label" parent="Panel/PlayerInfoPanel"]
 margin_right = 368.0
 margin_bottom = 48.0
-theme = SubResource( 6 )
-custom_fonts/font = SubResource( 2 )
+theme = SubResource( 2 )
+custom_fonts/font = SubResource( 3 )
 text = "Connected Players:"
 align = 1
 valign = 1
@@ -70,7 +70,7 @@ margin_left = 400.0
 margin_top = 304.0
 margin_right = 480.0
 margin_bottom = 336.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
 text = "Exit"
@@ -80,7 +80,7 @@ margin_left = 544.0
 margin_top = 304.0
 margin_right = 624.0
 margin_bottom = 336.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Start"

@@ -10,11 +10,35 @@ margin_right = 640.0
 margin_bottom = 368.0
 
 [node name="PlayerInfoPanel" type="Panel" parent="Panel"]
-margin_left = 16.0
+self_modulate = Color( 0, 0, 0, 1 )
+margin_left = 304.0
 margin_top = 16.0
-margin_right = 384.0
+margin_right = 624.0
 margin_bottom = 352.0
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="PlayerList" type="Label" parent="Panel/PlayerInfoPanel"]
-margin_right = 432.0
-margin_bottom = 320.0
+margin_right = 320.0
+margin_bottom = 336.0
+
+[node name="CharacterPanel" type="Panel" parent="."]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 288.0
+margin_bottom = 144.0
+
+[node name="AdventurerButton" type="Button" parent="CharacterPanel"]
+margin_left = 16.0
+margin_top = 32.0
+margin_right = 128.0
+margin_bottom = 96.0
+text = "Adventurer"
+
+[node name="PirateButton" type="Button" parent="CharacterPanel"]
+margin_left = 144.0
+margin_top = 32.0
+margin_right = 256.0
+margin_bottom = 96.0
+text = "Pirate"

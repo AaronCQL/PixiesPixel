@@ -10,10 +10,8 @@ func refresh_player_list():
 	var PlayerList = get_node("./Panel/PlayerInfoPanel/PlayerList")
 	PlayerList.text = ""
 	for id in Network.players_info:
-		if id == 1:
-			PlayerList.text += Network.players_info[id].name + " S:" + str(Network.players_info[id].spawnpoint) + " (Host)" + "\n"
-		else:
-			PlayerList.text += Network.players_info[id].name  + " S:" + str(Network.players_info[id].spawnpoint) + "\n"
+		# for debugging
+		PlayerList.text += Network.players_info[id].name  + " S:" + str(Network.players_info[id].spawnpoint) + " " + Network.players_info[id].actor_name + "\n"
 
 func _on_PirateButton_pressed():
 	# get network id of the person who pressed
