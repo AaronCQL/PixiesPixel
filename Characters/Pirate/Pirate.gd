@@ -1,7 +1,6 @@
 extends KinematicBody2D
 
 #signal health_updated(health)
-#signal killed()
 
 const MAX_HEALTH = 100
 const RUN_SPEED = 100
@@ -35,24 +34,36 @@ puppet var repl_position : Vector2 = Vector2()
 puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
 
+var rng = RandomNumberGenerator.new()
+var p_id_last_hit # Last player to hit this guy, for KDR
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
 	#$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
+	if is_network_master():
+		self.z_index = 10 # Make character you control display in front of peers
 	
 func _physics_process(delta):
-	direction_input()				# horizontal mvmt
-	jump_input()					# jump
-	acceleration_curve()			# simluate acceleration when moving
-	attack_input()
-	flip_sprite(x_dir)				# flips sprite when turning direction
-	play_animation(x_dir)
-		
-	$Camera2D.current = true
-	velocity.y += gravity * delta 	# gravity
-	velocity = move_and_slide(velocity, FLOOR)	# godot's physics
+	if is_network_master():
+		direction_input()				# horizontal mvmt
+		jump_input()					# jump
+		acceleration_curve()			# simluate acceleration when moving
+		attack_input()
+		flip_sprite(x_dir)				# flips sprite when turning direction
+		play_animation(x_dir)
+			
+		$Camera2D.current = true
+		velocity.y += gravity * delta 	# gravity
+		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
+		rset_unreliable("repl_position", position)
+		rset("repl_animation", $AnimationPlayer.current_animation)
+	else:
+		position = repl_position							# to replitcate current position
+		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
+		$Sprite.scale.x = repl_scale_x 	
 		
 	
 	
@@ -105,8 +116,11 @@ func jump_input():
 func flip_sprite(x_dir):
 	if x_dir > 0:
 		$Sprite.scale.x = 1
+		rset("repl_scale_x", 1)
 	elif x_dir < 0:
 		$Sprite.scale.x = -1
+		rset("repl_scale_x", -1)
+
 		
 func play_animation(x_dir):
 	if !is_dead:
