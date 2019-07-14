@@ -12,6 +12,11 @@ const MAX_JUMP_HEIGHT = 6 * 16
 const MIN_JUMP_HEIGHT = 2 * 16
 const TIME_TO_JUMP_APEX = 0.45
 
+const MIN_DAMAGE = 5
+const MAX_DAMAGE = 15
+
+const BOMB = preload("res://Characters/Pirate/Bomb.tscn")
+
 var move_speed : float = RUN_SPEED
 var gravity : float
 var max_jump_velocity : float
@@ -38,17 +43,17 @@ func _ready():
 	#$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
 	
 func _physics_process(delta):
-
 	direction_input()				# horizontal mvmt
 	jump_input()					# jump
 	acceleration_curve()			# simluate acceleration when moving
 	attack_input()
 	flip_sprite(x_dir)				# flips sprite when turning direction
 	play_animation(x_dir)
-	
+		
 	$Camera2D.current = true
 	velocity.y += gravity * delta 	# gravity
 	velocity = move_and_slide(velocity, FLOOR)	# godot's physics
+		
 	
 	
 func direction_input():
@@ -56,8 +61,12 @@ func direction_input():
 	if !is_dead:
 		if Input.is_action_pressed("ui_right"):
 			x_dir += 1
+			if sign($Position2D.position.x) == -1:
+				$Position2D.position.x *= -1
 		if Input.is_action_pressed("ui_left"):
 			x_dir += -1
+			if sign($Position2D.position.x) == 1:
+				$Position2D.position.x *= -1
 		
 # Moves player according to this acceleration curve
 func acceleration_curve():
@@ -76,6 +85,11 @@ func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
 		is_attacking = true
 		$AnimationPlayer.current_animation = "attack"
+		var bomb = BOMB.instance()	#creates instance of bomb
+		var dir = sign($Position2D.position.x)
+		bomb.set_bomb_direction(dir)	#sets bomb direction based on x value of Position2D
+		get_parent().add_child(bomb)
+		bomb.position = $Position2D.global_position
 	
 func jump_input():
 	if !is_dead:	
