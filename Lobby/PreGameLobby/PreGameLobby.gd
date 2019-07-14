@@ -53,3 +53,6 @@ remotesync func go_to_map():
 		world.add_child(player)
 	self.queue_free()
 
+func _on_ExitButton_pressed():
+	Network.on_disconnected_from_server()
+	get_tree().change_scene("res://MainMenu.tscn")

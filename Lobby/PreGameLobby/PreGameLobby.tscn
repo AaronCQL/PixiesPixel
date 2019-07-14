@@ -20,8 +20,10 @@ __meta__ = {
 }
 
 [node name="PlayerList" type="Label" parent="Panel/PlayerInfoPanel"]
-margin_right = 320.0
-margin_bottom = 336.0
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 304.0
+margin_bottom = 320.0
 
 [node name="CharacterPanel" type="Panel" parent="."]
 margin_left = 16.0
@@ -49,6 +51,14 @@ margin_top = 288.0
 margin_right = 272.0
 margin_bottom = 336.0
 text = "Start"
+
+[node name="ExitButton" type="Button" parent="."]
+margin_left = 32.0
+margin_top = 288.0
+margin_right = 144.0
+margin_bottom = 336.0
+text = "Exit"
 [connection signal="pressed" from="CharacterPanel/AdventurerButton" to="." method="_on_AdventurerButton_pressed"]
 [connection signal="pressed" from="CharacterPanel/PirateButton" to="." method="_on_PirateButton_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
