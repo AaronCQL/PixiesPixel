@@ -15,6 +15,8 @@ var my_info = {
 	spawnpoint = 0
 }
 
+var chosen_map : String = "Dungeon"
+
 # Stores ALL players' info, including self. Looks like:
 var players_info = {
 #	1 = {

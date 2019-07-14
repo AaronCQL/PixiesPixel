@@ -1,7 +1,9 @@
 extends CanvasLayer
 
 # Handles choosing of characters and maps
-signal master_player_added
+
+var format_chosen_map_res = "res://Maps/%s/%s.tscn"
+var chosen_map_res = format_chosen_map_res % [Network.chosen_map, Network.chosen_map]
 
 func _ready():
 	refresh_player_list()
@@ -40,7 +42,7 @@ func _on_StartButton_pressed():
 	rpc("go_to_map")
 
 remotesync func go_to_map():
-	var world = load("res://Maps/Dungeon/Dungeon.tscn").instance()
+	var world = load(chosen_map_res).instance()
 	get_node("/root").add_child(world)
 	for id in Network.players_info:
 		var actor_path : String = Network.players_info[id].actor_path

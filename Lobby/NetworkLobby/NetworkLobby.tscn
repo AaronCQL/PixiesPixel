@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Lobby/NetworkLobby/NetworkLobby.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
@@ -29,6 +29,22 @@ font_data = SubResource( 4 )
 [sub_resource type="DynamicFont" id=6]
 size = 32
 font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 32
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 32
+font_data = ExtResource( 2 )
 
 [node name="NetworkLobby" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -84,5 +100,46 @@ custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Start"
+
+[node name="MapPanel" type="Panel" parent="Panel"]
+self_modulate = Color( 0.631373, 0.631373, 0.631373, 1 )
+margin_left = 400.0
+margin_top = 16.0
+margin_right = 624.0
+margin_bottom = 288.0
+
+[node name="DungeonButton" type="Button" parent="Panel/MapPanel"]
+margin_left = 16.0
+margin_top = 16.0
+margin_right = 208.0
+margin_bottom = 80.0
+custom_fonts/font = SubResource( 7 )
+text = "Dungeon"
+
+[node name="GrassyPlainsButton" type="Button" parent="Panel/MapPanel"]
+margin_left = 16.0
+margin_top = 96.0
+margin_right = 208.0
+margin_bottom = 160.0
+custom_fonts/font = SubResource( 8 )
+text = "Grassy Plains"
+
+[node name="MapLabel" type="Label" parent="Panel/MapPanel"]
+margin_left = 16.0
+margin_top = 192.0
+margin_right = 208.0
+margin_bottom = 224.0
+custom_fonts/font = SubResource( 9 )
+text = "SELECTED MAP:"
+
+[node name="ChosenMapLabel" type="Label" parent="Panel/MapPanel"]
+margin_left = 32.0
+margin_top = 224.0
+margin_right = 192.0
+margin_bottom = 256.0
+custom_fonts/font = SubResource( 10 )
+text = "Dungeon"
 [connection signal="pressed" from="Panel/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="Panel/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="Panel/MapPanel/DungeonButton" to="." method="_on_DungeonButton_pressed"]
+[connection signal="pressed" from="Panel/MapPanel/GrassyPlainsButton" to="." method="_on_GrassyPlainsButton_pressed"]
