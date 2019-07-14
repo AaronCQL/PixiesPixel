@@ -343,10 +343,6 @@ disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
-limit_left = 0
-limit_top = 0
-limit_right = 704
-limit_bottom = 592
 smoothing_enabled = true
 smoothing_speed = 8.0
 drag_margin_left = 0.1

@@ -1,6 +1,7 @@
 extends CanvasLayer
 
 # Handles choosing of characters and maps
+signal master_player_added
 
 func _ready():
 	refresh_player_list()
@@ -41,16 +42,18 @@ func _on_StartButton_pressed():
 remotesync func go_to_map():
 	var world = load("res://Maps/Dungeon/Dungeon.tscn").instance()
 	get_node("/root").add_child(world)
-	for p in Network.players_info:
-		var actor_path : String = Network.players_info[p].actor_path
-		var spawnpoint : String = str(Network.players_info[p].spawnpoint)
-		var player_name : String = Network.players_info[p].name
+	for id in Network.players_info:
+		var actor_path : String = Network.players_info[id].actor_path
+		var spawnpoint : String = str(Network.players_info[id].spawnpoint)
+		var player_name : String = Network.players_info[id].name
 		var player = load(actor_path).instance()
 		player.position = get_node("/root/Map/SpawnPoints").get_node(spawnpoint).position
-		player.set_name(str(p)) # Sets the name of the node in the scene to be net_id
-		player.set_network_master(p)
+		player.set_name(str(id)) # Sets the name of the node in the scene to be net_id
+		player.set_network_master(id)
 		player.get_node("./PlayerNameLabel").text = player_name
 		world.add_child(player)
+		if id == Network.my_info.net_id:
+			world.set_camera_limits() # Ask map to set camera limits for the master player
 	self.queue_free()
 
 func _on_ExitButton_pressed():
