@@ -34,6 +34,8 @@ var players_info = {
 #	}
 }
 
+var remaining_players : Array
+
 signal server_created	  		# when server is successfully created
 signal join_success	    		# When the peer successfully joins a server
 signal join_fail   				# Failed to join a server
@@ -143,3 +145,10 @@ func sync_spawnpoints():
 remotesync func sync_client(id, i):
 	players_info[id].spawnpoint = i
 	emit_signal("player_list_changed")
+	
+func on_player_death(net_id):
+	rpc("player_died", net_id)
+	
+remotesync func player_died(net_id):
+	remaining_players.erase(net_id)
+	print(remaining_players)

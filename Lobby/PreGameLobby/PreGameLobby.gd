@@ -42,6 +42,7 @@ func _on_StartButton_pressed():
 	rpc("go_to_map")
 
 remotesync func go_to_map():
+	Network.remaining_players = Network.players_info.keys()
 	var world = load(chosen_map_res).instance()
 	get_node("/root").add_child(world)
 	for id in Network.players_info:

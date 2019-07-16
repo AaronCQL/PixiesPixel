@@ -35,8 +35,9 @@ puppet var repl_position : Vector2 = Vector2()
 puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
 
-var rng = RandomNumberGenerator.new()
-var p_id_last_hit # Last player to hit this guy, for KDR
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
+var p_id_last_hit : String 		# Last player to hit this guy, for KDR
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -181,11 +182,19 @@ func _on_InGameMenu_on_resume_button_pressed():
 	show_menu = false
 
 func check_death():
-	if health <= 0:
+	if health <= 0 && !is_dead:
 		is_dead = true
 		$AnimationPlayer.current_animation = "die"
+		$DeathTimer.start(3)
 		$PlayerHitBox/CollisionShape2D.disabled = true
+		Network.on_player_death(get_tree().get_network_unique_id())
 		print("Slain by " + p_id_last_hit)
+
+func _on_DeathTimer_timeout():
+	rpc("remove_player_node", get_tree().get_network_unique_id())
+	
+remotesync func remove_player_node(net_id):
+	get_node("./../" + str(net_id)).queue_free()
 
 # detects when a player's sword enters another player's actor
 # then, remotely calls the take_damage function on that player's actor

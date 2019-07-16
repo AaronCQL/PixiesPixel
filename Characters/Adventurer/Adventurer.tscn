@@ -390,7 +390,12 @@ align = 1
 valign = 1
 
 [node name="InGameMenu" parent="." instance=ExtResource( 6 )]
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="area_entered" from="Sprite/SwordHitBox" to="." method="_on_SwordHitBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="on_resume_button_pressed" from="InGameMenu" to="." method="_on_InGameMenu_on_resume_button_pressed"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
