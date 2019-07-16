@@ -34,6 +34,7 @@ var velocity : Vector2 = Vector2(0, 0)
 puppet var repl_position : Vector2 = Vector2()
 puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
+puppet var repl_is_dead : bool = false
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
@@ -70,6 +71,8 @@ func _physics_process(delta):
 		position = repl_position							# to replitcate current position
 		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
 		$Sprite.scale.x = repl_scale_x 						# to replicate change in x direction
+		if repl_is_dead:
+			$PlayerHitBox/CollisionShape2D.disabled = true		
 	
 func direction_input():
 	x_dir = 0
@@ -184,9 +187,9 @@ func _on_InGameMenu_on_resume_button_pressed():
 func check_death():
 	if health <= 0 && !is_dead:
 		is_dead = true
+		rset("repl_is_dead", true)
 		$AnimationPlayer.current_animation = "die"
 		$DeathTimer.start(3)
-		$PlayerHitBox/CollisionShape2D.disabled = true
 		Network.on_player_death(get_tree().get_network_unique_id())
 		print("Slain by " + p_id_last_hit)
 
