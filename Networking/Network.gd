@@ -1,9 +1,10 @@
 extends Node
 
 var server_info = {
-	name = "Server",      # Holds the name of the server
-	max_players = 0,      # Maximum allowed connections
-	used_port = 0         # Listening port
+	name = "Server",    # Holds the name of the server
+	max_players = 0,    # Maximum allowed connections
+	used_port = 0,      # Listening port
+	ip_addr = '',		# IP address of the host
 }
 
 # Stores my player's info for the game
@@ -59,6 +60,10 @@ func create_server():
 		emit_signal("server_created")
 		# Register the server's player in the local player list
 		register_player(my_info)
+		for address in IP.get_local_addresses():
+			if "192.168" in address:
+				server_info.ip_addr = address
+				return
 	else:
 		print("Failed to create server")
 		

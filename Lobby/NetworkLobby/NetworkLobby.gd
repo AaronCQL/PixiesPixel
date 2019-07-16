@@ -6,6 +6,13 @@ func _ready():
 	refresh_player_list()
 	Network.connect("player_list_changed", self, "refresh_player_list")
 	change_map("Dungeon", "Dungeon") # Dungeon is the default map
+	show_ip_address()
+	
+func show_ip_address():
+	if (get_tree().is_network_server()):
+		get_node("./Panel/PlayerInfoPanel/HostIpAddr").text = "Your IP address: " + Network.server_info.ip_addr
+	else:
+		get_node("./Panel/PlayerInfoPanel/HostIpAddr").hide()
 
 func refresh_player_list():
 	var player_list = get_node("./Panel/PlayerInfoPanel/PlayerList")
