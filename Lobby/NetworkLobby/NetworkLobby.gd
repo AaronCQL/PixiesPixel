@@ -5,6 +5,7 @@ var map_label_to_display = "Dungeon"
 func _ready():
 	refresh_player_list()
 	Network.connect("player_list_changed", self, "refresh_player_list")
+	Network.connect("player_joined", self, "sync_chosen_map")
 	change_map("Dungeon", "Dungeon") # Dungeon is the default map
 	show_ip_address()
 	
@@ -49,4 +50,6 @@ remotesync func change_map(map_name, map_label):
 func refresh_map_name():
 	get_node("./Panel/MapPanel/ChosenMapLabel").text = map_label_to_display
 
-
+func sync_chosen_map(id):
+	if get_tree().is_network_server():
+		rpc_id(id, "change_map", Network.chosen_map, map_label_to_display)

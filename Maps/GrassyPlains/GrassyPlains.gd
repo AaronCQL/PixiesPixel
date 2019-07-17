@@ -24,4 +24,3 @@ func _on_disconnected():
 	# Ideally pause the internal simulation and display a message box here.
 	# From the answer in the message box change back into the main menu scene
 	self.queue_free()
-	get_tree().change_scene("res://MainMenu.tscn")

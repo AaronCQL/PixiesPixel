@@ -42,6 +42,7 @@ signal join_fail   				# Failed to join a server
 signal player_list_changed		# List of players has been changed
 signal player_removed(id)		# A player has been removed from the list
 signal disconnected				# To allow code outside to act when disconnected
+signal player_joined(id)		# A new player has joined
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")
@@ -72,7 +73,6 @@ func create_server():
 
 func join_server(ip, port):
 	var net = NetworkedMultiplayerENet.new()
-	
 	if (net.create_client(ip, port) == OK):
 		get_tree().set_network_peer(net)
 	else:
@@ -102,7 +102,7 @@ remotesync func register_player(pinfo):
 
 # Everyone gets notified whenever a new client joins the server
 func _on_player_connected(id):
-	pass
+	emit_signal("player_joined", id)
 
 # Peer trying to connect to server is notified on failure
 func _on_connection_failed():
@@ -132,6 +132,7 @@ func on_disconnected_from_server():
 	# Reset the player info network ID
 	my_info.net_id = 1
 	my_info.spawnpoint = 0
+	get_tree().change_scene("res://MainMenu.tscn")
 
 func sync_spawnpoints():
 	# Ask server to generate the spawnpoints
