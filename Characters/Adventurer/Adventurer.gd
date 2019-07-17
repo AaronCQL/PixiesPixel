@@ -11,8 +11,8 @@ const MAX_JUMP_HEIGHT = 6 * 16
 const MIN_JUMP_HEIGHT = 2 * 16
 const TIME_TO_JUMP_APEX = 0.45
 
-const MIN_DAMAGE = 5
-const MAX_DAMAGE = 15
+const MIN_DAMAGE = 100
+const MAX_DAMAGE = 100
 
 var move_speed : float = RUN_SPEED
 var gravity : float
@@ -185,7 +185,7 @@ func _on_InGameMenu_on_resume_button_pressed():
 
 func check_death():
 	if !is_dead:
-		$Camera2D.current = true
+		$Camera2D.make_current()
 		if health <= 0:
 			is_dead = true
 			rset("repl_is_dead", true)
@@ -193,11 +193,21 @@ func check_death():
 			$DeathTimer.start(2)
 			Network.on_player_death(get_tree().get_network_unique_id())
 			print("Slain by " + p_id_last_hit)
+	if is_dead:
+		change_camera()
 
 func _on_DeathTimer_timeout():
 	$Camera2D.current = false
-	# TODO: Change this to dynamic switching
-	get_node("./../" + str(Network.remaining_players[0]) + "/Camera2D").current = true
+	get_node("./../" + str(Network.remaining_players[0]) + "/Camera2D").make_current()
+
+var cam_index : int = 0
+func change_camera():
+	if Input.is_action_just_pressed("ui_focus_next"):
+		if (cam_index >= Network.remaining_players.size() - 1):
+			cam_index = 0
+		else:
+			cam_index += 1	
+		get_node("./../" + str(Network.remaining_players[cam_index]) + "/Camera2D").make_current()
 
 # detects when a player's sword enters another player's actor
 # then, remotely calls the take_damage function on that player's actor
