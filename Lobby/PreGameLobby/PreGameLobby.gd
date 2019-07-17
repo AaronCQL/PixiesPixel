@@ -9,7 +9,6 @@ func _ready():
 	refresh_player_list()
 	Network.connect("player_list_changed", self, "refresh_player_list")
 	Network.is_game_ongoing = true
-	print(Network.is_game_ongoing)
 	
 func refresh_player_list():
 	var PlayerList = get_node("./Panel/PlayerInfoPanel/PlayerList")
@@ -62,4 +61,3 @@ remotesync func go_to_map():
 
 func _on_ExitButton_pressed():
 	Network.on_disconnected_from_server()
-	get_tree().change_scene("res://MainMenu.tscn")

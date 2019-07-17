@@ -1,5 +1,11 @@
 extends CanvasLayer
 
+func _ready():
+	Network.connect("server_created", self, "_on_connect_success")
+	Network.connect("join_fail", self, "_on_join_fail")
+	Network.is_game_ongoing = false
+	get_tree().paused = false
+
 func _on_HostButton_pressed():
 	# Properly set the local player information
 	set_player_info()
@@ -32,9 +38,4 @@ func _on_connect_success():
 func _on_join_fail():
 	# Change to displaying error message when finalising
 	print("Failed to join server")
-	
-func _ready():
-	Network.connect("server_created", self, "_on_connect_success")
-	Network.connect("join_fail", self, "_on_join_fail")
-	get_tree().paused = false
 
