@@ -1,12 +1,16 @@
 extends Area2D
 
-const SPEED = 100
+const SPEED = 0
 
 var velocity = Vector2()
 var direction = 1
+var is_exploding = false
+
+onready var timer = get_node("Timer")
 
 func _ready():
-	pass
+	timer.set_wait_time(2)
+	timer.start(2)
 
 func set_bomb_direction(dir):
 	direction = dir
@@ -14,9 +18,15 @@ func set_bomb_direction(dir):
 		$Sprite.flip_h = true
 
 func _physics_process(delta):
-	velocity.x = SPEED * delta * direction
-	translate(velocity)
-	$Sprite/AnimationPlayer.current_animation = "activate"
+	if !is_exploding:
+    	$Sprite/AnimationPlayer.current_animation = "activate"
+	else:
+    	$Sprite/AnimationPlayer.current_animation = "explode"
+	
 
-func _on_VisibilityEnabler2D_screen_exited():
+func _on_Timer_timeout():
+	print("hulo")
+	is_exploding = true
+
+func _on_AnimationPlayer_animation_finished(explode):
 	queue_free()

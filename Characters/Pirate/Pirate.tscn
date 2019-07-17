@@ -22,7 +22,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -4.65661e-010, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( -4.65661e-10, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 10, 11, 12, 13, 14 ]

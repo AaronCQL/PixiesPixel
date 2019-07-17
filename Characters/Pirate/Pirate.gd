@@ -66,7 +66,6 @@ func _physics_process(delta):
 		$Sprite.scale.x = repl_scale_x 	
 		
 	
-	
 func direction_input():
 	x_dir = 0
 	if !is_dead:
@@ -100,7 +99,7 @@ func attack_input():
 		var dir = sign($Position2D.position.x)
 		bomb.set_bomb_direction(dir)	#sets bomb direction based on x value of Position2D
 		get_parent().add_child(bomb)
-		bomb.position = $Position2D.global_position
+		bomb.position = $Position2D.global_position	
 	
 func jump_input():
 	if !is_dead:	
