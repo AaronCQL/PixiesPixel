@@ -55,8 +55,7 @@ remotesync func go_to_map():
 		player.set_network_master(id)
 		player.get_node("./PlayerNameLabel").text = player_name
 		world.add_child(player)
-		if id == Network.my_info.net_id:
-			world.set_camera_limits() # Ask map to set camera limits for the master player
+		world.set_camera_limits(str(id)) # Ask map to set camera limits for the all player nodes
 	self.queue_free()
 
 func _on_ExitButton_pressed():

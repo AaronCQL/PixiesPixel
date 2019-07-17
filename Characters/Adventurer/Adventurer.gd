@@ -62,7 +62,6 @@ func _physics_process(delta):
 		play_animation(x_dir)
 		check_death()
 		toggle_menu()
-		$Camera2D.current = true
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset_unreliable("repl_position", position)
@@ -185,19 +184,20 @@ func _on_InGameMenu_on_resume_button_pressed():
 	show_menu = false
 
 func check_death():
-	if health <= 0 && !is_dead:
-		is_dead = true
-		rset("repl_is_dead", true)
-		$AnimationPlayer.current_animation = "die"
-		$DeathTimer.start(3)
-		Network.on_player_death(get_tree().get_network_unique_id())
-		print("Slain by " + p_id_last_hit)
+	if !is_dead:
+		$Camera2D.current = true
+		if health <= 0:
+			is_dead = true
+			rset("repl_is_dead", true)
+			$AnimationPlayer.current_animation = "die"
+			$DeathTimer.start(2)
+			Network.on_player_death(get_tree().get_network_unique_id())
+			print("Slain by " + p_id_last_hit)
 
 func _on_DeathTimer_timeout():
-	rpc("remove_player_node", get_tree().get_network_unique_id())
-	
-remotesync func remove_player_node(net_id):
-	get_node("./../" + str(net_id)).queue_free()
+	$Camera2D.current = false
+	# TODO: Change this to dynamic switching
+	get_node("./../" + str(Network.remaining_players[0]) + "/Camera2D").current = true
 
 # detects when a player's sword enters another player's actor
 # then, remotely calls the take_damage function on that player's actor

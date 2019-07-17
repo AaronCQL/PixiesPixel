@@ -4,8 +4,8 @@ func _ready():
 	Network.connect("disconnected", self, "_on_disconnected")
 	Network.connect("player_removed", self, "_on_player_removed")
 	
-func set_camera_limits():
-	var player_node : String = "./" + str(get_tree().get_network_unique_id())
+func set_camera_limits(net_id):
+	var player_node : String = "./" + net_id
 	get_node(player_node).get_node("./Camera2D").limit_left = 0
 	get_node(player_node).get_node("./Camera2D").limit_top = 0
 	get_node(player_node).get_node("./Camera2D").limit_right = 704
