@@ -4,8 +4,8 @@ func _ready():
 	Network.connect("server_created", self, "_on_connect_success")
 	Network.connect("join_fail", self, "_on_join_fail")
 	Network.connect("host_fail", self, "_on_host_fail")
+	Network.connect("disconnected", self, "_on_disconnected")
 	Network.is_game_ongoing = false
-	get_tree().paused = false
 
 func _on_HostButton_pressed():
 	# Properly set the local player information
@@ -31,18 +31,22 @@ func _on_JoinButton_pressed():
 func set_player_info():
 	if (!$NetworkPanel/PlayerName.text.empty()):
 		Network.my_info.name = $NetworkPanel/PlayerName.text
-
-func _on_connect_success():
+		
+func go_to_network_lobby():
 	# Go to pre game lobby:
-	get_tree().change_scene("res://Lobby/NetworkLobby/NetworkLobby.tscn")
+	var network_lobby = preload("res://Lobby/NetworkLobby/NetworkLobby.tscn").instance()
+	get_node("/root").add_child(network_lobby)
+	$NetworkPanel.hide()
+	
+func _on_connect_success():
+	go_to_network_lobby()
 
 func _on_join_fail():
-	$Popup.window_title = "Connection Failed"
-	$Popup.dialog_text = "Unable to join server, please try again later."
-	$Popup.popup_centered()
+	$NetworkPanel/JoinFailPopup.popup_centered()
 
 func _on_host_fail():
-	$Popup.window_title = "Connection Failed"
-	$Popup.dialog_text = "Unable to create server, a server may already exist on your IP."
-	$Popup.popup_centered()
+	$NetworkPanel/HostFailPopup.popup_centered()
 
+func _on_disconnected():
+	$NetworkPanel.show()
+	$NetworkPanel/DisconnectedPopup.popup_centered()

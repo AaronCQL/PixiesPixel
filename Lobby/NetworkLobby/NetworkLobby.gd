@@ -30,11 +30,11 @@ func _on_StartButton_pressed():
 
 remotesync func go_to_pre_game_lobby():
 	Network.sync_spawnpoints()
-	get_tree().change_scene("res://Lobby/PreGameLobby/PreGameLobby.tscn")
+	var pre_game_lobby = preload("res://Lobby/PreGameLobby/PreGameLobby.tscn").instance()
+	get_node("/root").add_child(pre_game_lobby)
 
 func _on_ExitButton_pressed():
 	Network.on_disconnected_from_server()
-	get_tree().change_scene("res://MainMenu.tscn")
 
 func _on_DungeonButton_pressed():
 	rpc("change_map", "Dungeon", "Dungeon")

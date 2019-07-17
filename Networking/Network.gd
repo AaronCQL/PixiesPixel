@@ -114,7 +114,7 @@ func _on_player_connected(id):
 
 # For server to call peers to change to NetworkLobby scene if game is not ongoing
 remote func go_to_network_lobby():
-	get_tree().change_scene("res://Lobby/NetworkLobby/NetworkLobby.tscn")
+	get_node("/root/MainMenu").go_to_network_lobby()
 
 # For server to call peer to disconnect when game is ongoing
 remote func disconnect_peer():
@@ -137,8 +137,6 @@ func _on_player_disconnected(id):
 # Executed on the current machine when the current machine disconnects
 func on_disconnected_from_server():
 	print("Disconnected from server")
-	# Stop processing any node in the world, so the client remains responsive
-	get_tree().paused = true
 	# Clear the network object
 	get_tree().set_network_peer(null)
 	# Allow outside code to know about the disconnection
@@ -148,7 +146,15 @@ func on_disconnected_from_server():
 	# Reset the player info network ID
 	my_info.net_id = 1
 	my_info.spawnpoint = 0
-	get_tree().change_scene("res://MainMenu.tscn")
+	remove_child_nodes()
+
+func remove_child_nodes():
+	if get_node("/root").has_node("NetworkLobby"):
+		get_node("/root/NetworkLobby").queue_free()
+	if get_node("/root").has_node("PreGameLobby"):
+		get_node("/root/PreGameLobby").queue_free()
+	if get_node("/root").has_node("Map"):
+		get_node("/root/Map").queue_free()
 
 func sync_spawnpoints():
 	# Ask server to generate the spawnpoints

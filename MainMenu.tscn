@@ -118,10 +118,49 @@ text = "Port:"
 align = 2
 valign = 1
 
-[node name="Popup" type="AcceptDialog" parent="."]
-visible = true
-margin_right = 83.0
-margin_bottom = 58.0
+[node name="JoinFailPopup" type="AcceptDialog" parent="NetworkPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -68.0
+margin_top = -36.0
+margin_right = 68.0
+margin_bottom = 36.0
 theme = ExtResource( 3 )
+popup_exclusive = true
+window_title = "Failed to Join"
+dialog_text = "Unable to join server, 
+please try again later."
+
+[node name="HostFailPopup" type="AcceptDialog" parent="NetworkPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -192.0
+margin_top = -55.0
+margin_right = 242.0
+margin_bottom = 70.0
+theme = ExtResource( 3 )
+popup_exclusive = true
+window_title = "Unable to Host"
+dialog_text = "Unable to create server, a server 
+may already exist on your IP."
+
+[node name="DisconnectedPopup" type="AcceptDialog" parent="NetworkPanel"]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -163.0
+margin_top = -48.0
+margin_right = 163.0
+margin_bottom = 48.0
+theme = ExtResource( 3 )
+popup_exclusive = true
+window_title = "Disconnected!"
+dialog_text = "Disconnected from server."
 [connection signal="pressed" from="NetworkPanel/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/HostButton" to="." method="_on_HostButton_pressed"]
