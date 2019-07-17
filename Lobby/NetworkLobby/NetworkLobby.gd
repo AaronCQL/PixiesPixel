@@ -3,11 +3,11 @@ extends CanvasLayer
 var map_label_to_display = "Dungeon"
 
 func _ready():
-	refresh_player_list()
 	Network.connect("player_list_changed", self, "refresh_player_list")
-	Network.connect("player_joined", self, "sync_chosen_map")
-	change_map("Dungeon", "Dungeon") # Dungeon is the default map
+	Network.is_game_ongoing = false
+	refresh_player_list()
 	show_ip_address()
+	sync_chosen_map()
 	
 func show_ip_address():
 	if (get_tree().is_network_server()):
@@ -50,6 +50,9 @@ remotesync func change_map(map_name, map_label):
 func refresh_map_name():
 	get_node("./Panel/MapPanel/ChosenMapLabel").text = map_label_to_display
 
-func sync_chosen_map(id):
-	if get_tree().is_network_server():
-		rpc_id(id, "change_map", Network.chosen_map, map_label_to_display)
+func sync_chosen_map():
+	if !get_tree().is_network_server(): # Peer requests server to send the correct info
+		rpc_id(1, "request_server_sync_map", get_tree().get_network_unique_id())
+	
+remote func request_server_sync_map(net_id):
+	rpc_id(net_id, "change_map", Network.chosen_map, map_label_to_display)

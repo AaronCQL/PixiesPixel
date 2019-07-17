@@ -8,6 +8,8 @@ var chosen_map_res = format_chosen_map_res % [Network.chosen_map, Network.chosen
 func _ready():
 	refresh_player_list()
 	Network.connect("player_list_changed", self, "refresh_player_list")
+	Network.is_game_ongoing = true
+	print(Network.is_game_ongoing)
 	
 func refresh_player_list():
 	var PlayerList = get_node("./Panel/PlayerInfoPanel/PlayerList")

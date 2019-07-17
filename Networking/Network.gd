@@ -35,14 +35,15 @@ var players_info = {
 }
 
 var remaining_players : Array
+var is_game_ongoing : bool = false
 
-signal server_created	  		# when server is successfully created
-signal join_success	    		# When the peer successfully joins a server
-signal join_fail   				# Failed to join a server
-signal player_list_changed		# List of players has been changed
-signal player_removed(id)		# A player has been removed from the list
-signal disconnected				# To allow code outside to act when disconnected
-signal player_joined(id)		# A new player has joined
+signal server_created	  		# when current machine successfuly creates server
+signal join_success	    		# When current machine successfully joins a server
+signal join_fail   				# When current machine is unable to join a server
+signal player_list_changed		# Player list has been changed
+signal player_removed(id)		# A peer has been removed from the player list
+signal disconnected				# When current machine disconnects from server
+signal player_joined(id)		# A new peer has joined
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")
@@ -88,21 +89,35 @@ func _on_connected_to_server():
 	rpc("register_player", my_info)
 
 remotesync func register_player(pinfo):
-	if get_tree().is_network_server():
-		# Distribute the player list information throughout the connected players
-		for id in players_info:
-			# Send currently iterated player info to the new player
-			rpc_id(pinfo.net_id, "register_player", players_info[id])
-			if id != 1:
-				# Send new player info to currently iterated player
-				rpc_id(id, "register_player", pinfo)
-	
-	players_info[pinfo.net_id] = pinfo	# Actually create the player entry in the dictionary
-	emit_signal("player_list_changed") 	# Tell Lobby that player list is updated
+	if !is_game_ongoing:
+		if get_tree().is_network_server():
+			# Distribute the player list information throughout the connected players
+			for id in players_info:
+				# Send currently iterated player info to the new player
+				rpc_id(pinfo.net_id, "register_player", players_info[id])
+				if id != 1:
+					# Send new player info to currently iterated player
+					rpc_id(id, "register_player", pinfo)
+		
+		players_info[pinfo.net_id] = pinfo	# Actually create the player entry in the dictionary
+		emit_signal("player_list_changed") 	# Tell Lobby that player list is updated
 
 # Everyone gets notified whenever a new client joins the server
 func _on_player_connected(id):
-	emit_signal("player_joined", id)
+	if get_tree().is_network_server():
+		if is_game_ongoing:
+			rpc_id(id, "disconnect_peer") # disconnects new peer if game is already ongoing
+		else:
+			rpc_id(id, "go_to_network_lobby") # asks new peers to go to network_lobby if game is not ongoing
+		emit_signal("player_joined", id)
+
+# For server to call peers to change to NetworkLobby scene if game is not ongoing
+remote func go_to_network_lobby():
+	get_tree().change_scene("res://Lobby/NetworkLobby/NetworkLobby.tscn")
+
+# For server to call peer to disconnect when game is ongoing
+remote func disconnect_peer():
+	on_disconnected_from_server()
 
 # Peer trying to connect to server is notified on failure
 func _on_connection_failed():
