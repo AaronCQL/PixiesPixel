@@ -17,7 +17,7 @@ func show_ip_address():
 
 func refresh_player_list():
 	var player_list = get_node("./Panel/PlayerInfoPanel/PlayerList")
-	var text_to_display : String
+	var text_to_display : String = ""
 	for id in Network.players_info:
 		if id == 1:
 			text_to_display += Network.players_info[id].name + " (Host)" + "\n"

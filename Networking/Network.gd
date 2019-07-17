@@ -38,6 +38,7 @@ var remaining_players : Array
 var is_game_ongoing : bool = false
 
 signal server_created	  		# when current machine successfuly creates server
+signal host_fail				# When current machine is unable to host
 signal join_success	    		# When current machine successfully joins a server
 signal join_fail   				# When current machine is unable to join a server
 signal player_list_changed		# Player list has been changed
@@ -69,7 +70,7 @@ func create_server():
 				server_info.ip_addr = address
 				return
 	else:
-		print("Failed to create server")
+		emit_signal("host_fail")
 		
 
 func join_server(ip, port):

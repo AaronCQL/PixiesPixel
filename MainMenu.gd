@@ -3,6 +3,7 @@ extends CanvasLayer
 func _ready():
 	Network.connect("server_created", self, "_on_connect_success")
 	Network.connect("join_fail", self, "_on_join_fail")
+	Network.connect("host_fail", self, "_on_host_fail")
 	Network.is_game_ongoing = false
 	get_tree().paused = false
 
@@ -36,6 +37,12 @@ func _on_connect_success():
 	get_tree().change_scene("res://Lobby/NetworkLobby/NetworkLobby.tscn")
 
 func _on_join_fail():
-	# Change to displaying error message when finalising
-	print("Failed to join server")
+	$Popup.window_title = "Connection Failed"
+	$Popup.dialog_text = "Unable to join server, please try again later."
+	$Popup.popup_centered()
+
+func _on_host_fail():
+	$Popup.window_title = "Connection Failed"
+	$Popup.dialog_text = "Unable to create server, a server may already exist on your IP."
+	$Popup.popup_centered()
 

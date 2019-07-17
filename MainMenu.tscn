@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Theme/Theme.tres" type="Theme" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -116,5 +117,11 @@ custom_fonts/font = SubResource( 6 )
 text = "Port:"
 align = 2
 valign = 1
+
+[node name="Popup" type="AcceptDialog" parent="."]
+visible = true
+margin_right = 83.0
+margin_bottom = 58.0
+theme = ExtResource( 3 )
 [connection signal="pressed" from="NetworkPanel/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/HostButton" to="." method="_on_HostButton_pressed"]
