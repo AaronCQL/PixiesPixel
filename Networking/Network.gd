@@ -35,22 +35,25 @@ var players_info = {
 }
 
 var remaining_players : Array
-var is_game_ongoing : bool = false
+var is_game_ongoing : bool = false # Only for server, will be false all the time for clients
 
 signal server_created	  		# when current machine successfuly creates server
+signal host_fail				# When current machine is unable to host
 signal join_success	    		# When current machine successfully joins a server
 signal join_fail   				# When current machine is unable to join a server
 signal player_list_changed		# Player list has been changed
 signal player_removed(id)		# A peer has been removed from the player list
 signal disconnected				# When current machine disconnects from server
 signal player_joined(id)		# A new peer has joined
+signal on_exit_button_pressed	# When current machine presses exit
+signal game_already_started		# When current machine tries to join a game that has started
 
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_on_player_connected")
 	get_tree().connect("network_peer_disconnected", self, "_on_player_disconnected")
 	get_tree().connect("connected_to_server", self, "_on_connected_to_server")
 	get_tree().connect("connection_failed", self, "_on_connection_failed")
-	get_tree().connect("server_disconnected", self, "on_disconnected_from_server")
+	get_tree().connect("server_disconnected", self, "_on_disconnected_from_server")
 
 func create_server():
 	# Initialize the networking system
@@ -69,7 +72,7 @@ func create_server():
 				server_info.ip_addr = address
 				return
 	else:
-		print("Failed to create server")
+		emit_signal("host_fail")
 		
 
 func join_server(ip, port):
@@ -113,11 +116,11 @@ func _on_player_connected(id):
 
 # For server to call peers to change to NetworkLobby scene if game is not ongoing
 remote func go_to_network_lobby():
-	get_tree().change_scene("res://Lobby/NetworkLobby/NetworkLobby.tscn")
+	get_node("/root/MainMenu").go_to_network_lobby()
 
 # For server to call peer to disconnect when game is ongoing
 remote func disconnect_peer():
-	on_disconnected_from_server()
+	_server_already_in_game()
 
 # Peer trying to connect to server is notified on failure
 func _on_connection_failed():
@@ -126,28 +129,45 @@ func _on_connection_failed():
 
 # Executed on all the connected peers when another peer disconnects
 func _on_player_disconnected(id):
-	print("Player ", players_info[id].name, " disconnected from server")
-	# Remove the player from the player list
-	players_info.erase(id)
-	# Tell Lobby to update the list
-	emit_signal("player_list_changed")
-	emit_signal("player_removed", id)
+	if players_info.has(id):
+		print("Player ", players_info[id].name, " disconnected from server")
+		# Remove the player from the player list
+		players_info.erase(id)
+		# Tell Lobby to update the list
+		emit_signal("player_list_changed")
+		emit_signal("player_removed", id)
+
+# Executed when trying to connect to a game that is already going on
+func _server_already_in_game():
+	exit_to_main_menu()
+	emit_signal("game_already_started")
 
 # Executed on the current machine when the current machine disconnects
-func on_disconnected_from_server():
-	print("Disconnected from server")
-	# Stop processing any node in the world, so the client remains responsive
-	get_tree().paused = true
-	# Clear the network object
-	get_tree().set_network_peer(null)
+func _on_disconnected_from_server():
 	# Allow outside code to know about the disconnection
 	emit_signal("disconnected")
+	exit_to_main_menu()
+	
+func exit_to_main_menu():
+	print("Disconnected from server")
+	# Clear the network object
+	get_tree().set_network_peer(null)
 	# Clear the internal player list
 	players_info.clear()
 	# Reset the player info network ID
 	my_info.net_id = 1
 	my_info.spawnpoint = 0
-	get_tree().change_scene("res://MainMenu.tscn")
+	remove_child_nodes()
+	emit_signal("on_exit_button_pressed")
+	is_game_ongoing = false # Reset all of this boolean to false
+
+func remove_child_nodes():
+	if get_node("/root").has_node("NetworkLobby"):
+		get_node("/root/NetworkLobby").queue_free()
+	if get_node("/root").has_node("PreGameLobby"):
+		get_node("/root/PreGameLobby").queue_free()
+	if get_node("/root").has_node("Map"):
+		get_node("/root/Map").queue_free()
 
 func sync_spawnpoints():
 	# Ask server to generate the spawnpoints

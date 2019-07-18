@@ -60,4 +60,4 @@ remotesync func go_to_map():
 	self.queue_free()
 
 func _on_ExitButton_pressed():
-	Network.on_disconnected_from_server()
+	Network.exit_to_main_menu()

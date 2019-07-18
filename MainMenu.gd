@@ -3,8 +3,11 @@ extends CanvasLayer
 func _ready():
 	Network.connect("server_created", self, "_on_connect_success")
 	Network.connect("join_fail", self, "_on_join_fail")
+	Network.connect("host_fail", self, "_on_host_fail")
+	Network.connect("disconnected", self, "_on_disconnected")
+	Network.connect("on_exit_button_pressed", self, "_show_main_menu")
+	Network.connect("game_already_started", self, "_on_game_already_started")
 	Network.is_game_ongoing = false
-	get_tree().paused = false
 
 func _on_HostButton_pressed():
 	# Properly set the local player information
@@ -30,12 +33,29 @@ func _on_JoinButton_pressed():
 func set_player_info():
 	if (!$NetworkPanel/PlayerName.text.empty()):
 		Network.my_info.name = $NetworkPanel/PlayerName.text
-
-func _on_connect_success():
+		
+func go_to_network_lobby():
 	# Go to pre game lobby:
-	get_tree().change_scene("res://Lobby/NetworkLobby/NetworkLobby.tscn")
+	var network_lobby = preload("res://Lobby/NetworkLobby/NetworkLobby.tscn").instance()
+	get_node("/root").add_child(network_lobby)
+	$NetworkPanel.hide()
+	
+func _on_connect_success():
+	go_to_network_lobby()
 
 func _on_join_fail():
-	# Change to displaying error message when finalising
-	print("Failed to join server")
+	$NetworkPanel/JoinFailPopup.popup_centered()
 
+func _on_host_fail():
+	$NetworkPanel/HostFailPopup.popup_centered()
+
+func _show_main_menu():
+	$NetworkPanel.show()
+
+func _on_disconnected():
+	_show_main_menu()
+	$NetworkPanel/DisconnectedPopup.popup_centered()
+
+func _on_game_already_started():
+	_show_main_menu()
+	$NetworkPanel/GameAlreadyStartedPopup.popup_centered()

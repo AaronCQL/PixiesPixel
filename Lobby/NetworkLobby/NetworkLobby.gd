@@ -4,7 +4,6 @@ var map_label_to_display = "Dungeon"
 
 func _ready():
 	Network.connect("player_list_changed", self, "refresh_player_list")
-	Network.is_game_ongoing = false
 	refresh_player_list()
 	show_ip_address()
 	sync_chosen_map()
@@ -17,7 +16,7 @@ func show_ip_address():
 
 func refresh_player_list():
 	var player_list = get_node("./Panel/PlayerInfoPanel/PlayerList")
-	var text_to_display : String
+	var text_to_display : String = ""
 	for id in Network.players_info:
 		if id == 1:
 			text_to_display += Network.players_info[id].name + " (Host)" + "\n"
@@ -30,11 +29,14 @@ func _on_StartButton_pressed():
 
 remotesync func go_to_pre_game_lobby():
 	Network.sync_spawnpoints()
-	get_tree().change_scene("res://Lobby/PreGameLobby/PreGameLobby.tscn")
+	var pre_game_lobby = preload("res://Lobby/PreGameLobby/PreGameLobby.tscn").instance()
+	get_node("/root").add_child(pre_game_lobby)
+	self.queue_free()
+	if get_tree().is_network_server():
+		Network.is_game_ongoing = true
 
 func _on_ExitButton_pressed():
-	Network.on_disconnected_from_server()
-	get_tree().change_scene("res://MainMenu.tscn")
+	Network.exit_to_main_menu()
 
 func _on_DungeonButton_pressed():
 	rpc("change_map", "Dungeon", "Dungeon")
