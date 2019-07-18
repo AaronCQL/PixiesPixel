@@ -6,7 +6,7 @@
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 13.3958, 23.7125 )
+extents = Vector2( 19.4741, 23.7125 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 15.9223
@@ -127,7 +127,7 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 4.46418, 4.36663 )
+position = Vector2( -1.35956, 2.61951 )
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_group_": true
@@ -154,7 +154,8 @@ anims/jump = SubResource( 7 )
 anims/run = SubResource( 8 )
 
 [node name="Position2D" type="Position2D" parent="."]
-position = Vector2( 7.89868, 0.625721 )
+position = Vector2( 42.8411, 0.0433502 )
+scale = Vector2( 0.5, 0.5 )
 
 [node name="PlayerNameLabel" type="Label" parent="."]
 margin_left = -48.299
