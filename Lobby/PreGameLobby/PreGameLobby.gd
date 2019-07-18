@@ -9,7 +9,6 @@ func _ready():
 	refresh_player_list()
 	Network.connect("player_list_changed", self, "refresh_player_list")
 	Network.is_game_ongoing = true
-	get_node("/root/NetworkLobby").queue_free()
 	
 func refresh_player_list():
 	var PlayerList = get_node("./Panel/PlayerInfoPanel/PlayerList")
@@ -61,4 +60,4 @@ remotesync func go_to_map():
 	self.queue_free()
 
 func _on_ExitButton_pressed():
-	Network.on_disconnected_from_server()
+	Network.exit_to_main_menu()

@@ -5,6 +5,8 @@ func _ready():
 	Network.connect("join_fail", self, "_on_join_fail")
 	Network.connect("host_fail", self, "_on_host_fail")
 	Network.connect("disconnected", self, "_on_disconnected")
+	Network.connect("on_exit_button_pressed", self, "_show_main_menu")
+	Network.connect("game_already_started", self, "_on_game_already_started")
 	Network.is_game_ongoing = false
 
 func _on_HostButton_pressed():
@@ -47,6 +49,13 @@ func _on_join_fail():
 func _on_host_fail():
 	$NetworkPanel/HostFailPopup.popup_centered()
 
-func _on_disconnected():
+func _show_main_menu():
 	$NetworkPanel.show()
+
+func _on_disconnected():
+	_show_main_menu()
 	$NetworkPanel/DisconnectedPopup.popup_centered()
+
+func _on_game_already_started():
+	_show_main_menu()
+	$NetworkPanel/GameAlreadyStartedPopup.popup_centered()
