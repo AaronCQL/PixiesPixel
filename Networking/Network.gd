@@ -35,7 +35,7 @@ var players_info = {
 }
 
 var remaining_players : Array
-var is_game_ongoing : bool = false
+var is_game_ongoing : bool = false # Only for server, will be false all the time for clients
 
 signal server_created	  		# when current machine successfuly creates server
 signal host_fail				# When current machine is unable to host
@@ -159,6 +159,7 @@ func exit_to_main_menu():
 	my_info.spawnpoint = 0
 	remove_child_nodes()
 	emit_signal("on_exit_button_pressed")
+	is_game_ongoing = false # Reset all of this boolean to false
 
 func remove_child_nodes():
 	if get_node("/root").has_node("NetworkLobby"):
