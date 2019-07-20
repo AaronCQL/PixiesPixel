@@ -2,8 +2,8 @@ extends KinematicBody2D
 
 const GRAVITY : int = 125
 const FLOOR : Vector2 = Vector2(0, -1)
-const MIN_DAMAGE = 1
-const MAX_DAMAGE = 10
+const MIN_DAMAGE = 5
+const MAX_DAMAGE = 22
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var velocity : Vector2 = Vector2()

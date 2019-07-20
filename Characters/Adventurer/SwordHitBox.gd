@@ -1,7 +1,7 @@
 extends Area2D
 
-const MIN_DAMAGE = 1
-const MAX_DAMAGE = 10
+const MIN_DAMAGE = 7
+const MAX_DAMAGE = 15
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
