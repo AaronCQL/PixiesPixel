@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Characters/Pirate/Pirate.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pirate/pirate.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Characters/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=5]
+[ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.8071, 23.712 )
@@ -134,7 +135,7 @@ tracks/0/keys = {
 "values": [ 15, 16, 19, 20, 22, 23, 26, 27 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=9]
 resource_name = "damage"
 length = 0.2
 step = 0.05
@@ -151,7 +152,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=9]
+[sub_resource type="DynamicFont" id=10]
 font_data = ExtResource( 3 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
@@ -207,14 +208,14 @@ anims/jump = SubResource( 7 )
 anims/run = SubResource( 8 )
 
 [node name="DamageAnimation" type="AnimationPlayer" parent="."]
-anims/damage = SubResource( 10 )
+anims/damage = SubResource( 9 )
 
 [node name="PlayerNameLabel" type="Label" parent="."]
 margin_left = -48.2658
 margin_top = -51.4544
 margin_right = 47.7342
 margin_bottom = -37.4544
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 0.678431 )
 text = "Player"
 align = 1
@@ -224,5 +225,8 @@ valign = 1
 position = Vector2( -27.9963, -38.2997 )
 scale = Vector2( 1.2, 1.2 )
 script = ExtResource( 5 )
+
+[node name="InGameMenu" parent="." instance=ExtResource( 6 )]
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="on_resume_button_pressed" from="InGameMenu" to="." method="_on_InGameMenu_on_resume_button_pressed"]

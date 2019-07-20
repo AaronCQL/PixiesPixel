@@ -27,6 +27,7 @@ var is_attacking : bool = false
 var attack_combo : int = 0
 var health : int = MAX_HEALTH
 var is_dead : bool = false
+var show_menu : bool = false
 
 var velocity : Vector2 = Vector2(0, 0)
 
@@ -56,6 +57,7 @@ func _physics_process(delta):
 		flip_sprite(x_dir)				# flips sprite when turning direction
 		play_animation(x_dir)
 		check_death()
+		toggle_menu()
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset_unreliable("repl_position", position)
@@ -133,6 +135,17 @@ func play_animation(x_dir):
 
 func _on_AnimationPlayer_animation_finished(attack):
 	is_attacking = false
+	
+func toggle_menu():
+	if Input.is_action_just_pressed("ui_cancel"):
+		show_menu = !show_menu
+	if show_menu:
+		get_node('./InGameMenu/Panel').show()
+	else:
+		get_node('./InGameMenu/Panel').hide()
+		
+func _on_InGameMenu_on_resume_button_pressed():
+	show_menu = false
 	
 func check_death():
 	if !is_dead:
