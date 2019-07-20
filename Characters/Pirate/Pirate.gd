@@ -54,12 +54,12 @@ func _physics_process(delta):
 		attack_input()
 		flip_sprite(x_dir)				# flips sprite when turning direction
 		play_animation(x_dir)
-			
 		$Camera2D.current = true
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset_unreliable("repl_position", position)
 		rset("repl_animation", $AnimationPlayer.current_animation)
+		print($RayCast2D.is_colliding())
 	else:
 		position = repl_position							# to replitcate current position
 		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
@@ -89,17 +89,18 @@ func acceleration_curve():
 
 func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
-		rpc("spawn_bomb", get_tree().get_network_unique_id())
+		var bomb_position : Vector2 = get_node("./Sprite/Position2D").global_position
+		rpc("spawn_bomb", get_tree().get_network_unique_id(), bomb_position)
 
-remotesync func spawn_bomb(net_id):
+remotesync func spawn_bomb(net_id, bomb_position):
 	var player_node = get_node("/root/Map/" + str(net_id))
 	player_node.is_attacking = true
 	player_node.get_node("./AnimationPlayer").current_animation = "attack"
 	var bomb = BOMB.instance()	#creates instance of bomb
 	bomb.set_network_master(net_id)
-	bomb.position = player_node.get_node("Sprite/Position2D").global_position
-	get_node("/root/Map").add_child(bomb)
-	
+	bomb.position = bomb_position
+	get_node("/root/Map").add_child(bomb)	
+
 func jump_input():
 	if !is_dead:	
 		if Input.is_action_just_pressed("ui_up"):

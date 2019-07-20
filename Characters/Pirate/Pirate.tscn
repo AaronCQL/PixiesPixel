@@ -127,7 +127,7 @@ __meta__ = {
 }
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
-position = Vector2( 31.4403, 11.2713 )
+position = Vector2( 31, 9 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -169,4 +169,9 @@ custom_colors/font_color = Color( 1, 1, 1, 0.678431 )
 text = "Player"
 align = 1
 valign = 1
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2( 0, 15 )
+enabled = true
+cast_to = Vector2( 20, 0 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
