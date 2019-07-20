@@ -33,6 +33,7 @@ var velocity : Vector2 = Vector2(0, 0)
 puppet var repl_position : Vector2 = Vector2()
 puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
+puppet var repl_is_dead : bool = false
 
 var rng = RandomNumberGenerator.new()
 var p_id_last_hit # Last player to hit this guy, for KDR
@@ -54,7 +55,7 @@ func _physics_process(delta):
 		attack_input()
 		flip_sprite(x_dir)				# flips sprite when turning direction
 		play_animation(x_dir)
-		$Camera2D.current = true
+		check_death()
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset_unreliable("repl_position", position)
@@ -63,7 +64,8 @@ func _physics_process(delta):
 		position = repl_position							# to replitcate current position
 		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
 		$Sprite.scale.x = repl_scale_x 	
-		
+		if repl_is_dead:
+			$PlayerHitBox/CollisionShape2D.disabled = true	
 	
 func direction_input():
 	x_dir = 0
@@ -131,6 +133,32 @@ func play_animation(x_dir):
 
 func _on_AnimationPlayer_animation_finished(attack):
 	is_attacking = false
+	
+func check_death():
+	if !is_dead:
+		$Camera2D.make_current()
+		if health <= 0:
+			is_dead = true
+			rset("repl_is_dead", true)
+			$AnimationPlayer.current_animation = "die"
+			$DeathTimer.start(2)
+			Network.on_player_death(get_tree().get_network_unique_id())
+			print("Slain by " + p_id_last_hit)
+	if is_dead:
+		change_camera()
+
+func _on_DeathTimer_timeout():
+	$Camera2D.current = false
+	get_node("./../" + str(Network.remaining_players[0]) + "/Camera2D").make_current()
+
+var cam_index : int = 0
+func change_camera():
+	if Input.is_action_just_pressed("ui_focus_next"):
+		if (cam_index >= Network.remaining_players.size() - 1):
+			cam_index = 0
+		else:
+			cam_index += 1	
+		get_node("./../" + str(Network.remaining_players[cam_index]) + "/Camera2D").make_current()
 	
 func take_damage(p_id_hit, amount, p_id_sender):
 	rpc("send_damage_info", p_id_hit, amount, p_id_sender)

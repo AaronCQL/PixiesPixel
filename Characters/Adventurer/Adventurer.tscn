@@ -330,7 +330,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 17
 hframes = 7
-frame = 38
+frame = 42
 
 [node name="SwordHitBox" type="Area2D" parent="Sprite"]
 collision_layer = 0
@@ -341,7 +341,6 @@ script = ExtResource( 3 )
 position = Vector2( 13, -3.321 )
 scale = Vector2( 1, 2.4 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
