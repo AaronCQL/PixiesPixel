@@ -8,8 +8,6 @@
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=7]
 
-
-
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.04966, 12.3489 )
 
@@ -332,7 +330,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 17
 hframes = 7
-frame = 43
+frame = 38
 
 [node name="SwordHitBox" type="Area2D" parent="Sprite"]
 collision_layer = 0

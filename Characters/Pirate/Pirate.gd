@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-#signal health_updated(health)
+signal health_updated(health)
 
 const MAX_HEALTH = 100
 const RUN_SPEED = 100
@@ -99,9 +99,8 @@ remotesync func spawn_bomb(net_id, bomb_position):
 func jump_input():
 	if !is_dead:	
 		if Input.is_action_just_pressed("ui_up"):
-			if !is_attacking:
-				if is_on_floor():
-					velocity.y = max_jump_velocity
+			if is_on_floor():
+				velocity.y = max_jump_velocity
 		
 		# variable jump height
 		if Input.is_action_just_released("ui_up") && velocity.y < min_jump_velocity:
@@ -110,10 +109,10 @@ func jump_input():
 func flip_sprite(x_dir):
 	if x_dir > 0:
 		$Sprite.scale.x = 1
-		#rset("repl_scale_x", 1)
+		rset("repl_scale_x", 1)
 	elif x_dir < 0:
 		$Sprite.scale.x = -1
-		#rset("repl_scale_x", -1)
+		rset("repl_scale_x", -1)
 
 func play_animation(x_dir):
 	if !is_dead:
@@ -132,3 +131,18 @@ func play_animation(x_dir):
 
 func _on_AnimationPlayer_animation_finished(attack):
 	is_attacking = false
+	
+func take_damage(p_id_hit, amount, p_id_sender):
+	rpc("send_damage_info", p_id_hit, amount, p_id_sender)
+
+remotesync func send_damage_info(p_id_hit, amount, p_id_sender):
+	# Get the actual player node that was hit using the network_id
+	var player_hit = get_node("./../" + p_id_hit)
+	player_hit.get_node("./DamageAnimation").current_animation = "damage"
+	player_hit.set_health(player_hit.health - amount)
+	player_hit.p_id_last_hit = p_id_sender
+		
+func set_health(value):
+# warning-ignore:narrowing_conversion
+	health = clamp(value, 0, MAX_HEALTH)
+	emit_signal("health_updated", health) # For health bar
