@@ -59,7 +59,6 @@ func _physics_process(delta):
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset_unreliable("repl_position", position)
 		rset("repl_animation", $AnimationPlayer.current_animation)
-		print($RayCast2D.is_colliding())
 	else:
 		position = repl_position							# to replitcate current position
 		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
@@ -76,20 +75,16 @@ func direction_input():
 		
 # Moves player according to this acceleration curve
 func acceleration_curve():
-	if !is_attacking:
-		if is_on_floor():
-			velocity.x = lerp(velocity.x, move_speed * x_dir, 0.2)
-		else:
-			velocity.x = lerp(velocity.x, move_speed * x_dir, 0.08)
+	if is_on_floor():
+		velocity.x = lerp(velocity.x, move_speed * x_dir, 0.2)
 	else:
-		if is_on_floor():
-			velocity.x = lerp(velocity.x, 0, 0.2)
-		else:
-			velocity.x = lerp(velocity.x, move_speed * x_dir, 0.01)
+		velocity.x = lerp(velocity.x, move_speed * x_dir, 0.08)
 
 func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
 		var bomb_position : Vector2 = get_node("./Sprite/Position2D").global_position
+		if get_node("./Sprite/RayCast2D").is_colliding():
+			bomb_position = self.global_position
 		rpc("spawn_bomb", get_tree().get_network_unique_id(), bomb_position)
 
 remotesync func spawn_bomb(net_id, bomb_position):
@@ -115,10 +110,10 @@ func jump_input():
 func flip_sprite(x_dir):
 	if x_dir > 0:
 		$Sprite.scale.x = 1
-		rset("repl_scale_x", 1)
+		#rset("repl_scale_x", 1)
 	elif x_dir < 0:
 		$Sprite.scale.x = -1
-		rset("repl_scale_x", -1)
+		#rset("repl_scale_x", -1)
 
 func play_animation(x_dir):
 	if !is_dead:
