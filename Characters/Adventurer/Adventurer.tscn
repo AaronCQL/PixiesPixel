@@ -3,8 +3,8 @@
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Characters/Adventurer/SwordHitBox.gd" type="Script" id=3]
-[ext_resource path="res://Characters/Adventurer/HealthBar.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Characters/Adventurer/HealthBar.gd" type="Script" id=5]
+[ext_resource path="res://Characters/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=5]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=7]
 
@@ -330,7 +330,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 17
 hframes = 7
-frame = 43
+frame = 42
 
 [node name="SwordHitBox" type="Area2D" parent="Sprite"]
 collision_layer = 0
@@ -341,7 +341,6 @@ script = ExtResource( 3 )
 position = Vector2( 13, -3.321 )
 scale = Vector2( 1, 2.4 )
 shape = SubResource( 2 )
-disabled = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
