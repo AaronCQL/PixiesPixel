@@ -71,12 +71,8 @@ func direction_input():
 	if !is_dead:
 		if Input.is_action_pressed("ui_right"):
 			x_dir += 1
-			if sign($Position2D.position.x) == -1:
-				$Position2D.position.x *= -1
 		if Input.is_action_pressed("ui_left"):
 			x_dir += -1
-			if sign($Position2D.position.x) == 1:
-				$Position2D.position.x *= -1
 		
 # Moves player according to this acceleration curve
 func acceleration_curve():
@@ -96,10 +92,8 @@ func attack_input():
 		is_attacking = true
 		$AnimationPlayer.current_animation = "attack"
 		var bomb = BOMB.instance()	#creates instance of bomb
-		var dir = sign($Position2D.position.x)
-		bomb.set_bomb_direction(dir)	#sets bomb direction based on x value of Position2D
 		get_parent().add_child(bomb)
-		bomb.position = $Position2D.global_position	
+		bomb.position = $Sprite/Position2D.global_position
 	
 func jump_input():
 	if !is_dead:	
@@ -120,7 +114,6 @@ func flip_sprite(x_dir):
 		$Sprite.scale.x = -1
 		rset("repl_scale_x", -1)
 
-		
 func play_animation(x_dir):
 	if !is_dead:
 		if is_on_floor():
