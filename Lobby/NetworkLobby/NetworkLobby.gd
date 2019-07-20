@@ -10,9 +10,16 @@ func _ready():
 	
 func show_ip_address():
 	if (get_tree().is_network_server()):
+		find_and_display_ip_addr()
 		get_node("./Panel/PlayerInfoPanel/HostIpAddr").text = "Your IP address: " + Network.server_info.ip_addr
 	else:
 		get_node("./Panel/PlayerInfoPanel/HostIpAddr").hide()
+
+func find_and_display_ip_addr():
+	for address in IP.get_local_addresses():
+		if "192.168" in address:
+			Network.server_info.ip_addr = address
+			return
 
 func refresh_player_list():
 	var player_list = get_node("./Panel/PlayerInfoPanel/PlayerList")

@@ -67,10 +67,6 @@ func create_server():
 		emit_signal("server_created")
 		# Register the server's player in the local player list
 		register_player(my_info)
-		for address in IP.get_local_addresses():
-			if "192.168" in address:
-				server_info.ip_addr = address
-				return
 	else:
 		emit_signal("host_fail")
 		
