@@ -11,9 +11,6 @@ const MAX_JUMP_HEIGHT = 6 * 16
 const MIN_JUMP_HEIGHT = 2 * 16
 const TIME_TO_JUMP_APEX = 0.45
 
-const MIN_DAMAGE = 100
-const MAX_DAMAGE = 100
-
 var move_speed : float = RUN_SPEED
 var gravity : float
 var max_jump_velocity : float
@@ -36,8 +33,6 @@ puppet var repl_animation : String = "idle"
 puppet var repl_scale_x : int = 1
 puppet var repl_is_dead : bool = false
 
-var rng : RandomNumberGenerator = RandomNumberGenerator.new()
-
 var p_id_last_hit : String 		# Last player to hit this guy, for KDR
 
 # Called when the node enters the scene tree for the first time.
@@ -46,7 +41,6 @@ func _ready():
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
 	$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
-	rng.randomize()	# randomise RNG for SwordHitBox
 	get_node("./InGameMenu/Panel").hide() # Hide InGameMenu on start
 	if is_network_master():
 		self.z_index = 10 # Make character you control display in front of peers
@@ -208,21 +202,11 @@ func change_camera():
 		else:
 			cam_index += 1	
 		get_node("./../" + str(Network.remaining_players[cam_index]) + "/Camera2D").make_current()
+		
+func take_damage(p_id_hit, amount, p_id_sender):
+	rpc("send_damage_info", p_id_hit, amount, p_id_sender)
 
-# detects when a player's sword enters another player's actor
-# then, remotely calls the take_damage function on that player's actor
-# for other attacks, use the same logic, just change the damage taken to vary damage
-func _on_SwordHitBox_area_entered(area):
-	if is_network_master():
-		if area.name == "PlayerHitBox":	
-			if area != get_node("./PlayerHitBox"): # Check if is not own hit box
-				var actor = area.get_node("./../") # Get the Adventurer node that was hit
-				var p_id_hit : String = str(actor.get_name()) # Get the id of the peer who was hit
-				var p_id_sender : String = get_node('./').get_name() # Get self id to let peer know who hit him
-				var damage : int = rng.randi_range(MIN_DAMAGE, MAX_DAMAGE)
-				rpc("take_damage", p_id_hit, damage, p_id_sender)
-
-remotesync func take_damage(p_id_hit, amount, p_id_sender):
+remotesync func send_damage_info(p_id_hit, amount, p_id_sender):
 	# Get the actual player node that was hit using the network_id
 	var player_hit = get_node("./../" + p_id_hit)
 	player_hit.get_node("./DamageAnimation").current_animation = "damage"

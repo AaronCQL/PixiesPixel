@@ -1,11 +1,12 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
-[ext_resource path="res://Characters/Adventurer/HealthBar.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Characters/Adventurer/HealthBar.gd" type="Script" id=4]
-[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Characters/Adventurer/SwordHitBox.gd" type="Script" id=3]
+[ext_resource path="res://Characters/Adventurer/HealthBar.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Characters/Adventurer/HealthBar.gd" type="Script" id=5]
+[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.04966, 12.3489 )
@@ -312,7 +313,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="DynamicFont" id=15]
-font_data = ExtResource( 5 )
+font_data = ExtResource( 6 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 collision_layer = 2
@@ -334,6 +335,7 @@ frame = 43
 [node name="SwordHitBox" type="Area2D" parent="Sprite"]
 collision_layer = 0
 collision_mask = 2
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite/SwordHitBox"]
 position = Vector2( 13, -3.321 )
@@ -374,9 +376,9 @@ anims/sprint = SubResource( 13 )
 [node name="DamageAnimation" type="AnimationPlayer" parent="."]
 anims/damage = SubResource( 14 )
 
-[node name="HealthBar" parent="." instance=ExtResource( 3 )]
+[node name="HealthBar" parent="." instance=ExtResource( 4 )]
 position = Vector2( -14.2062, -16.5975 )
-script = ExtResource( 4 )
+script = ExtResource( 5 )
 
 [node name="PlayerNameLabel" type="Label" parent="."]
 margin_left = -24.86
@@ -390,13 +392,13 @@ text = "Player"
 align = 1
 valign = 1
 
-[node name="InGameMenu" parent="." instance=ExtResource( 6 )]
+[node name="InGameMenu" parent="." instance=ExtResource( 7 )]
 
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
-[connection signal="area_entered" from="Sprite/SwordHitBox" to="." method="_on_SwordHitBox_area_entered"]
+[connection signal="area_entered" from="Sprite/SwordHitBox" to="Sprite/SwordHitBox" method="_on_SwordHitBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="on_resume_button_pressed" from="InGameMenu" to="." method="_on_InGameMenu_on_resume_button_pressed"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

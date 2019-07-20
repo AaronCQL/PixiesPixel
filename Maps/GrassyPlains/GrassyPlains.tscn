@@ -6,7 +6,6 @@
 [ext_resource path="res://Maps/GrassyPlains/PNG/Middleground.png" type="Texture" id=4]
 
 [node name="Map" type="Node2D"]
-position = Vector2( 16.0097, 0.0239597 )
 script = ExtResource( 1 )
 
 [node name="Walls and Blocks" type="TileMap" parent="."]

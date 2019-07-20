@@ -6,7 +6,7 @@
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 14.2327, 23.712 )
+extents = Vector2( 12.8071, 23.712 )
 
 [sub_resource type="CapsuleShape2D" id=2]
 radius = 15.9223
@@ -22,7 +22,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( -4.65661e-10, 0.1, 0.2, 0.3, 0.4 ),
+"times": PoolRealArray( -4.65661e-010, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 10, 11, 12, 13, 14 ]
@@ -127,14 +127,15 @@ __meta__ = {
 }
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
-position = Vector2( 17.7991, 2.51798 )
+position = Vector2( 31.4403, 11.2713 )
 scale = Vector2( 0.5, 0.5 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 3.59062, 2.03714 )
 shape = SubResource( 1 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -142,7 +143,8 @@ __meta__ = {
 [node name="PirateHitBox" type="Area2D" parent="."]
 script = ExtResource( 3 )
 __meta__ = {
-"_edit_group_": true
+"_edit_group_": true,
+"_edit_lock_": true
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PirateHitBox"]
