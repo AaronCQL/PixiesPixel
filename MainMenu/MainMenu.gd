@@ -16,7 +16,6 @@ func _on_HostButton_pressed():
 	# Gather values from the GUI and fill the network.server_info dictionary
 	if (!$NetworkPanel/ServerIP.text.empty()):
 		Network.server_info.name = $NetworkPanel/ServerIP.text
-	Network.server_info.used_port = int($NetworkPanel/ServerPort.text)
 	Network.server_info.max_players = 6		
 	
 	# And create the server, using the function previously added into the code
@@ -26,9 +25,8 @@ func _on_JoinButton_pressed():
 	# Properly set the local player information
 	set_player_info()
 	
-	var port = int($NetworkPanel/ServerPort.text)
 	var ip = $NetworkPanel/ServerIP.text
-	Network.join_server(ip, port)
+	Network.join_server(ip, 32788)
 	
 func set_player_info():
 	if (!$NetworkPanel/PlayerName.text.empty()):
@@ -59,3 +57,9 @@ func _on_disconnected():
 func _on_game_already_started():
 	_show_main_menu()
 	$NetworkPanel/GameAlreadyStartedPopup.popup_centered()
+
+func _on_HelpButton_pressed():
+	$NetworkPanel/HelpDialog.popup_centered()
+
+func _on_ExitButton_pressed():
+	get_tree().quit()

@@ -9,13 +9,16 @@ script = ExtResource( 1 )
 [node name="Panel" type="Panel" parent="."]
 margin_right = 640.0
 margin_bottom = 368.0
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="PlayerInfoPanel" type="Panel" parent="Panel"]
 self_modulate = Color( 0, 0, 0, 1 )
-margin_left = 304.0
+margin_left = 16.0
 margin_top = 16.0
-margin_right = 624.0
-margin_bottom = 352.0
+margin_right = 384.0
+margin_bottom = 304.0
 theme = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -24,46 +27,74 @@ __meta__ = {
 [node name="PlayerList" type="Label" parent="Panel/PlayerInfoPanel"]
 margin_left = 16.0
 margin_top = 16.0
-margin_right = 304.0
-margin_bottom = 320.0
+margin_right = 352.0
+margin_bottom = 272.0
+text = "NAME - Pirate
+2
+3
+4
+5
+6
+7
+8"
 
 [node name="CharacterPanel" type="Panel" parent="."]
-margin_left = 16.0
+self_modulate = Color( 0.529412, 0.529412, 0.529412, 1 )
+margin_left = 400.0
 margin_top = 16.0
-margin_right = 288.0
-margin_bottom = 256.0
+margin_right = 624.0
+margin_bottom = 304.0
 theme = ExtResource( 2 )
 
 [node name="AdventurerButton" type="Button" parent="CharacterPanel"]
 margin_left = 16.0
-margin_top = 80.0
-margin_right = 256.0
-margin_bottom = 112.0
+margin_top = 16.0
+margin_right = 208.0
+margin_bottom = 80.0
 theme = ExtResource( 2 )
+custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Adventurer"
 
 [node name="PirateButton" type="Button" parent="CharacterPanel"]
 margin_left = 16.0
-margin_top = 192.0
-margin_right = 256.0
-margin_bottom = 224.0
+margin_top = 96.0
+margin_right = 208.0
+margin_bottom = 160.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Pirate"
 
+[node name="CharacterLabel" type="Label" parent="CharacterPanel"]
+margin_left = 16.0
+margin_top = 192.0
+margin_right = 208.0
+margin_bottom = 224.0
+text = "YOUR CHARACTER:"
+
+[node name="ChosenCharacterLabel" type="Label" parent="CharacterPanel"]
+margin_left = 32.0
+margin_top = 224.0
+margin_right = 192.0
+margin_bottom = 250.0
+text = "Adventurer"
+
 [node name="StartButton" type="Button" parent="."]
-margin_left = 160.0
-margin_top = 288.0
-margin_right = 272.0
-margin_bottom = 336.0
+margin_left = 544.0
+margin_top = 320.0
+margin_right = 624.0
+margin_bottom = 352.0
 theme = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Start"
 
 [node name="ExitButton" type="Button" parent="."]
-margin_left = 32.0
-margin_top = 288.0
-margin_right = 144.0
-margin_bottom = 336.0
+margin_left = 16.0
+margin_top = 320.0
+margin_right = 96.0
+margin_bottom = 352.0
 theme = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )

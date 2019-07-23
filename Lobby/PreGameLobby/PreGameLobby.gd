@@ -15,7 +15,7 @@ func refresh_player_list():
 	PlayerList.text = ""
 	for id in Network.players_info:
 		# for debugging
-		PlayerList.text += Network.players_info[id].name  + " S:" + str(Network.players_info[id].spawnpoint) + " " + Network.players_info[id].actor_name + "\n"
+		PlayerList.text += Network.players_info[id].name  + " - " + Network.players_info[id].actor_name + "\n"
 
 func _on_PirateButton_pressed():
 	# get network id of the person who pressed
@@ -25,6 +25,7 @@ func _on_PirateButton_pressed():
 	Network.my_info.actor_path = "res://Characters/Pirate/Pirate.tscn"
 	# ask everybody else to change their player list
 	rpc("update_player_list", net_id_to_change, Network.my_info)
+	get_node("./CharacterPanel/ChosenCharacterLabel").text = "Pirate"
 
 func _on_AdventurerButton_pressed():
 	# get network id of the person who pressed
@@ -34,6 +35,7 @@ func _on_AdventurerButton_pressed():
 	Network.my_info.actor_path = "res://Characters/Adventurer/Adventurer.tscn"
 	# ask everybody else to change their player list
 	rpc("update_player_list", net_id_to_change, Network.my_info)
+	get_node("./CharacterPanel/ChosenCharacterLabel").text = "Adventurer"
 
 remotesync func update_player_list(net_id_to_change, new_player_info):
 	Network.players_info[net_id_to_change] = new_player_info

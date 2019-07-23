@@ -3,7 +3,7 @@ extends Node
 var server_info = {
 	name = "Server",    # Holds the name of the server
 	max_players = 0,    # Maximum allowed connections
-	used_port = 0,      # Listening port
+	used_port = 32788,      # Listening port
 	ip_addr = '',		# IP address of the host
 }
 
