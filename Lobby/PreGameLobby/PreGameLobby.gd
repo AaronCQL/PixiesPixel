@@ -9,6 +9,7 @@ func _ready():
 	refresh_player_list()
 	Network.connect("player_list_changed", self, "refresh_player_list")
 	Network.is_game_ongoing = true
+	get_node("./CharacterPanel/ChosenCharacterLabel").text = Network.my_info.actor_name
 	
 func refresh_player_list():
 	var PlayerList = get_node("./Panel/PlayerInfoPanel/PlayerList")

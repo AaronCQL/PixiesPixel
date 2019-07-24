@@ -4,7 +4,7 @@
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=3]
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=4]
-[ext_resource path="res://Assets/Music/Pixel-Party.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Music/01 A Night Of Dizzy Spells.ogg" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 48
@@ -53,6 +53,7 @@ margin_right = 416.0
 margin_bottom = 186.0
 min_value = -60.0
 max_value = 10.0
+ticks_on_borders = false
 
 [node name="SoundEffectsToggle" type="CheckButton" parent="Panel"]
 margin_left = 208.0
@@ -70,6 +71,7 @@ margin_right = 416.0
 margin_bottom = 266.0
 min_value = -60.0
 max_value = 10.0
+ticks_on_borders = false
 
 [node name="BackButton" type="Button" parent="Panel"]
 margin_left = 16.0
