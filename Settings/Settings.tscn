@@ -33,7 +33,7 @@ margin_bottom = 72.0
 custom_fonts/font = SubResource( 1 )
 text = "SETTINGS"
 
-[node name="Music" type="CheckButton" parent="Panel"]
+[node name="MusicToggle" type="CheckButton" parent="Panel"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -46,20 +46,29 @@ theme = ExtResource( 3 )
 pressed = true
 text = "Music"
 
-[node name="SoundEffects" type="CheckButton" parent="Panel"]
+[node name="MusicSlider" type="HSlider" parent="Panel"]
 margin_left = 208.0
 margin_top = 170.0
+margin_right = 416.0
+margin_bottom = 186.0
+min_value = -60.0
+max_value = 10.0
+ticks_on_borders = false
+
+[node name="SoundEffectsToggle" type="CheckButton" parent="Panel"]
+margin_left = 208.0
+margin_top = 208.0
 margin_right = 432.0
-margin_bottom = 212.0
+margin_bottom = 250.0
 theme = ExtResource( 3 )
 pressed = true
 text = "Sound Effects"
 
-[node name="VolumeSlider" type="HSlider" parent="Panel"]
+[node name="SoundEffectsSlider" type="HSlider" parent="Panel"]
 margin_left = 208.0
-margin_top = 246.0
+margin_top = 250.0
 margin_right = 416.0
-margin_bottom = 262.0
+margin_bottom = 266.0
 min_value = -60.0
 max_value = 10.0
 ticks_on_borders = false
@@ -75,7 +84,9 @@ text = "Back"
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 autoplay = true
-bus = "VolumeAdjust"
-[connection signal="toggled" from="Panel/Music" to="." method="_on_CheckButton_toggled"]
-[connection signal="value_changed" from="Panel/VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]
+bus = "Music"
+[connection signal="toggled" from="Panel/MusicToggle" to="." method="_on_MusicToggle_toggled"]
+[connection signal="value_changed" from="Panel/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
+[connection signal="toggled" from="Panel/SoundEffectsToggle" to="." method="_on_SoundEffectsToggle_toggled"]
+[connection signal="value_changed" from="Panel/SoundEffectsSlider" to="." method="_on_SoundEffectsSlider_value_changed"]
 [connection signal="pressed" from="Panel/BackButton" to="." method="_on_BackButton_pressed"]
