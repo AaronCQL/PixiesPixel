@@ -42,7 +42,7 @@ font_data = ExtResource( 2 )
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=10]
 size = 32
 font_data = ExtResource( 2 )
 
@@ -155,7 +155,7 @@ margin_left = 32.0
 margin_top = 224.0
 margin_right = 192.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 10 )
 text = "Dungeon"
 [connection signal="pressed" from="Panel/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="Panel/StartButton" to="." method="_on_StartButton_pressed"]

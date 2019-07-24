@@ -83,7 +83,7 @@ text = "Adventurer"
 [node name="StartButton" type="Button" parent="."]
 margin_left = 544.0
 margin_top = 320.0
-margin_right = 624.0
+margin_right = 625.0
 margin_bottom = 352.0
 theme = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )

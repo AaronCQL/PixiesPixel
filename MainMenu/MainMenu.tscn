@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Theme/button_theme.tres" type="Theme" id=4]
-[ext_resource path="res://Theme/Theme.tres" type="Theme" id=5]
+[ext_resource path="res://Theme/Theme.tres" type="Theme" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -110,11 +109,11 @@ text = "Exit"
 [node name="SettingsButton" type="Button" parent="NetworkPanel"]
 margin_left = 256.0
 margin_top = 232.0
-margin_right = 439.0
-margin_bottom = 298.0
-rect_scale = Vector2( 0.7, 0.7 )
-theme = ExtResource( 4 )
+margin_right = 384.0
+margin_bottom = 274.0
 custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Settings"
 
 [node name="IPLabel" type="Label" parent="NetworkPanel"]
@@ -146,7 +145,7 @@ margin_left = -151.0
 margin_top = -62.5
 margin_right = 151.0
 margin_bottom = 62.5
-theme = ExtResource( 5 )
+theme = ExtResource( 4 )
 popup_exclusive = true
 window_title = "Failed to Join"
 dialog_text = "Unable to join server, 
@@ -161,7 +160,7 @@ margin_left = -192.0
 margin_top = -55.0
 margin_right = 242.0
 margin_bottom = 70.0
-theme = ExtResource( 5 )
+theme = ExtResource( 4 )
 popup_exclusive = true
 window_title = "Unable to Host"
 dialog_text = "Unable to create server, a server 
@@ -176,7 +175,7 @@ margin_left = -163.0
 margin_top = -48.0
 margin_right = 163.0
 margin_bottom = 48.0
-theme = ExtResource( 5 )
+theme = ExtResource( 4 )
 popup_exclusive = true
 window_title = "Disconnected!"
 dialog_text = "Disconnected from server."
@@ -190,7 +189,7 @@ margin_left = -157.0
 margin_top = -40.0
 margin_right = 157.0
 margin_bottom = 40.0
-theme = ExtResource( 5 )
+theme = ExtResource( 4 )
 window_title = "Unable to Join"
 dialog_text = "Host is already in game!"
 
@@ -203,7 +202,7 @@ margin_left = -235.0
 margin_top = -135.0
 margin_right = 235.0
 margin_bottom = 135.0
-theme = ExtResource( 5 )
+theme = ExtResource( 4 )
 window_title = ""
 dialog_text = "To Host a game:
 - Simply Press Host, no need to fill 
