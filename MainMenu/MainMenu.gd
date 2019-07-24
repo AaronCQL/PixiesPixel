@@ -7,7 +7,7 @@ func _ready():
 	Network.connect("disconnected", self, "_on_disconnected")
 	Network.connect("on_exit_button_pressed", self, "_show_main_menu")
 	Network.connect("game_already_started", self, "_on_game_already_started")
-	Network.is_game_ongoing = false
+
 
 func _on_HostButton_pressed():
 	# Properly set the local player information

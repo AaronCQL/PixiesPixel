@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/adventurer-v1.5-Sheet-1.png.png-bab9df74a082139f24645f50b3b88bb1.stex"
+path="res://.import/plx-4.png-e18118d7cb0e8e98d46a129edc585eac.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lobby/adventurer-v1.5-Sheet-1.png.png"
-dest_files=[ "res://.import/adventurer-v1.5-Sheet-1.png.png-bab9df74a082139f24645f50b3b88bb1.stex" ]
+source_file="res://Assets/Jungle Asset Pack/parallax background/plx-4.png"
+dest_files=[ "res://.import/plx-4.png-e18118d7cb0e8e98d46a129edc585eac.stex" ]
 
 [params]
 

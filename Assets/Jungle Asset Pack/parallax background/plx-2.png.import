@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jungle tileset.png-4ecc449dc657b4088f17cb2cae6d0dc0.stex"
+path="res://.import/plx-2.png-8968b49f31433b1776a2218751430e6d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Lobby/Jungle Asset Pack/jungle tileset/jungle tileset.png"
-dest_files=[ "res://.import/jungle tileset.png-4ecc449dc657b4088f17cb2cae6d0dc0.stex" ]
+source_file="res://Assets/Jungle Asset Pack/parallax background/plx-2.png"
+dest_files=[ "res://.import/plx-2.png-8968b49f31433b1776a2218751430e6d.stex" ]
 
 [params]
 

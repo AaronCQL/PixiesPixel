@@ -1,0 +1,7 @@
+[gd_scene format=2]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 640.0
+margin_bottom = 368.0

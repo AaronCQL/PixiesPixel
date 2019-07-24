@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/8-Bit-Techno.ogg-17087d896de6de59a024d34489bb1a60.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/8-Bit-Techno.ogg"
+dest_files=[ "res://.import/8-Bit-Techno.ogg-17087d896de6de59a024d34489bb1a60.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
