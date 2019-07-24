@@ -3,8 +3,8 @@
 [ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Theme/Theme.tres" type="Theme" id=4]
-[ext_resource path="res://Assets/Music/01 A Night Of Dizzy Spells.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Assets/Icons/Settings_black-512.png" type="Texture" id=4]
+[ext_resource path="res://Theme/Theme.tres" type="Theme" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -107,6 +107,14 @@ custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
 text = "Exit"
 
+[node name="SettingsButton" type="Button" parent="NetworkPanel"]
+margin_left = 401.678
+margin_top = 287.984
+margin_right = 463.678
+margin_bottom = 343.984
+rect_scale = Vector2( 0.7, 0.7 )
+icon = ExtResource( 4 )
+
 [node name="IPLabel" type="Label" parent="NetworkPanel"]
 margin_left = 352.0
 margin_top = 68.0
@@ -136,7 +144,7 @@ margin_left = -151.0
 margin_top = -62.5
 margin_right = 151.0
 margin_bottom = 62.5
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 popup_exclusive = true
 window_title = "Failed to Join"
 dialog_text = "Unable to join server, 
@@ -151,7 +159,7 @@ margin_left = -192.0
 margin_top = -55.0
 margin_right = 242.0
 margin_bottom = 70.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 popup_exclusive = true
 window_title = "Unable to Host"
 dialog_text = "Unable to create server, a server 
@@ -166,7 +174,7 @@ margin_left = -163.0
 margin_top = -48.0
 margin_right = 163.0
 margin_bottom = 48.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 popup_exclusive = true
 window_title = "Disconnected!"
 dialog_text = "Disconnected from server."
@@ -180,7 +188,7 @@ margin_left = -157.0
 margin_top = -40.0
 margin_right = 157.0
 margin_bottom = 40.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 window_title = "Unable to Join"
 dialog_text = "Host is already in game!"
 
@@ -193,7 +201,7 @@ margin_left = -235.0
 margin_top = -135.0
 margin_right = 235.0
 margin_bottom = 135.0
-theme = ExtResource( 4 )
+theme = ExtResource( 5 )
 window_title = ""
 dialog_text = "To Host a game:
 - Simply Press Host, no need to fill 
@@ -202,10 +210,8 @@ dialog_text = "To Host a game:
 To Join a game:
 - Ask for the host's IP Address, fill
   it in, and press join"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 5 )
 [connection signal="pressed" from="NetworkPanel/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/HostButton" to="." method="_on_HostButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="NetworkPanel/SettingsButton" to="." method="_on_SettingsButton_pressed"]

@@ -8,7 +8,6 @@ func _ready():
 	Network.connect("on_exit_button_pressed", self, "_show_main_menu")
 	Network.connect("game_already_started", self, "_on_game_already_started")
 
-
 func _on_HostButton_pressed():
 	# Properly set the local player information
 	set_player_info()
@@ -63,3 +62,8 @@ func _on_HelpButton_pressed():
 
 func _on_ExitButton_pressed():
 	get_tree().quit()
+
+func _on_SettingsButton_pressed():
+	var settings_page = preload("res://Settings/Settings.tscn").instance()
+	get_node("/root").add_child(settings_page)
+	$NetworkPanel.hide()
