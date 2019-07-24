@@ -21,6 +21,7 @@ run/main_scene="res://MainMenu/MainMenu.tscn"
 [autoload]
 
 Network="*res://Networking/Network.gd"
+Settings="*res://Settings/Settings.tscn"
 
 [display]
 

@@ -64,6 +64,5 @@ func _on_ExitButton_pressed():
 	get_tree().quit()
 
 func _on_SettingsButton_pressed():
-	var settings_page = preload("res://Settings/Settings.tscn").instance()
-	get_node("/root").add_child(settings_page)
 	$NetworkPanel.hide()
+	get_node("/root/Settings/Panel").show()

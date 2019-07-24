@@ -154,8 +154,16 @@ func exit_to_main_menu():
 	my_info.net_id = 1
 	my_info.spawnpoint = 0
 	remove_child_nodes()
+	change_bg_music()
 	emit_signal("on_exit_button_pressed")
 	is_game_ongoing = false # Reset all of this boolean to false
+
+func change_bg_music():
+	var audio_player = get_node("/root/Settings/AudioStreamPlayer")
+	var lobby_music = load("res://Assets/Music/01 A Night Of Dizzy Spells.ogg")
+	if (audio_player.get_stream() != lobby_music):
+		audio_player.stream = lobby_music
+		audio_player.play()
 
 func remove_child_nodes():
 	if get_node("/root").has_node("NetworkLobby"):
