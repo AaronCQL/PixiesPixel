@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Settings/Settings.gd" type="Script" id=1]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=2]
-[ext_resource path="res://Assets/Music/01 A Night Of Dizzy Spells.ogg" type="AudioStream" id=3]
+[ext_resource path="res://Theme/button_theme.tres" type="Theme" id=3]
+[ext_resource path="res://Assets/Music/01 A Night Of Dizzy Spells.ogg" type="AudioStream" id=4]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -11,13 +12,13 @@ script = ExtResource( 1 )
 show_behind_parent = true
 margin_right = 640.0
 margin_bottom = 368.0
-theme = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="Panel"]
 margin_left = 260.0
 margin_top = 40.0
 margin_right = 370.0
 margin_bottom = 80.0
+theme = ExtResource( 2 )
 text = "Settings"
 
 [node name="Music" type="CheckButton" parent="Panel"]
@@ -25,13 +26,16 @@ margin_left = 230.0
 margin_top = 110.0
 margin_right = 400.0
 margin_bottom = 182.0
+theme = ExtResource( 2 )
+pressed = true
 text = "Music"
 
-[node name="Sound effects" type="CheckButton" parent="Panel"]
+[node name="SoundEffects" type="CheckButton" parent="Panel"]
 margin_left = 170.0
 margin_top = 160.0
 margin_right = 400.0
 margin_bottom = 220.0
+theme = ExtResource( 2 )
 text = "Sound Effects"
 
 [node name="VolumeSlider" type="HSlider" parent="Panel"]
@@ -42,8 +46,18 @@ margin_bottom = 246.0
 min_value = -60.0
 max_value = 10.0
 
+[node name="BackButton" type="Button" parent="Panel"]
+margin_left = 30.0
+margin_top = 290.0
+margin_right = 93.0
+margin_bottom = 326.0
+theme = ExtResource( 3 )
+text = "Back"
+
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 4 )
+autoplay = true
 bus = "VolumeAdjust"
 [connection signal="toggled" from="Panel/Music" to="." method="_on_CheckButton_toggled"]
 [connection signal="value_changed" from="Panel/VolumeSlider" to="." method="_on_VolumeSlider_value_changed"]
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_BackButton_pressed"]
