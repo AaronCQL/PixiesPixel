@@ -6,7 +6,7 @@ func _ready():
 func set_camera_limits(net_id):
 	var player_node : String = "./" + net_id
 	get_node(player_node).get_node("./Camera2D").limit_left = 0
-	get_node(player_node).get_node("./Camera2D").limit_top = -192
+	get_node(player_node).get_node("./Camera2D").limit_top = -208
 	get_node(player_node).get_node("./Camera2D").limit_right = 1520
 	get_node(player_node).get_node("./Camera2D").limit_bottom = 416
 	
