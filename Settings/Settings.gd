@@ -4,7 +4,7 @@ var audio_player
 
 func _ready():
 	Network.connect("on_exit_button_pressed", self, "_show_main_menu")
-	audio_player = get_node("AudioStreamPlayer2D")
+	audio_player = get_node("AudioStreamPlayer")
 
 func _on_CheckButton_toggled(button_pressed):
 	if button_pressed == true:

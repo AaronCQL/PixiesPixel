@@ -3,7 +3,7 @@
 [ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=3]
-[ext_resource path="res://Assets/Icons/Settings_black-512.png" type="Texture" id=4]
+[ext_resource path="res://Theme/button_theme.tres" type="Theme" id=4]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=5]
 
 [sub_resource type="DynamicFont" id=1]
@@ -108,12 +108,14 @@ custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
 text = "Exit"
 
 [node name="SettingsButton" type="Button" parent="NetworkPanel"]
-margin_left = 401.678
-margin_top = 287.984
-margin_right = 463.678
-margin_bottom = 343.984
+margin_left = 256.0
+margin_top = 232.0
+margin_right = 439.0
+margin_bottom = 298.0
 rect_scale = Vector2( 0.7, 0.7 )
-icon = ExtResource( 4 )
+theme = ExtResource( 4 )
+custom_fonts/font = ExtResource( 3 )
+text = "Settings"
 
 [node name="IPLabel" type="Label" parent="NetworkPanel"]
 margin_left = 352.0
