@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=5]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.04966, 12.3489 )
@@ -391,13 +392,15 @@ text = "Player"
 align = 1
 valign = 1
 
-[node name="InGameMenu" parent="." instance=ExtResource( 7 )]
-
 [node name="DeathTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
+
+[node name="InGameMenu" parent="." instance=ExtResource( 7 )]
+
+[node name="ScoreBoard" parent="." instance=ExtResource( 8 )]
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="area_entered" from="Sprite/SwordHitBox" to="Sprite/SwordHitBox" method="_on_SwordHitBox_area_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
-[connection signal="on_resume_button_pressed" from="InGameMenu" to="." method="_on_InGameMenu_on_resume_button_pressed"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="on_resume_button_pressed" from="InGameMenu" to="." method="_on_InGameMenu_on_resume_button_pressed"]

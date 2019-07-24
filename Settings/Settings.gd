@@ -4,7 +4,6 @@ var audio_player
 
 func _ready():
 	$Panel.hide()
-	Network.connect("on_exit_button_pressed", self, "_show_main_menu")
 	audio_player = get_node("AudioStreamPlayer")
 
 func _on_MusicToggle_toggled(button_pressed):

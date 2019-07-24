@@ -1,0 +1,34 @@
+[gd_scene format=2]
+
+[node name="HBoxContainer2" type="HBoxContainer"]
+margin_top = 138.0
+margin_right = 576.0
+margin_bottom = 272.0
+size_flags_vertical = 7
+custom_constants/separation = 30
+
+[node name="NameLabel" type="Label" parent="."]
+margin_top = 60.0
+margin_right = 172.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+text = "Player"
+align = 1
+
+[node name="KillsLabel" type="Label" parent="."]
+margin_left = 202.0
+margin_top = 60.0
+margin_right = 374.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+text = "2"
+align = 1
+
+[node name="KilledByLabel" type="Label" parent="."]
+margin_left = 404.0
+margin_top = 60.0
+margin_right = 576.0
+margin_bottom = 74.0
+size_flags_horizontal = 3
+text = "TheLegend27"
+align = 1

@@ -36,7 +36,7 @@ func _on_BombHitBox_area_entered(area):
 				if is_exploding:
 					var actor = area.get_node("./../") # Get the Adventurer node that was hit
 					var p_id_hit : String = str(actor.get_name()) # Get the id of the peer who was hit
-					var p_id_sender : String = get_node('./').get_name() # Get self id to let peer know who hit him
+					var p_id_sender : String = str(get_tree().get_network_unique_id()) # Get self id to let peer know who hit him
 					var damage : int = rng.randi_range(MIN_DAMAGE, MAX_DAMAGE)
 					actor.take_damage(p_id_hit, damage, p_id_sender)
 				else:

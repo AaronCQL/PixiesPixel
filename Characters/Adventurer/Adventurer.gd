@@ -41,7 +41,6 @@ func _ready():
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
 	$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
-	get_node("./InGameMenu/Panel").hide() # Hide InGameMenu on start
 	if is_network_master():
 		self.z_index = 10 # Make character you control display in front of peers
 	
@@ -186,13 +185,22 @@ func check_death():
 			$AnimationPlayer.current_animation = "die"
 			$DeathTimer.start(2)
 			Network.on_player_death(get_tree().get_network_unique_id())
+			rpc("update_score_board", p_id_last_hit, get_tree().get_network_unique_id())
 			print("Slain by " + p_id_last_hit)
 	if is_dead:
 		change_camera()
+		
+remotesync func update_score_board(p_id_killer, p_id_dead):
+	$ScoreBoard.update_score_board(p_id_killer, p_id_dead)
 
 func _on_DeathTimer_timeout():
 	$Camera2D.current = false
 	get_node("./../" + str(Network.remaining_players[0]) + "/Camera2D").make_current()
+	if Network.remaining_players.size() == 1:
+		rpc("show_score_board")
+
+remotesync func show_score_board():
+	$ScoreBoard.show_score_board()	
 
 var cam_index : int = 0
 func change_camera():
