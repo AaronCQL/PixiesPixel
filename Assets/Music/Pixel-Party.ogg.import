@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Pixel-Party.ogg-28057edd6a30658f7aebb7ab2be7abc6.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/Pixel-Party.ogg"
+dest_files=[ "res://.import/Pixel-Party.ogg-28057edd6a30658f7aebb7ab2be7abc6.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Automation.ogg-1404ece39e08565181492efdb4837e47.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/Automation.ogg"
+dest_files=[ "res://.import/Automation.ogg-1404ece39e08565181492efdb4837e47.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
