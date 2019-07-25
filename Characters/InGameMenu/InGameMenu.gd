@@ -10,3 +10,7 @@ func _on_MainMenuButton_pressed():
 
 func _on_ResumeButton_pressed():
 	emit_signal("on_resume_button_pressed")
+
+func _on_SettingsButton_pressed():
+	emit_signal("on_resume_button_pressed")
+	get_node("/root/Settings/Panel").show()

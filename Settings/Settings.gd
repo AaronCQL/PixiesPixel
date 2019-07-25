@@ -25,5 +25,6 @@ func _on_SoundEffectsSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(2, value)
 			
 func _on_BackButton_pressed():
-	get_node("/root/MainMenu/NetworkPanel").show()
 	$Panel.hide()
+	if !get_node("/root").has_node("Map"):
+		get_node("/root/MainMenu/NetworkPanel").show()

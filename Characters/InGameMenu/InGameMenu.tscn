@@ -20,25 +20,38 @@ margin_right = 640.0
 margin_bottom = 368.0
 
 [node name="Panel" type="Panel" parent="Panel"]
-margin_left = 192.0
-margin_top = 80.0
-margin_right = 448.0
-margin_bottom = 240.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -128.0
+margin_top = -120.0
+margin_right = 128.0
+margin_bottom = 120.0
 
 [node name="ResumeButton" type="Button" parent="Panel/Panel"]
 margin_left = 48.0
 margin_top = 32.0
 margin_right = 208.0
-margin_bottom = 64.0
+margin_bottom = 80.0
 custom_fonts/font = SubResource( 1 )
 text = "Resume"
 
-[node name="MainMenuButton" type="Button" parent="Panel/Panel"]
+[node name="SettingsButton" type="Button" parent="Panel/Panel"]
 margin_left = 48.0
 margin_top = 96.0
 margin_right = 208.0
-margin_bottom = 128.0
+margin_bottom = 144.0
+custom_fonts/font = SubResource( 1 )
+text = "Settings"
+
+[node name="MainMenuButton" type="Button" parent="Panel/Panel"]
+margin_left = 48.0
+margin_top = 160.0
+margin_right = 208.0
+margin_bottom = 208.0
 custom_fonts/font = SubResource( 2 )
 text = "Main Menu"
 [connection signal="pressed" from="Panel/Panel/ResumeButton" to="." method="_on_ResumeButton_pressed"]
+[connection signal="pressed" from="Panel/Panel/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="Panel/Panel/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]
