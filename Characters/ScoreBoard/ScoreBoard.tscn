@@ -86,6 +86,8 @@ margin_top = 10.0
 margin_right = 624.0
 margin_bottom = 42.0
 custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Rematch"
 
 [node name="ExitButton" type="Button" parent="Panel"]
@@ -94,6 +96,8 @@ margin_top = 10.0
 margin_right = 112.0
 margin_bottom = 42.0
 custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
 text = "Exit"
 [connection signal="pressed" from="Panel/RematchButton" to="." method="_on_RematchButton_pressed"]
 [connection signal="pressed" from="Panel/ExitButton" to="." method="_on_ExitButton_pressed"]

@@ -55,9 +55,9 @@ caret_blink = true
 caret_blink_speed = 0.35
 
 [node name="JoinButton" type="Button" parent="NetworkPanel"]
-margin_left = 336.0
+margin_left = 328.0
 margin_top = 176.0
-margin_right = 448.0
+margin_right = 440.0
 margin_bottom = 218.0
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
@@ -69,9 +69,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -128.0
+margin_left = -120.0
 margin_top = -8.0
-margin_right = -16.0
+margin_right = -8.0
 margin_bottom = 34.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
