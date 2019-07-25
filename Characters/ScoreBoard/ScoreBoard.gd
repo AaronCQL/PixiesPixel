@@ -44,4 +44,5 @@ func _on_RematchButton_pressed():
 remotesync func go_to_network_lobby():
 	var network_lobby = preload("res://Lobby/NetworkLobby/NetworkLobby.tscn").instance()
 	get_node("/root").add_child(network_lobby)
+	Network.change_bg_music()
 	get_node("/root/Map").queue_free()
