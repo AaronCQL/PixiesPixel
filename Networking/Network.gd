@@ -160,7 +160,7 @@ func exit_to_main_menu():
 
 func change_bg_music():
 	var audio_player = get_node("/root/Settings/AudioStreamPlayer")
-	var lobby_music = load("res://Assets/Music/Pixel-Party.ogg")
+	var lobby_music = load("res://Assets/Music/Automation.ogg")
 	if (audio_player.get_stream() != lobby_music):
 		audio_player.stream = lobby_music
 		audio_player.play()

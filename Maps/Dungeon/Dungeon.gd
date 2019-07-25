@@ -3,7 +3,7 @@ extends Node2D
 func _ready():
 	Network.connect("player_removed", self, "_on_player_removed")
 	var audio_player = get_node("/root/Settings/AudioStreamPlayer")
-	audio_player.stream = load("res://Assets/Music/8-Bit-Techno.ogg")
+	audio_player.stream = load("res://Assets/Music/Pixel-Party.ogg")
 	audio_player.play()
 	
 func set_camera_limits(net_id):
