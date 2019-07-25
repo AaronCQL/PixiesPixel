@@ -3,19 +3,20 @@ extends KinematicBody2D
 const SPEED = 200
 const MIN_DAMAGE = 5
 const MAX_DAMAGE = 22
+const FLOOR = Vector2(0, -1)
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 var velocity : Vector2 = Vector2()
-var direction : int = 1
 
 func _physics_process(delta):
-	velocity.x = SPEED * direction
 	move_and_slide(velocity)
 	$Sprite/AnimationPlayer.current_animation = "shoot"
-	if is_on_wall():
-		queue_free()
+	check_collision()
 		
 func set_arrow_direction(dir):
-	direction = dir
-	if dir == -1:
-		$Sprite.flip_h = true
+	$Sprite.scale.x = dir
+	velocity.x = SPEED * dir
+
+func check_collision():
+	if is_on_wall():
+		queue_free()

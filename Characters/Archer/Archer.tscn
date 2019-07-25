@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Sprites/Archer/archer.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.9243, 26.2624 )
+extents = Vector2( 10.9243, 27.9301 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack"
@@ -122,7 +122,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CapsuleShape2D" id=9]
-height = 33.0196
+height = 32.4012
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 scale = Vector2( 0.7, 0.7 )
@@ -133,13 +133,13 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 6
-frame = 2
+frame = 1
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
-position = Vector2( 21.3944, 8.85442 )
+position = Vector2( 39.6667, 10.5294 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -11.2576, 21.722 )
+position = Vector2( -0.434126, 20.0101 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -156,6 +156,6 @@ anims/run = SubResource( 8 )
 [node name="PlayerHitBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
-position = Vector2( -10.9715, 21.8448 )
+position = Vector2( -0.57861, 21.3551 )
 shape = SubResource( 9 )
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
