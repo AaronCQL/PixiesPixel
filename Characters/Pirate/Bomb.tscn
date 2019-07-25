@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Characters/Pirate/Bomb.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pirate/bomb.png" type="Texture" id=2]
+[ext_resource path="res://Assets/SoundEffects/bomb_explode.wav" type="AudioStream" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 13.9521
@@ -71,7 +72,7 @@ tracks/4/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="CircleShape2D" id=5]
+[sub_resource type="CircleShape2D" id=3]
 
 [sub_resource type="Animation" id=4]
 length = 0.45
@@ -122,7 +123,7 @@ tracks/3/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ SubResource( 5 ) ]
+"values": [ SubResource( 3 ) ]
 }
 tracks/4/type = "value"
 tracks/4/path = NodePath("../BombHitBox/CollsionShape2D:disabled")
@@ -136,8 +137,20 @@ tracks/4/keys = {
 "update": 1,
 "values": [ false, true ]
 }
+tracks/5/type = "value"
+tracks/5/path = NodePath("../AudioStreamPlayer2D:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
-[sub_resource type="CircleShape2D" id=6]
+[sub_resource type="CircleShape2D" id=5]
 radius = 14.6569
 
 [node name="Bomb" type="KinematicBody2D"]
@@ -157,7 +170,7 @@ anims/explode = SubResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 1.13393, 0.323975 )
-shape = SubResource( 6 )
+shape = SubResource( 5 )
 
 [node name="Timer" type="Timer" parent="."]
 
@@ -171,6 +184,12 @@ __meta__ = {
 [node name="CollsionShape2D" type="CollisionShape2D" parent="BombHitBox"]
 rotation = 1.5708
 shape = SubResource( 1 )
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+pitch_scale = 0.8
+max_distance = 380.0
+bus = "SoundEffects"
 [connection signal="animation_finished" from="Sprite/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="area_entered" from="BombHitBox" to="." method="_on_BombHitBox_area_entered"]
