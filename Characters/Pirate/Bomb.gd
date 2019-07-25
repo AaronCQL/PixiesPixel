@@ -12,6 +12,7 @@ var is_exploding : bool
 onready var timer = get_node("Timer")
 
 func _ready():
+	rng.randomize()
 	is_exploding = false
 	timer.start(2)
 

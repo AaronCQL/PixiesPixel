@@ -38,6 +38,7 @@ var p_id_last_hit : String 		# Last player to hit this guy, for KDR
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
