@@ -5,6 +5,9 @@ const MAX_DAMAGE = 15
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
+func _ready():
+	rng.randomize()
+
 func _on_SwordHitBox_area_entered(area):
 	if is_network_master():
 		if area.name == "PlayerHitBox":	

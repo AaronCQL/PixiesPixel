@@ -12,6 +12,7 @@ var is_exploding : bool
 onready var timer = get_node("Timer")
 
 func _ready():
+	rng.randomize()
 	is_exploding = false
 	timer.start(2)
 
@@ -24,6 +25,7 @@ func _physics_process(delta):
 		$Sprite/AnimationPlayer.current_animation = "explode"
 
 func _on_Timer_timeout():
+	$AudioStreamPlayer2D.pitch_scale = rng.randf_range(0.7, 0.9)	
 	is_exploding = true
 
 func _on_AnimationPlayer_animation_finished(explode):
