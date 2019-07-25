@@ -1,6 +1,6 @@
 extends KinematicBody2D
 
-#signal health_updated(health)
+signal health_updated(health)
 
 const MAX_HEALTH = 100
 const RUN_SPEED = 100
@@ -174,7 +174,7 @@ func take_damage(p_id_hit, amount, p_id_sender):
 remotesync func send_damage_info(p_id_hit, amount, p_id_sender):
 	# Get the actual player node that was hit using the network_id
 	var player_hit = get_node("./../" + p_id_hit)
-	player_hit.get_node("./DamageAnimation").current_animation = "damage"
+	player_hit.get_node("./AnimationPlayer").current_animation = "hit"
 	player_hit.set_health(player_hit.health - amount)
 	player_hit.p_id_last_hit = p_id_sender
 		
