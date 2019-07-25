@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://Assets/Sprites/Archer/arrow.png" type="Texture" id=1]
+[ext_resource path="res://Characters/Archer/Arrow.gd" type="Script" id=1]
+[ext_resource path="res://Assets/Sprites/Archer/arrow.png" type="Texture" id=2]
 
 [sub_resource type="Animation" id=1]
 resource_name = "shoot"
@@ -20,26 +21,29 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 10, 3.693 )
+extents = Vector2( 10.1089, 3.88547 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 3.69301 )
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="Sprite" type="Sprite" parent="."]
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
+offset = Vector2( -1, 1 )
 vframes = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite"]
 anims/shoot = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.673695, -0.673693 )
 shape = SubResource( 2 )
 
 [node name="ArrowHitBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArrowHitBox"]
-position = Vector2( 0.674, -0.674 )
 shape = SubResource( 3 )

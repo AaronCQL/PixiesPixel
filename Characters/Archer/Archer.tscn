@@ -8,6 +8,8 @@ extents = Vector2( 10.9243, 26.2624 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack"
+length = 0.5
+step = 0.01
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -15,7 +17,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.3, 0.5, 0.6, 0.8 ),
+"times": PoolRealArray( 0, 0.09, 0.16, 0.24, 0.32, 0.41 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3, 4, 5 ]
@@ -125,16 +127,16 @@ height = 33.0196
 [node name="KinematicBody2D" type="KinematicBody2D"]
 scale = Vector2( 0.7, 0.7 )
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 offset = Vector2( 10, -21.5 )
 vframes = 6
 hframes = 6
-frame = 14
+frame = 2
+
+[node name="Position2D" type="Position2D" parent="Sprite"]
+position = Vector2( 27.3592, -13.642 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -154,3 +156,4 @@ anims/run = SubResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 shape = SubResource( 9 )
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
