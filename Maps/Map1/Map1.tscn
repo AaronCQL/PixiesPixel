@@ -4,7 +4,6 @@
 [ext_resource path="res://Characters/Archer/Archer.tscn" type="PackedScene" id=2]
 
 [node name="Map1" type="Node2D"]
-position = Vector2( 376.516, 828.167 )
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )

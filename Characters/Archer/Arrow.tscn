@@ -26,11 +26,9 @@ extents = Vector2( 10.1089, 3.88547 )
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 3.69301 )
 
-[node name="KinematicBody2D" type="KinematicBody2D"]
+[node name="Arrow" type="KinematicBody2D"]
+collision_layer = 2
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

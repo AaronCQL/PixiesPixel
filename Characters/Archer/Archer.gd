@@ -93,6 +93,13 @@ func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
 		is_attacking = true
 		$AnimationPlayer.current_animation = "attack"
+		var arrow = ARROW.instance()
+		print(sign($Sprite/Position2D.position.x))
+		arrow.set_arrow_direction(sign($Sprite/Position2D.position.x))
+		get_parent().add_child(arrow)
+		arrow.position = $Sprite/Position2D.global_position
+
+
 
 func jump_input():
 	if !is_dead:	
