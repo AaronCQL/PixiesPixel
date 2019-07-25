@@ -8,7 +8,7 @@
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=6]
 [ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/SoundEffects/_short_sword__swing.wav" type="AudioStream" id=9]
+[ext_resource path="res://Assets/SoundEffects/sword_swing.wav" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.04966, 12.3489 )
@@ -439,6 +439,7 @@ one_shot = true
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
+pitch_scale = 1.2
 bus = "SoundEffects"
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="area_entered" from="Sprite/SwordHitBox" to="Sprite/SwordHitBox" method="_on_SwordHitBox_area_entered"]

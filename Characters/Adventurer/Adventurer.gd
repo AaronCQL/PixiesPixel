@@ -25,6 +25,7 @@ var attack_combo : int = 0
 var health : int = MAX_HEALTH
 var is_dead : bool = false
 var show_menu : bool = false
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 var velocity : Vector2 = Vector2(0, 0)
 
@@ -99,7 +100,8 @@ func acceleration_curve():
 func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
 		is_attacking = true
-
+		$AudioStreamPlayer2D.pitch_scale = rng.randf_range(1.0, 1.4)	
+		
 		if attack_combo == 0:
 			$AnimationPlayer.current_animation = "attack1"
 			attack_combo = 1
