@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Lobby/NetworkLobby/NetworkLobby.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
@@ -23,26 +23,15 @@ font_data = ExtResource( 3 )
 [sub_resource type="DynamicFont" id=4]
 font_data = ExtResource( 3 )
 
-[sub_resource type="DynamicFontData" id=5]
-font_path = "res://Fonts/m5x7.ttf"
+[sub_resource type="DynamicFont" id=5]
+size = 32
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=6]
 size = 32
-font_data = SubResource( 5 )
+font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=7]
-size = 32
-font_data = ExtResource( 3 )
-
-[sub_resource type="DynamicFont" id=8]
-size = 32
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=9]
-size = 32
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=10]
 size = 32
 font_data = ExtResource( 2 )
 
@@ -100,7 +89,7 @@ margin_left = 16.0
 margin_top = 320.0
 margin_right = 96.0
 margin_bottom = 352.0
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
 text = "Exit"
@@ -110,7 +99,7 @@ margin_left = 544.0
 margin_top = 320.0
 margin_right = 624.0
 margin_bottom = 352.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Start"
@@ -127,7 +116,7 @@ margin_left = 16.0
 margin_top = 16.0
 margin_right = 208.0
 margin_bottom = 80.0
-custom_fonts/font = SubResource( 8 )
+custom_fonts/font = SubResource( 5 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Dungeon"
@@ -137,7 +126,7 @@ margin_left = 16.0
 margin_top = 96.0
 margin_right = 208.0
 margin_bottom = 160.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 6 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Grassy Plains"
@@ -155,7 +144,7 @@ margin_left = 32.0
 margin_top = 224.0
 margin_right = 192.0
 margin_bottom = 256.0
-custom_fonts/font = SubResource( 10 )
+custom_fonts/font = SubResource( 7 )
 text = "Dungeon"
 [connection signal="pressed" from="Panel/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="Panel/StartButton" to="." method="_on_StartButton_pressed"]
