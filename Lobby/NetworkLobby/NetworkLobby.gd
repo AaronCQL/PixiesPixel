@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var map_label_to_display = "Dungeon"
+var map_label_to_display : String = "Dungeon"
 
 func _ready():
 	Network.connect("player_list_changed", self, "refresh_player_list")
@@ -38,9 +38,9 @@ remotesync func go_to_pre_game_lobby():
 	Network.sync_spawnpoints()
 	var pre_game_lobby = preload("res://Lobby/PreGameLobby/PreGameLobby.tscn").instance()
 	get_node("/root").add_child(pre_game_lobby)
-	self.queue_free()
 	if get_tree().is_network_server():
 		Network.is_game_ongoing = true
+	self.queue_free()
 
 func _on_ExitButton_pressed():
 	Network.exit_to_main_menu()
