@@ -62,7 +62,7 @@ func _physics_process(delta):
 		rset_unreliable("repl_position", position)
 		rset("repl_animation", $AnimationPlayer.current_animation)
 	else:
-		position = repl_position							# to replitcate current position
+		position = lerp(position, repl_position, 0.5)		# to replitcate current position
 		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
 		$Sprite.scale.x = repl_scale_x 						# to replicate change in x direction
 		if repl_is_dead:
