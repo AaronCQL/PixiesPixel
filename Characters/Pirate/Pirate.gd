@@ -48,6 +48,8 @@ func _ready():
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
 	if is_network_master():
 		self.z_index = 10 # Make character you control display in front of peers
+	else:
+		get_node("./HUD/Panel").hide()
 	
 func _physics_process(delta):
 	if is_network_master():
@@ -69,7 +71,7 @@ func _physics_process(delta):
 		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
 		$Sprite.scale.x = repl_scale_x 	
 		if repl_is_dead:
-			$PlayerHitBox/CollisionShape2D.disabled = true	
+			$PlayerHitBox/CollisionShape2D.disabled = true
 	
 func direction_input():
 	x_dir = 0
