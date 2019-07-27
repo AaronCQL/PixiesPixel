@@ -100,6 +100,7 @@ func attack_input():
 
 func replenish_ammo():
 	if bomb_ammo < 5 && $BombAmmoTimer.is_stopped():
+		$BombAmmoTimer.one_shot = true
 		$BombAmmoTimer.set_wait_time(3)
 		$BombAmmoTimer.start()
 

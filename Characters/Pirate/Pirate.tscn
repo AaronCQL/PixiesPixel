@@ -238,6 +238,7 @@ one_shot = true
 
 [node name="BombAmmoTimer" type="Timer" parent="."]
 wait_time = 3.0
+one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
 [connection signal="ammo_updated" from="." to="HUD" method="_on_KinematicBody2D_ammo_updated"]

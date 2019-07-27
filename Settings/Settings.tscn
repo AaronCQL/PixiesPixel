@@ -53,6 +53,7 @@ margin_right = 416.0
 margin_bottom = 186.0
 min_value = -60.0
 max_value = 10.0
+ticks_on_borders = true
 
 [node name="SoundEffectsToggle" type="CheckButton" parent="Panel"]
 margin_left = 208.0

@@ -138,7 +138,7 @@ tracks/0/keys = {
 "values": [ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=9]
 resource_name = "damage"
 length = 0.2
 step = 0.05
@@ -155,7 +155,7 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=9]
+[sub_resource type="CapsuleShape2D" id=10]
 height = 32.4012
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
@@ -186,7 +186,7 @@ anims/jump = SubResource( 7 )
 anims/run = SubResource( 8 )
 
 [node name="DamageAnimation" type="AnimationPlayer" parent="."]
-anims/damage = SubResource( 11 )
+anims/damage = SubResource( 9 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -196,7 +196,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 position = Vector2( -1.34965, -6.49557 )
-shape = SubResource( 9 )
+shape = SubResource( 10 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 3 )]
 position = Vector2( -22.7837, -44.3825 )
