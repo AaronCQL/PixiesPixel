@@ -1,11 +1,11 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Characters/Adventurer/SwordHitBox.gd" type="Script" id=3]
 [ext_resource path="res://Characters/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=5]
-[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=6]
+[ext_resource path="res://Fonts/PlayerNameLabel.tres" type="DynamicFont" id=6]
 [ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/SoundEffects/sword_swing.wav" type="AudioStream" id=9]
@@ -350,9 +350,6 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="DynamicFont" id=15]
-font_data = ExtResource( 6 )
-
 [node name="KinematicBody2D" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
@@ -418,12 +415,12 @@ position = Vector2( -14.2062, -16.5975 )
 script = ExtResource( 5 )
 
 [node name="PlayerNameLabel" type="Label" parent="."]
-margin_left = -24.86
-margin_top = -22.7429
-margin_right = 74.14
-margin_bottom = -9.74294
+margin_left = -23.7972
+margin_top = -23.0406
+margin_right = 75.2028
+margin_bottom = -10.0406
 rect_scale = Vector2( 0.5, 0.5 )
-custom_fonts/font = SubResource( 15 )
+custom_fonts/font = ExtResource( 6 )
 custom_colors/font_color = Color( 1, 1, 1, 0.678431 )
 text = "Player"
 align = 1

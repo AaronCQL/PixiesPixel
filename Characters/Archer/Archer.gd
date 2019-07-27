@@ -48,7 +48,6 @@ func _ready():
 		self.z_index = 10 # Make character you control display in front of peers
 	
 func _physics_process(delta):
-	print(self.get_name())
 	if is_network_master():
 		direction_input()				# horizontal mvmt
 		jump_input()					# jump
@@ -201,19 +200,16 @@ func change_camera():
 #		get_node("./../" + str(Network.remaining_players[cam_index]) + "/Camera2D").make_current()
 	
 func take_damage(p_id_hit, amount, p_id_sender):
-	pass
-#	rpc("send_damage_info", p_id_hit, amount, p_id_sender)
+	rpc("send_damage_info", p_id_hit, amount, p_id_sender)
 
 remotesync func send_damage_info(p_id_hit, amount, p_id_sender):
 	# Get the actual player node that was hit using the network_id
-	pass
-#	var player_hit = get_node("./../" + p_id_hit)
-#	player_hit.get_node("./AnimationPlayer").current_animation = "hit"
-#	player_hit.set_health(player_hit.health - amount)
-#	player_hit.p_id_last_hit = p_id_sender
+	var player_hit = get_node("./../" + p_id_hit)
+	player_hit.get_node("./DamageAnimation").current_animation = "damage"
+	player_hit.set_health(player_hit.health - amount)
+	player_hit.p_id_last_hit = p_id_sender
 		
 func set_health(value):
 # warning-ignore:narrowing_conversion
-	pass
-#	health = clamp(value, 0, MAX_HEALTH)
-#	emit_signal("health_updated", health) # For health bar
+	health = clamp(value, 0, MAX_HEALTH)
+	emit_signal("health_updated", health) # For health bar

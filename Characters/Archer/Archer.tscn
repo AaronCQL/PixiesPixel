@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Characters/Archer/Archer.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Archer/archer.png" type="Texture" id=2]
-[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://Characters/HealthBar/HealthBar.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=4]
+[ext_resource path="res://Fonts/PlayerNameLabel.tres" type="DynamicFont" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.94723, 24.3224 )
@@ -136,14 +138,28 @@ tracks/0/keys = {
 "values": [ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33 ]
 }
 
+[sub_resource type="Animation" id=11]
+resource_name = "damage"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [sub_resource type="CapsuleShape2D" id=9]
 height = 32.4012
 
-[sub_resource type="DynamicFont" id=10]
-font_data = ExtResource( 3 )
-
 [node name="KinematicBody2D" type="KinematicBody2D"]
-scale = Vector2( 0.7, 0.7 )
+scale = Vector2( 0.6, 0.6 )
 collision_layer = 2
 script = ExtResource( 1 )
 
@@ -151,7 +167,7 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 6
-frame = 3
+frame = 14
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
 position = Vector2( 25.2365, -17.4914 )
@@ -169,21 +185,37 @@ anims/idle = SubResource( 6 )
 anims/jump = SubResource( 7 )
 anims/run = SubResource( 8 )
 
+[node name="DamageAnimation" type="AnimationPlayer" parent="."]
+anims/damage = SubResource( 11 )
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PlayerHitBox" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 position = Vector2( -1.34965, -6.49557 )
 shape = SubResource( 9 )
 
+[node name="HealthBar" parent="." instance=ExtResource( 3 )]
+position = Vector2( -22.7837, -44.3825 )
+scale = Vector2( 1, 1 )
+script = ExtResource( 4 )
+
 [node name="PlayerNameLabel" type="Label" parent="."]
-margin_left = -36.4738
-margin_top = -52.0074
-margin_right = 41.5262
-margin_bottom = -37.0074
-custom_fonts/font = SubResource( 10 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -42.8061
+margin_top = -56.1432
+margin_right = 56.1939
+margin_bottom = -43.1432
+rect_scale = Vector2( 0.9, 0.9 )
+custom_fonts/font = ExtResource( 5 )
+custom_colors/font_color = Color( 1, 1, 1, 0.678431 )
 text = "Player"
 align = 1
-valign = 1
+[connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]

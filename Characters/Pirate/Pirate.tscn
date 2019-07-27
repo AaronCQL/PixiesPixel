@@ -213,10 +213,10 @@ anims/run = SubResource( 8 )
 anims/damage = SubResource( 9 )
 
 [node name="PlayerNameLabel" type="Label" parent="."]
-margin_left = -48.2658
-margin_top = -51.4544
-margin_right = 47.7342
-margin_bottom = -37.4544
+margin_left = -46.5152
+margin_top = -51.2701
+margin_right = 49.4848
+margin_bottom = -37.2701
 custom_fonts/font = SubResource( 10 )
 custom_colors/font_color = Color( 1, 1, 1, 0.678431 )
 text = "Player"
