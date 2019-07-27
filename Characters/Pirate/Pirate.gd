@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 signal health_updated(health)
+signal ammo_updated(ammo)
 
 const MAX_HEALTH = 100
 const RUN_SPEED = 100
@@ -21,6 +22,7 @@ var gravity : float
 var max_jump_velocity : float
 var min_jump_velocity : float
 var x_dir : int # direction in which player is facing in the x-axis
+var bomb_ammo : int = 5
 
 var is_grounded : bool = true
 var is_attacking : bool = false
@@ -44,7 +46,6 @@ func _ready():
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
-	#$Sprite.get_node("./SwordHitBox/CollisionShape2D").disabled = true # Disables sword hit box on start
 	if is_network_master():
 		self.z_index = 10 # Make character you control display in front of peers
 	
@@ -54,6 +55,7 @@ func _physics_process(delta):
 		jump_input()					# jump
 		acceleration_curve()			# simluate acceleration when moving
 		attack_input()
+		replenish_ammo()
 		flip_sprite(x_dir)				# flips sprite when turning direction
 		play_animation(x_dir)
 		check_death()
@@ -86,11 +88,23 @@ func acceleration_curve():
 
 func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
-		var bomb_position : Vector2 = get_node("./Sprite/Position2D").global_position
-		if get_node("./Sprite/RayCast2D").is_colliding():
-			bomb_position = self.global_position
-		rpc("spawn_bomb", get_tree().get_network_unique_id(), bomb_position)
+		if bomb_ammo > 0:
+			bomb_ammo -= 1
+			emit_signal("ammo_updated", bomb_ammo)
+			var bomb_position : Vector2 = get_node("./Sprite/Position2D").global_position
+			if get_node("./Sprite/RayCast2D").is_colliding():
+				bomb_position = self.global_position
+			rpc("spawn_bomb", get_tree().get_network_unique_id(), bomb_position)
 
+func replenish_ammo():
+	if bomb_ammo < 5 && $BombAmmoTimer.is_stopped():
+		$BombAmmoTimer.set_wait_time(3)
+		$BombAmmoTimer.start()
+
+func _on_BombAmmoTimer_timeout():
+	bomb_ammo += 1
+	emit_signal("ammo_updated", bomb_ammo)
+	
 remotesync func spawn_bomb(net_id, bomb_position):
 	var player_node = get_node("/root/Map/" + str(net_id))
 	player_node.is_attacking = true
@@ -196,3 +210,4 @@ func set_health(value):
 # warning-ignore:narrowing_conversion
 	health = clamp(value, 0, MAX_HEALTH)
 	emit_signal("health_updated", health) # For health bar
+

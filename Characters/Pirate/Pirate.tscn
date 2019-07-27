@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Characters/Pirate/Pirate.gd" type="Script" id=1]
 [ext_resource path="res://Characters/Pirate/pirate.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=5]
 [ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Characters/Pirate/HUD.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.8071, 23.712 )
@@ -234,7 +235,14 @@ one_shot = true
 [node name="InGameMenu" parent="." instance=ExtResource( 6 )]
 
 [node name="ScoreBoard" parent="." instance=ExtResource( 7 )]
+
+[node name="BombAmmoTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="HUD" parent="." instance=ExtResource( 8 )]
+[connection signal="ammo_updated" from="." to="HUD" method="_on_KinematicBody2D_ammo_updated"]
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="on_resume_button_pressed" from="InGameMenu" to="." method="_on_InGameMenu_on_resume_button_pressed"]
+[connection signal="timeout" from="BombAmmoTimer" to="." method="_on_BombAmmoTimer_timeout"]
