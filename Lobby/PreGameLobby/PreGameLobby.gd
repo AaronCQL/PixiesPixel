@@ -38,6 +38,16 @@ func _on_AdventurerButton_pressed():
 	rpc("update_player_list", net_id_to_change, Network.my_info)
 	get_node("./CharacterPanel/ChosenCharacterLabel").text = "Adventurer"
 
+func _on_ArcherButton_pressed():
+	# get network id of the person who pressed
+	var net_id_to_change : int = Network.my_info.net_id
+	# change local state
+	Network.my_info.actor_name = "Archer"
+	Network.my_info.actor_path = "res://Characters/Archer/Archer.tscn"
+	# ask everybody else to change their player list
+	rpc("update_player_list", net_id_to_change, Network.my_info)
+	get_node("./CharacterPanel/ChosenCharacterLabel").text = "Archer"
+
 remotesync func update_player_list(net_id_to_change, new_player_info):
 	Network.players_info[net_id_to_change] = new_player_info
 	refresh_player_list()
@@ -64,3 +74,5 @@ remotesync func go_to_map():
 
 func _on_ExitButton_pressed():
 	Network.exit_to_main_menu()
+
+

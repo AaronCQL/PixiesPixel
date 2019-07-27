@@ -44,11 +44,11 @@ func _ready():
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
-#	if is_network_master():
-#		self.z_index = 10 # Make character you control display in front of peers
+	if is_network_master():
+		self.z_index = 10 # Make character you control display in front of peers
 	
 func _physics_process(delta):
-#	if is_network_master():
+	if is_network_master():
 		direction_input()				# horizontal mvmt
 		jump_input()					# jump
 		acceleration_curve()			# simluate acceleration when moving
@@ -59,14 +59,14 @@ func _physics_process(delta):
 #		toggle_menu()
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
-#		rset_unreliable("repl_position", position)
-#		rset("repl_animation", $AnimationPlayer.current_animation)
-#	else:
-#		position = repl_position							# to replitcate current position
-#		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
-#		$Sprite.scale.x = repl_scale_x 	
-#		if repl_is_dead:
-#			$PlayerHitBox/CollisionShape2D.disabled = true	
+		rset_unreliable("repl_position", position)
+		rset("repl_animation", $AnimationPlayer.current_animation)
+	else:
+		position = repl_position							# to replitcate current position
+		$AnimationPlayer.current_animation = repl_animation # to replicate current animation
+		$Sprite.scale.x = repl_scale_x 	
+		if repl_is_dead:
+			$PlayerHitBox/CollisionShape2D.disabled = true	
 	
 func direction_input():
 	x_dir = 0
@@ -89,14 +89,29 @@ func acceleration_curve():
 		else:
 			velocity.x = lerp(velocity.x, move_speed * x_dir, 0.01)
 
+#func attack_input():
+#	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
+#		is_attacking = true
+#		$AnimationPlayer.current_animation = "attack"
+#		var arrow = ARROW.instance()
+#		arrow.set_arrow_direction($Sprite.scale.x)
+#		get_parent().add_child(arrow)
+#		arrow.position = $Sprite/Position2D.global_position
+
 func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
-		is_attacking = true
-		$AnimationPlayer.current_animation = "attack"
-		var arrow = ARROW.instance()
-		arrow.set_arrow_direction($Sprite.scale.x)
-		get_parent().add_child(arrow)
-		arrow.position = $Sprite/Position2D.global_position
+		var arrow_position : Vector2 = get_node("./Sprite/Position2D").global_position
+		rpc("spawn_arrow", get_tree().get_network_unique_id(), arrow_position)
+
+remotesync func spawn_arrow(net_id, arrow_position):
+	var player_node = get_node("/root/Map/" + str(net_id))
+	player_node.is_attacking = true
+	player_node.get_node("./AnimationPlayer").current_animation = "attack"
+	var arrow = ARROW.instance()	#creates instance of bomb
+	arrow.set_network_master(net_id)
+	arrow.set_arrow_direction($Sprite.scale.x)
+	arrow.position = arrow_position
+	get_node("/root/Map").add_child(arrow)
 
 func jump_input():
 	if !is_dead:	
@@ -111,10 +126,10 @@ func jump_input():
 func flip_sprite(x_dir):
 	if x_dir > 0:
 		$Sprite.scale.x = 1
-#		rset("repl_scale_x", 1)
+		rset("repl_scale_x", 1)
 	elif x_dir < 0:
 		$Sprite.scale.x = -1
-#		rset("repl_scale_x", -1)
+		rset("repl_scale_x", -1)
 
 func play_animation(x_dir):
 	if !is_dead:
@@ -137,10 +152,10 @@ func _on_AnimationPlayer_animation_finished(attack):
 func toggle_menu():
 	if Input.is_action_just_pressed("ui_cancel"):
 		show_menu = !show_menu
-#	if show_menu:
-#		get_node('./InGameMenu/Panel').show()
-#	else:
-#		get_node('./InGameMenu/Panel').hide()
+	if show_menu:
+		get_node('./InGameMenu/Panel').show()
+	else:
+		get_node('./InGameMenu/Panel').hide()
 		
 func _on_InGameMenu_on_resume_button_pressed():
 	show_menu = false
@@ -150,11 +165,11 @@ func check_death():
 		$Camera2D.make_current()
 		if health <= 0:
 			is_dead = true
-#			rset("repl_is_dead", true)
+			rset("repl_is_dead", true)
 			$AnimationPlayer.current_animation = "die"
 			$DeathTimer.start(2)
-#			Network.on_player_death(get_tree().get_network_unique_id())
-#			rpc("update_score_board", p_id_last_hit, get_tree().get_network_unique_id())
+			Network.on_player_death(get_tree().get_network_unique_id())
+			rpc("update_score_board", p_id_last_hit, get_tree().get_network_unique_id())
 			print("Slain by " + p_id_last_hit)
 	if is_dead:
 		change_camera()

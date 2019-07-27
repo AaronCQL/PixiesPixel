@@ -47,24 +47,34 @@ margin_bottom = 304.0
 theme = ExtResource( 2 )
 
 [node name="AdventurerButton" type="Button" parent="CharacterPanel"]
-margin_left = 16.0
-margin_top = 16.0
-margin_right = 208.0
-margin_bottom = 80.0
+margin_left = 40.0
+margin_top = 14.0
+margin_right = 187.0
+margin_bottom = 54.0
 theme = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Adventurer"
 
 [node name="PirateButton" type="Button" parent="CharacterPanel"]
-margin_left = 16.0
-margin_top = 96.0
-margin_right = 208.0
-margin_bottom = 160.0
+margin_left = 40.0
+margin_top = 74.0
+margin_right = 187.0
+margin_bottom = 114.0
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Pirate"
+
+[node name="ArcherButton" type="Button" parent="CharacterPanel"]
+margin_left = 40.0
+margin_top = 134.0
+margin_right = 187.0
+margin_bottom = 174.0
+custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
+custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
+text = "Archer"
 
 [node name="CharacterLabel" type="Label" parent="CharacterPanel"]
 margin_left = 16.0
@@ -101,5 +111,6 @@ custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
 text = "Exit"
 [connection signal="pressed" from="CharacterPanel/AdventurerButton" to="." method="_on_AdventurerButton_pressed"]
 [connection signal="pressed" from="CharacterPanel/PirateButton" to="." method="_on_PirateButton_pressed"]
+[connection signal="pressed" from="CharacterPanel/ArcherButton" to="." method="_on_ArcherButton_pressed"]
 [connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_ExitButton_pressed"]
