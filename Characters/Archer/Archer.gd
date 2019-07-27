@@ -48,6 +48,7 @@ func _ready():
 		self.z_index = 10 # Make character you control display in front of peers
 	
 func _physics_process(delta):
+	print(self.get_name())
 	if is_network_master():
 		direction_input()				# horizontal mvmt
 		jump_input()					# jump
@@ -100,17 +101,19 @@ func acceleration_curve():
 
 func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
-		var arrow_position : Vector2 = get_node("./Sprite/Position2D").global_position
-		rpc("spawn_arrow", get_tree().get_network_unique_id(), arrow_position)
+		rpc("play_attack_animation", get_tree().get_network_unique_id())
 
-remotesync func spawn_arrow(net_id, arrow_position):
+remotesync func play_attack_animation(net_id):
 	var player_node = get_node("/root/Map/" + str(net_id))
 	player_node.is_attacking = true
 	player_node.get_node("./AnimationPlayer").current_animation = "attack"
+
+func spawn_arrow():
+	var net_id = self.get_name()
 	var arrow = ARROW.instance()	#creates instance of bomb
-	arrow.set_network_master(net_id)
+	arrow.set_network_master(int(net_id))
 	arrow.set_arrow_direction($Sprite.scale.x)
-	arrow.position = arrow_position
+	arrow.position = $Sprite/Position2D.global_position
 	get_node("/root/Map").add_child(arrow)
 
 func jump_input():
