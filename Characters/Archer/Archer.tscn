@@ -5,7 +5,7 @@
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 10.9243, 27.9301 )
+extents = Vector2( 8.94723, 24.3224 )
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack"
@@ -139,13 +139,13 @@ script = ExtResource( 1 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 6
-frame = 21
+frame = 1
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
-position = Vector2( 39.6667, 10.5294 )
+position = Vector2( 25.2365, -17.4914 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.434126, 20.0101 )
+position = Vector2( -0.882462, -5.81627 )
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -162,14 +162,14 @@ anims/run = SubResource( 8 )
 [node name="PlayerHitBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
-position = Vector2( -0.57861, 21.3551 )
+position = Vector2( -1.34965, -6.49557 )
 shape = SubResource( 9 )
 
 [node name="PlayerNameLabel" type="Label" parent="."]
 margin_left = -36.4738
-margin_top = -25.892
+margin_top = -52.0074
 margin_right = 41.5262
-margin_bottom = -10.892
+margin_bottom = -37.0074
 custom_fonts/font = SubResource( 10 )
 text = "Player"
 align = 1
