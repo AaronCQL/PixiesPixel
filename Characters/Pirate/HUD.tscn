@@ -5,7 +5,8 @@
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-outline_color = Color( 0.878431, 0, 0, 1 )
+size = 32
+outline_color = Color( 0, 0.603922, 0.207843, 1 )
 font_data = ExtResource( 3 )
 
 [sub_resource type="Animation" id=2]
@@ -29,23 +30,24 @@ tracks/0/keys = {
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
-self_modulate = Color( 1, 1, 1, 0.647059 )
-margin_right = 30.0
-margin_bottom = 31.0
+self_modulate = Color( 1, 1, 1, 0.827451 )
+margin_right = 50.0
+margin_bottom = 50.0
 
 [node name="Sprite" type="Sprite" parent="Panel"]
-position = Vector2( 14, 12 )
-scale = Vector2( 0.5, 0.5 )
+position = Vector2( 26.137, 20 )
+scale = Vector2( 0.844224, 0.844224 )
 texture = ExtResource( 2 )
 hframes = 19
-frame = 8
+frame = 1
 
 [node name="BombCounter" type="Label" parent="Panel"]
-margin_left = 10.3639
-margin_top = 11.298
-margin_right = 20.3639
-margin_bottom = 31.298
+margin_left = 21.0
+margin_top = 22.0
+margin_right = 33.0
+margin_bottom = 48.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "5"
 align = 1
 valign = 1

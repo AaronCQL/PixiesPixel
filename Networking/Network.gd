@@ -156,6 +156,7 @@ func exit_to_main_menu():
 	remove_child_nodes()
 	change_bg_music()
 	emit_signal("on_exit_button_pressed")
+	chosen_map = "Dungeon"
 	is_game_ongoing = false # Reset all of this boolean to false
 
 func change_bg_music():
