@@ -1,13 +1,18 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Characters/Archer/Archer.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Archer/archer.png" type="Texture" id=2]
 [ext_resource path="res://Characters/HealthBar/HealthBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=4]
 [ext_resource path="res://Fonts/PlayerNameLabel.tres" type="DynamicFont" id=5]
+[ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.94723, 24.3224 )
+
+[sub_resource type="CapsuleShape2D" id=10]
+height = 32.4012
 
 [sub_resource type="Animation" id=2]
 resource_name = "attack"
@@ -40,8 +45,9 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-resource_name = "dead"
+resource_name = "die"
 length = 99999.0
+step = 0.15
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -49,10 +55,22 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"times": PoolRealArray( 0, 0.15, 0.3, 0.45 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 6, 7, 8, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.8, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
 [sub_resource type="Animation" id=4]
@@ -155,13 +173,15 @@ tracks/0/keys = {
 "values": [ Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 
-[sub_resource type="CapsuleShape2D" id=10]
-height = 32.4012
-
 [node name="KinematicBody2D" type="KinematicBody2D"]
+self_modulate = Color( 1, 1, 1, 0 )
 scale = Vector2( 0.6, 0.6 )
 collision_layer = 2
 script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.882462, -5.81627 )
+shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -172,22 +192,6 @@ frame = 14
 [node name="Position2D" type="Position2D" parent="Sprite"]
 position = Vector2( 25.2365, -17.4914 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.882462, -5.81627 )
-shape = SubResource( 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 2 )
-anims/dead = SubResource( 3 )
-anims/fall = SubResource( 4 )
-anims/hit = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/run = SubResource( 8 )
-
-[node name="DamageAnimation" type="AnimationPlayer" parent="."]
-anims/damage = SubResource( 9 )
-
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PlayerHitBox" type="Area2D" parent="."]
@@ -197,6 +201,18 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 position = Vector2( -1.34965, -6.49557 )
 shape = SubResource( 10 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/attack = SubResource( 2 )
+anims/die = SubResource( 3 )
+anims/fall = SubResource( 4 )
+anims/hit = SubResource( 5 )
+anims/idle = SubResource( 6 )
+anims/jump = SubResource( 7 )
+anims/run = SubResource( 8 )
+
+[node name="DamageAnimation" type="AnimationPlayer" parent="."]
+anims/damage = SubResource( 9 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 3 )]
 position = Vector2( -22.7837, -44.3825 )
@@ -217,5 +233,15 @@ custom_fonts/font = ExtResource( 5 )
 custom_colors/font_color = Color( 1, 1, 1, 0.678431 )
 text = "Player"
 align = 1
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="InGameMenu" parent="." instance=ExtResource( 6 )]
+
+[node name="ScoreBoard" parent="." instance=ExtResource( 7 )]
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="on_resume_button_pressed" from="InGameMenu" to="." method="_on_InGameMenu_on_resume_button_pressed"]

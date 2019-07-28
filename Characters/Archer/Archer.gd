@@ -56,7 +56,7 @@ func _physics_process(delta):
 		flip_sprite(x_dir)				# flips sprite when turning direction
 		play_animation(x_dir)
 		check_death()
-#		toggle_menu()
+		toggle_menu()
 		velocity.y += gravity * delta 	# gravity
 		velocity = move_and_slide(velocity, FLOOR)	# godot's physics
 		rset_unreliable("repl_position", position)
@@ -88,15 +88,6 @@ func acceleration_curve():
 			velocity.x = lerp(velocity.x, 0, 0.2)
 		else:
 			velocity.x = lerp(velocity.x, move_speed * x_dir, 0.01)
-
-#func attack_input():
-#	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
-#		is_attacking = true
-#		$AnimationPlayer.current_animation = "attack"
-#		var arrow = ARROW.instance()
-#		arrow.set_arrow_direction($Sprite.scale.x)
-#		get_parent().add_child(arrow)
-#		arrow.position = $Sprite/Position2D.global_position
 
 func attack_input():
 	if Input.is_action_pressed("ui_focus_next") && !is_attacking && !is_dead:
@@ -176,28 +167,27 @@ func check_death():
 	if is_dead:
 		change_camera()
 
-#remotesync func update_score_board(p_id_killer, p_id_dead):
-#	$ScoreBoard.update_score_board(p_id_killer, p_id_dead)
+remotesync func update_score_board(p_id_killer, p_id_dead):
+	$ScoreBoard.update_score_board(p_id_killer, p_id_dead)
 
 func _on_DeathTimer_timeout():
-	pass
-#	$Camera2D.current = false
-#	get_node("./../" + str(Network.remaining_players[0]) + "/Camera2D").make_current()
-#	if Network.remaining_players.size() == 1:
-#		rpc("show_score_board")
+	$Camera2D.current = false
+	get_node("./../" + str(Network.remaining_players[0]) + "/Camera2D").make_current()
+	if Network.remaining_players.size() == 1:
+		rpc("show_score_board")
 
-#remotesync func show_score_board():
-#	$ScoreBoard.show_score_board()	
+remotesync func show_score_board():
+	$ScoreBoard.show_score_board()	
 	
 var cam_index : int = 0
 func change_camera():
 	pass
-#	if Input.is_action_just_pressed("ui_focus_next"):
-#		if (cam_index >= Network.remaining_players.size() - 1):
-#			cam_index = 0
-#		else:
-#			cam_index += 1	
-#		get_node("./../" + str(Network.remaining_players[cam_index]) + "/Camera2D").make_current()
+	if Input.is_action_just_pressed("ui_focus_next"):
+		if (cam_index >= Network.remaining_players.size() - 1):
+			cam_index = 0
+		else:
+			cam_index += 1	
+		get_node("./../" + str(Network.remaining_players[cam_index]) + "/Camera2D").make_current()
 	
 func take_damage(p_id_hit, amount, p_id_sender):
 	rpc("send_damage_info", p_id_hit, amount, p_id_sender)
