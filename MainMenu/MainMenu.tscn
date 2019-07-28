@@ -5,18 +5,18 @@
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=4]
 
-[sub_resource type="DynamicFontData" id=3]
+[sub_resource type="DynamicFontData" id=1]
 font_path = "res://Fonts/monogram_extended.ttf"
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=2]
 size = 32
-font_data = SubResource( 3 )
+font_data = SubResource( 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=2]
+[sub_resource type="DynamicFont" id=4]
 size = 32
 font_data = ExtResource( 2 )
 
@@ -35,7 +35,7 @@ margin_left = 352.0
 margin_top = 68.0
 margin_right = 472.0
 margin_bottom = 104.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Host's IP:"
 align = 2
 valign = 1
@@ -46,7 +46,7 @@ margin_top = 100.0
 margin_right = 576.0
 margin_bottom = 136.0
 rect_pivot_offset = Vector2( 202.058, 8.67853 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "127.0.0.1"
 placeholder_text = "IP Address"
 caret_blink = true
@@ -57,7 +57,7 @@ margin_left = 64.0
 margin_top = 68.0
 margin_right = 220.0
 margin_bottom = 104.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "Display Name:"
 align = 2
 valign = 1
@@ -68,7 +68,7 @@ margin_top = 100.0
 margin_right = 288.0
 margin_bottom = 136.0
 rect_pivot_offset = Vector2( 202.058, 8.67853 )
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 max_length = 12
 placeholder_text = "Enter name"
 caret_blink = true
@@ -93,7 +93,7 @@ margin_left = 328.0
 margin_top = 176.0
 margin_right = 440.0
 margin_bottom = 218.0
-custom_fonts/font = SubResource( 2 )
+custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Join"
