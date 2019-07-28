@@ -3,7 +3,7 @@
 [ext_resource path="res://Settings/Settings.gd" type="Script" id=1]
 [ext_resource path="res://MainMenu/Label.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=3]
-[ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=4]
+[ext_resource path="res://MainMenu/BackButton.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Music/Automation.ogg" type="AudioStream" id=5]
 
 [node name="Settings" type="CanvasLayer"]
@@ -59,15 +59,7 @@ min_value = -60.0
 max_value = 10.0
 ticks_on_borders = true
 
-[node name="BackButton" type="Button" parent="Panel"]
-margin_left = 16.0
-margin_top = 304.0
-margin_right = 96.0
-margin_bottom = 347.0
-custom_fonts/font = ExtResource( 4 )
-custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
-custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
-text = "Back"
+[node name="BackButton" parent="Panel" instance=ExtResource( 4 )]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )

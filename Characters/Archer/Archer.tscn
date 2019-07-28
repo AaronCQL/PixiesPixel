@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Characters/Archer/Archer.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Archer/archer.png" type="Texture" id=2]
@@ -8,15 +8,15 @@
 [ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/SoundEffects/bow_release.wav" type="AudioStream" id=8]
+[ext_resource path="res://Characters/MobileHUD/MobileControls.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.94723, 24.3224 )
 
-[sub_resource type="CapsuleShape2D" id=10]
+[sub_resource type="CapsuleShape2D" id=2]
 height = 32.4012
 
-[sub_resource type="Animation" id=2]
-resource_name = "attack"
+[sub_resource type="Animation" id=3]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -57,8 +57,7 @@ tracks/2/keys = {
 "values": [ true ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "die"
+[sub_resource type="Animation" id=4]
 length = 99999.0
 step = 0.15
 tracks/0/type = "value"
@@ -86,8 +85,7 @@ tracks/1/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "fall"
+[sub_resource type="Animation" id=5]
 length = 999.0
 loop = true
 step = 0.01
@@ -104,7 +102,7 @@ tracks/0/keys = {
 "values": [ 20, 21 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=6]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -119,7 +117,7 @@ tracks/0/keys = {
 "values": [ 10, 11, 12, 13 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=7]
 length = 0.6
 loop = true
 tracks/0/type = "value"
@@ -135,7 +133,7 @@ tracks/0/keys = {
 "values": [ 14, 15 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=8]
 length = 99999.0
 step = 0.08
 tracks/0/type = "value"
@@ -151,8 +149,7 @@ tracks/0/keys = {
 "values": [ 16, 17, 18, 19 ]
 }
 
-[sub_resource type="Animation" id=8]
-resource_name = "run"
+[sub_resource type="Animation" id=9]
 length = 0.96
 loop = true
 step = 0.08
@@ -169,8 +166,7 @@ tracks/0/keys = {
 "values": [ 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33 ]
 }
 
-[sub_resource type="Animation" id=9]
-resource_name = "damage"
+[sub_resource type="Animation" id=10]
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -213,19 +209,19 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerHitBox"]
 position = Vector2( -1.34965, -6.49557 )
-shape = SubResource( 10 )
+shape = SubResource( 2 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 2 )
-anims/die = SubResource( 3 )
-anims/fall = SubResource( 4 )
-anims/hit = SubResource( 5 )
-anims/idle = SubResource( 6 )
-anims/jump = SubResource( 7 )
-anims/run = SubResource( 8 )
+anims/attack = SubResource( 3 )
+anims/die = SubResource( 4 )
+anims/fall = SubResource( 5 )
+anims/hit = SubResource( 6 )
+anims/idle = SubResource( 7 )
+anims/jump = SubResource( 8 )
+anims/run = SubResource( 9 )
 
 [node name="DamageAnimation" type="AnimationPlayer" parent="."]
-anims/damage = SubResource( 9 )
+anims/damage = SubResource( 10 )
 
 [node name="HealthBar" parent="." instance=ExtResource( 3 )]
 position = Vector2( -22.7837, -44.3825 )
@@ -259,6 +255,8 @@ one_shot = true
 stream = ExtResource( 8 )
 max_distance = 380.0
 bus = "SoundEffects"
+
+[node name="MobileControls" parent="." instance=ExtResource( 9 )]
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

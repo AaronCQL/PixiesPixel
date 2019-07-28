@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=1]
+
+[node name="BackButton" type="Button"]
+margin_left = 16.0
+margin_top = 304.0
+margin_right = 96.0
+margin_bottom = 347.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
+text = "Back"

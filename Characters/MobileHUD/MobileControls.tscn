@@ -1,14 +1,18 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Characters/MobileHUD/MobileControls.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/MobileHUD/mobile_controls-export.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Sprites/MobileHUD/mobile_setting_button.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 25, 25 )
 
 [sub_resource type="CircleShape2D" id=2]
 
+[sub_resource type="CapsuleShape2D" id=3]
+
 [node name="MobileControls" type="CanvasLayer"]
+layer = 0
 script = ExtResource( 1 )
 
 [node name="Panel" type="Panel" parent="."]
@@ -20,7 +24,7 @@ __meta__ = {
 }
 
 [node name="Arrows" type="Sprite" parent="Panel"]
-self_modulate = Color( 1, 1, 1, 0.537255 )
+self_modulate = Color( 1, 1, 1, 0.592157 )
 position = Vector2( 85, 314 )
 scale = Vector2( 2.75, 2.75 )
 texture = ExtResource( 2 )
@@ -41,7 +45,7 @@ passby_press = true
 action = "ui_right"
 
 [node name="Attack" type="Sprite" parent="Panel"]
-self_modulate = Color( 1, 1, 1, 0.537255 )
+self_modulate = Color( 1, 1, 1, 0.592157 )
 position = Vector2( 592, 314 )
 scale = Vector2( 1.13167, 1.13167 )
 texture = ExtResource( 2 )
@@ -55,7 +59,7 @@ passby_press = true
 action = "ui_focus_next"
 
 [node name="Jump" type="Sprite" parent="Panel"]
-self_modulate = Color( 1, 1, 1, 0.537255 )
+self_modulate = Color( 1, 1, 1, 0.592157 )
 position = Vector2( 592, 223 )
 scale = Vector2( 1.13167, 1.13167 )
 texture = ExtResource( 2 )
@@ -70,7 +74,7 @@ passby_press = true
 action = "ui_up"
 
 [node name="Skill" type="Sprite" parent="Panel"]
-self_modulate = Color( 1, 1, 1, 0.537255 )
+self_modulate = Color( 1, 1, 1, 0.592157 )
 position = Vector2( 501, 316 )
 scale = Vector2( 1.13167, 1.13167 )
 texture = ExtResource( 2 )
@@ -83,3 +87,13 @@ scale = Vector2( 3, 3 )
 shape = SubResource( 2 )
 passby_press = true
 action = "ui_select"
+
+[node name="Menu" type="Sprite" parent="Panel"]
+self_modulate = Color( 1, 1, 1, 0.592157 )
+position = Vector2( 615.113, 19 )
+texture = ExtResource( 3 )
+
+[node name="TouchScreenButton" type="TouchScreenButton" parent="Panel/Menu"]
+position = Vector2( 2, 6 )
+shape = SubResource( 3 )
+action = "ui_cancel"

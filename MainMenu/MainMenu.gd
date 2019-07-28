@@ -89,4 +89,4 @@ func _on_SettingsButton_pressed():
 	get_node("/root/Settings/Panel").show()
 
 func _on_ControlsButton_pressed():
-	$NetworkPanel/ControlsDialog.popup_centered()
+	$Controls/Panel.show()

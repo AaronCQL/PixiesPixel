@@ -45,12 +45,15 @@ margin_top = 16.0
 margin_right = 624.0
 margin_bottom = 304.0
 theme = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="AdventurerButton" type="Button" parent="CharacterPanel"]
 margin_left = 40.0
-margin_top = 14.0
+margin_top = 16.0
 margin_right = 187.0
-margin_bottom = 54.0
+margin_bottom = 64.0
 theme = ExtResource( 2 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
@@ -58,9 +61,9 @@ text = "Adventurer"
 
 [node name="PirateButton" type="Button" parent="CharacterPanel"]
 margin_left = 40.0
-margin_top = 74.0
+margin_top = 80.0
 margin_right = 187.0
-margin_bottom = 114.0
+margin_bottom = 128.0
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
@@ -68,9 +71,9 @@ text = "Pirate"
 
 [node name="ArcherButton" type="Button" parent="CharacterPanel"]
 margin_left = 40.0
-margin_top = 134.0
+margin_top = 144.0
 margin_right = 187.0
-margin_bottom = 174.0
+margin_bottom = 192.0
 custom_colors/font_color_disabled = Color( 0, 0, 0, 1 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
@@ -78,16 +81,16 @@ text = "Archer"
 
 [node name="CharacterLabel" type="Label" parent="CharacterPanel"]
 margin_left = 16.0
-margin_top = 192.0
+margin_top = 208.0
 margin_right = 208.0
-margin_bottom = 224.0
+margin_bottom = 240.0
 text = "YOUR CHARACTER:"
 
 [node name="ChosenCharacterLabel" type="Label" parent="CharacterPanel"]
 margin_left = 32.0
-margin_top = 224.0
+margin_top = 240.0
 margin_right = 192.0
-margin_bottom = 250.0
+margin_bottom = 266.0
 text = "Adventurer"
 
 [node name="StartButton" type="Button" parent="."]
