@@ -34,6 +34,14 @@ var players_info = {
 #	}
 }
 
+var score_board = {
+#	1 = {
+#		name = "some player",
+#		kills = 2,
+#		killed_by = "another player"
+#	}
+}
+
 var remaining_players : Array
 var is_game_ongoing : bool = false # Only for server, will be false all the time for clients
 
