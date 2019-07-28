@@ -21,7 +21,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 8.10777, 2.78887 )
+extents = Vector2( 0.568245, 0.670563 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 7.37396, 2.21428 )
@@ -44,9 +44,14 @@ shape = SubResource( 2 )
 
 [node name="ArrowHitBox" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ArrowHitBox"]
 position = Vector2( -0.508564, 0.484404 )
 shape = SubResource( 3 )
+
+[node name="DespawnTimer" type="Timer" parent="."]
+one_shot = true
 [connection signal="area_entered" from="ArrowHitBox" to="." method="_on_ArrowHitBox_area_entered"]
+[connection signal="body_entered" from="ArrowHitBox" to="." method="_on_ArrowHitBox_body_entered"]
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_DespawnTimer_timeout"]

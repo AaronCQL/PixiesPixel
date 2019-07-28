@@ -10,10 +10,10 @@ var velocity : Vector2 = Vector2()
 
 func _ready():
 	rng.randomize()	
+	$Sprite/AnimationPlayer.current_animation = "shoot"
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, FLOOR)
-	$Sprite/AnimationPlayer.current_animation = "shoot"
 	check_collision_with_wall()
 		
 func set_arrow_direction(dir):
@@ -22,9 +22,11 @@ func set_arrow_direction(dir):
 
 func check_collision_with_wall():
 	if is_on_wall():
-		self.queue_free()
+		pass
+		#self.queue_free()
 
 func _on_ArrowHitBox_area_entered(area):
+	print(area)
 	if is_network_master():
 		if area.name == "PlayerHitBox":	
 			if area.get_node("./..").name != str(get_tree().get_network_unique_id()): # Check if is not own hit box
@@ -37,3 +39,11 @@ func _on_ArrowHitBox_area_entered(area):
 	else:
 		if area.name == "PlayerHitBox":
 			self.queue_free()
+
+func _on_ArrowHitBox_body_entered(body):
+	if body.name == "CollisionBlocks":
+		$Sprite/AnimationPlayer.stop()
+		$DespawnTimer.start(2)
+
+func _on_DespawnTimer_timeout():
+	self.queue_free()
