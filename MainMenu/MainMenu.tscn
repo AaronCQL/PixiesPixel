@@ -224,25 +224,6 @@ dialog_text = "To Host a game:
 To Join a game:
 - Ask for the host's IP Address, fill
   it in, and press join"
-
-[node name="ControlsDialog" type="AcceptDialog" parent="NetworkPanel"]
-visible = true
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -217.0
-margin_top = -135.0
-margin_right = 217.0
-margin_bottom = 135.0
-theme = ExtResource( 5 )
-window_title = ""
-dialog_text = "LEFT/RIGHT ARROW - Move left/right
-UP ARROW - Jump
-
-X or TAB - Attack
-
-SHIFT - Sprint (for Adventurer)"
 [connection signal="pressed" from="NetworkPanel/HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/HostButton" to="." method="_on_HostButton_pressed"]
