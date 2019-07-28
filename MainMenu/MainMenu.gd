@@ -1,5 +1,10 @@
 extends CanvasLayer
 
+var config : ConfigFile
+
+var display_name : String
+var ip_addr : String
+
 func _ready():
 	Network.connect("server_created", self, "_on_connect_success")
 	Network.connect("join_fail", self, "_on_join_fail")
@@ -7,7 +12,18 @@ func _ready():
 	Network.connect("disconnected", self, "_on_disconnected")
 	Network.connect("on_exit_button_pressed", self, "_show_main_menu")
 	Network.connect("game_already_started", self, "_on_game_already_started")
-
+	init_config()
+	
+func init_config():
+	config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	if err == OK: # if not, something went wrong with the file loading
+		display_name = config.get_value("main_menu", "display_name", "")
+		$NetworkPanel/PlayerName.text = display_name
+		
+		ip_addr = config.get_value("main_menu", "ip_addr", "127.0.0.1")
+		$NetworkPanel/ServerIP.text = ip_addr
+	
 func _on_HostButton_pressed():
 	# Properly set the local player information
 	set_player_info()
@@ -29,7 +45,12 @@ func _on_JoinButton_pressed():
 	
 func set_player_info():
 	if (!$NetworkPanel/PlayerName.text.empty()):
-		Network.my_info.name = $NetworkPanel/PlayerName.text
+		display_name = $NetworkPanel/PlayerName.text
+		Network.my_info.name = display_name
+	ip_addr = $NetworkPanel/ServerIP.text
+	config.set_value("main_menu", "display_name", display_name)
+	config.set_value("main_menu", "ip_addr", ip_addr)
+	config.save("user://settings.cfg")
 		
 func go_to_network_lobby():
 	# Go to pre game lobby:
