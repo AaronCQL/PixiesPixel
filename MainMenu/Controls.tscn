@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://MainMenu/Label.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 32
+font_data = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 640.0
+margin_bottom = 360.0
+rect_pivot_offset = Vector2( 278.496, -65.2603 )
+
+[node name="Label" parent="Panel" instance=ExtResource( 1 )]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -148.0
+margin_bottom = -108.0
+text = "CONTROLS"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel"]
+margin_left = 48.0
+margin_top = 96.0
+margin_right = 592.0
+margin_bottom = 336.0
+
+[node name="Label" type="Label" parent="Panel/ScrollContainer"]
+margin_right = 468.0
+margin_bottom = 287.0
+custom_fonts/font = SubResource( 1 )
+text = "Non-mobile:
+ARROW    - left/right/jump movement
+X        - attack
+SHIFT    - sprint (only for Adventurer)
+
+Mobile:
+ARROW    - left/right movement
+X        - attack
+TRIANGLE - jump
+CIRCLE   - sprint (only for Adventurer)"

@@ -223,6 +223,7 @@ To Join a game:
   it in, and press join"
 
 [node name="ControlsDialog" type="AcceptDialog" parent="NetworkPanel"]
+visible = true
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5

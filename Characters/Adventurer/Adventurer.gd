@@ -51,8 +51,8 @@ func _physics_process(delta):
 		direction_input()				# horizontal mvmt
 		sprint_input()
 		jump_input()					# jump
-		acceleration_curve()			# simluate acceleration when moving
 		attack_input()
+		acceleration_curve()			# simluate acceleration when moving
 		flip_sprite(x_dir)				# flips sprite when turning direction
 		play_animation(x_dir)
 		check_death()

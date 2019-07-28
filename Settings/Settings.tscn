@@ -1,16 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Settings/Settings.gd" type="Script" id=1]
-[ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://MainMenu/Label.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=3]
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Assets/Music/Automation.ogg" type="AudioStream" id=5]
-
-[sub_resource type="DynamicFont" id=1]
-size = 48
-outline_size = 2
-outline_color = Color( 0.0431373, 0.54902, 0.815686, 1 )
-font_data = ExtResource( 2 )
 
 [node name="Settings" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -23,15 +17,7 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Label" type="Label" parent="Panel"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -72.0
-margin_top = 32.0
-margin_right = 72.0
-margin_bottom = 72.0
-custom_fonts/font = SubResource( 1 )
-text = "SETTINGS"
+[node name="Label" parent="Panel" instance=ExtResource( 2 )]
 
 [node name="MusicToggle" type="CheckButton" parent="Panel"]
 anchor_left = 0.5
