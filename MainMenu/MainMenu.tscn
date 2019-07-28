@@ -5,6 +5,13 @@
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=4]
 
+[sub_resource type="DynamicFontData" id=3]
+font_path = "res://Fonts/monogram_extended.ttf"
+
+[sub_resource type="DynamicFont" id=4]
+size = 32
+font_data = SubResource( 3 )
+
 [sub_resource type="DynamicFont" id=1]
 size = 32
 font_data = ExtResource( 2 )
@@ -12,13 +19,6 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=2]
 size = 32
 font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFontData" id=3]
-font_path = "res://Fonts/monogram_extended.ttf"
-
-[sub_resource type="DynamicFont" id=4]
-size = 32
-font_data = SubResource( 3 )
 
 [node name="MainMenu" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -29,6 +29,16 @@ margin_bottom = 368.0
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="IPLabel" type="Label" parent="NetworkPanel"]
+margin_left = 352.0
+margin_top = 68.0
+margin_right = 472.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 4 )
+text = "Host's IP:"
+align = 2
+valign = 1
 
 [node name="ServerIP" type="LineEdit" parent="NetworkPanel"]
 margin_left = 352.0
@@ -42,6 +52,16 @@ placeholder_text = "IP Address"
 caret_blink = true
 caret_blink_speed = 0.35
 
+[node name="NameLabel" type="Label" parent="NetworkPanel"]
+margin_left = 64.0
+margin_top = 68.0
+margin_right = 220.0
+margin_bottom = 104.0
+custom_fonts/font = SubResource( 4 )
+text = "Display Name:"
+align = 2
+valign = 1
+
 [node name="PlayerName" type="LineEdit" parent="NetworkPanel"]
 margin_left = 64.0
 margin_top = 100.0
@@ -53,6 +73,20 @@ max_length = 12
 placeholder_text = "Enter name"
 caret_blink = true
 caret_blink_speed = 0.35
+
+[node name="HelpButton" type="Button" parent="NetworkPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 272.0
+margin_top = -84.0
+margin_right = 304.0
+margin_bottom = -48.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
+text = "?"
 
 [node name="JoinButton" type="Button" parent="NetworkPanel"]
 margin_left = 328.0
@@ -78,20 +112,6 @@ custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Host"
 
-[node name="HelpButton" type="Button" parent="NetworkPanel"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = 272.0
-margin_top = -84.0
-margin_right = 304.0
-margin_bottom = -48.0
-custom_fonts/font = ExtResource( 3 )
-custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
-custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
-text = "?"
-
 [node name="ExitButton" type="Button" parent="NetworkPanel"]
 anchor_left = 0.5
 anchor_top = 0.5
@@ -115,26 +135,6 @@ custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Settings"
-
-[node name="IPLabel" type="Label" parent="NetworkPanel"]
-margin_left = 352.0
-margin_top = 68.0
-margin_right = 472.0
-margin_bottom = 104.0
-custom_fonts/font = SubResource( 4 )
-text = "Host's IP:"
-align = 2
-valign = 1
-
-[node name="NameLabel" type="Label" parent="NetworkPanel"]
-margin_left = 64.0
-margin_top = 68.0
-margin_right = 128.0
-margin_bottom = 104.0
-custom_fonts/font = SubResource( 4 )
-text = "Display Name:"
-align = 2
-valign = 1
 
 [node name="JoinFailPopup" type="AcceptDialog" parent="NetworkPanel"]
 anchor_left = 0.5
@@ -211,8 +211,8 @@ dialog_text = "To Host a game:
 To Join a game:
 - Ask for the host's IP Address, fill
   it in, and press join"
+[connection signal="pressed" from="NetworkPanel/HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/HostButton" to="." method="_on_HostButton_pressed"]
-[connection signal="pressed" from="NetworkPanel/HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/ExitButton" to="." method="_on_ExitButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/SettingsButton" to="." method="_on_SettingsButton_pressed"]

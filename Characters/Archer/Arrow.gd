@@ -14,16 +14,10 @@ func _ready():
 
 func _physics_process(delta):
 	velocity = move_and_slide(velocity, FLOOR)
-	check_collision_with_wall()
 		
 func set_arrow_direction(dir):
 	$Sprite.scale.x = dir
 	velocity.x = SPEED * dir
-
-func check_collision_with_wall():
-	if is_on_wall():
-		pass
-		#self.queue_free()
 
 func _on_ArrowHitBox_area_entered(area):
 	print(area)
@@ -42,6 +36,8 @@ func _on_ArrowHitBox_area_entered(area):
 
 func _on_ArrowHitBox_body_entered(body):
 	if body.name == "CollisionBlocks":
+		$ArrowHitBox/CollisionShape2D.disabled = true
+		$CollisionShape2D.disabled = true
 		$Sprite/AnimationPlayer.stop()
 		$DespawnTimer.start(2)
 
