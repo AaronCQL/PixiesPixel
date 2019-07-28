@@ -33,7 +33,7 @@ func _on_ArrowHitBox_area_entered(area):
 				var p_id_sender : String = str(get_tree().get_network_unique_id()) # Get self id to let peer know who hit him
 				var damage : int = rng.randi_range(MIN_DAMAGE, MAX_DAMAGE)
 				actor.take_damage(p_id_hit, damage, p_id_sender)
-				rpc("arrow_queue_free")
-
-remotesync func arrow_queue_free():
-	self.queue_free()
+				self.queue_free()
+	else:
+		if area.name == "PlayerHitBox":
+			self.queue_free()

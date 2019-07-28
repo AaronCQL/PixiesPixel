@@ -165,6 +165,7 @@ func check_death():
 			$DeathTimer.start(2)
 			Network.on_player_death(get_tree().get_network_unique_id())
 			rpc("update_score_board", p_id_last_hit, get_tree().get_network_unique_id())
+			$PlayerHitBox/CollisionShape2D.disabled = true	
 			print("Slain by " + p_id_last_hit)
 	if is_dead:
 		change_camera()
