@@ -32,9 +32,9 @@ __meta__ = {
 
 [node name="IPLabel" type="Label" parent="NetworkPanel"]
 margin_left = 352.0
-margin_top = 68.0
+margin_top = 28.0
 margin_right = 472.0
-margin_bottom = 104.0
+margin_bottom = 64.0
 custom_fonts/font = SubResource( 2 )
 text = "Host's IP:"
 align = 2
@@ -42,9 +42,9 @@ valign = 1
 
 [node name="ServerIP" type="LineEdit" parent="NetworkPanel"]
 margin_left = 352.0
-margin_top = 100.0
+margin_top = 60.0
 margin_right = 576.0
-margin_bottom = 136.0
+margin_bottom = 96.0
 rect_pivot_offset = Vector2( 202.058, 8.67853 )
 custom_fonts/font = SubResource( 3 )
 text = "127.0.0.1"
@@ -54,9 +54,9 @@ caret_blink_speed = 0.35
 
 [node name="NameLabel" type="Label" parent="NetworkPanel"]
 margin_left = 64.0
-margin_top = 68.0
+margin_top = 28.0
 margin_right = 220.0
-margin_bottom = 104.0
+margin_bottom = 64.0
 custom_fonts/font = SubResource( 2 )
 text = "Display Name:"
 align = 2
@@ -64,9 +64,9 @@ valign = 1
 
 [node name="PlayerName" type="LineEdit" parent="NetworkPanel"]
 margin_left = 64.0
-margin_top = 100.0
+margin_top = 60.0
 margin_right = 288.0
-margin_bottom = 136.0
+margin_bottom = 96.0
 rect_pivot_offset = Vector2( 202.058, 8.67853 )
 custom_fonts/font = SubResource( 3 )
 max_length = 12
@@ -80,9 +80,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = 272.0
-margin_top = -84.0
+margin_top = -124.0
 margin_right = 304.0
-margin_bottom = -48.0
+margin_bottom = -88.0
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
 custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
@@ -90,9 +90,9 @@ text = "?"
 
 [node name="JoinButton" type="Button" parent="NetworkPanel"]
 margin_left = 328.0
-margin_top = 176.0
+margin_top = 121.5
 margin_right = 440.0
-margin_bottom = 218.0
+margin_bottom = 163.5
 custom_fonts/font = SubResource( 4 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
@@ -104,9 +104,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -120.0
-margin_top = -8.0
+margin_top = -62.5
 margin_right = -8.0
-margin_bottom = 34.0
+margin_bottom = -20.5
 custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
 custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
@@ -125,6 +125,16 @@ custom_fonts/font = ExtResource( 3 )
 custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
 custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
 text = "Exit"
+
+[node name="ControlsButton" type="Button" parent="NetworkPanel"]
+margin_left = 256.0
+margin_top = 176.0
+margin_right = 384.0
+margin_bottom = 218.0
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
+text = "Controls"
 
 [node name="SettingsButton" type="Button" parent="NetworkPanel"]
 margin_left = 256.0
@@ -211,8 +221,27 @@ dialog_text = "To Host a game:
 To Join a game:
 - Ask for the host's IP Address, fill
   it in, and press join"
+
+[node name="ControlsDialog" type="AcceptDialog" parent="NetworkPanel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -217.0
+margin_top = -135.0
+margin_right = 217.0
+margin_bottom = 135.0
+theme = ExtResource( 4 )
+window_title = ""
+dialog_text = "LEFT/RIGHT ARROW - Move left/right
+UP ARROW - Jump
+
+X or TAB - Attack
+
+SHIFT - Sprint (for Adventurer)"
 [connection signal="pressed" from="NetworkPanel/HelpButton" to="." method="_on_HelpButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/JoinButton" to="." method="_on_JoinButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/HostButton" to="." method="_on_HostButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="NetworkPanel/ControlsButton" to="." method="_on_ControlsButton_pressed"]
 [connection signal="pressed" from="NetworkPanel/SettingsButton" to="." method="_on_SettingsButton_pressed"]

@@ -79,6 +79,8 @@ margin_top = 304.0
 margin_right = 96.0
 margin_bottom = 347.0
 custom_fonts/font = ExtResource( 4 )
+custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Back"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]

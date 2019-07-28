@@ -87,3 +87,6 @@ func _on_ExitButton_pressed():
 func _on_SettingsButton_pressed():
 	$NetworkPanel.hide()
 	get_node("/root/Settings/Panel").show()
+
+func _on_ControlsButton_pressed():
+	$NetworkPanel/ControlsDialog.popup_centered()

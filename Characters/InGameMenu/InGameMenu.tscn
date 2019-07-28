@@ -35,6 +35,8 @@ margin_top = 32.0
 margin_right = 208.0
 margin_bottom = 80.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_hover = Color( 0.270588, 1, 0, 1 )
+custom_colors/font_color_pressed = Color( 0.270588, 1, 0, 1 )
 text = "Resume"
 
 [node name="SettingsButton" type="Button" parent="Panel/Panel"]
@@ -43,6 +45,8 @@ margin_top = 96.0
 margin_right = 208.0
 margin_bottom = 144.0
 custom_fonts/font = SubResource( 1 )
+custom_colors/font_color_hover = Color( 0, 0.913725, 1, 1 )
+custom_colors/font_color_pressed = Color( 0, 0.913725, 1, 1 )
 text = "Settings"
 
 [node name="MainMenuButton" type="Button" parent="Panel/Panel"]
@@ -51,7 +55,9 @@ margin_top = 160.0
 margin_right = 208.0
 margin_bottom = 208.0
 custom_fonts/font = SubResource( 2 )
-text = "Main Menu"
+custom_colors/font_color_hover = Color( 1, 0, 0, 1 )
+custom_colors/font_color_pressed = Color( 1, 0, 0, 1 )
+text = "Exit Game"
 [connection signal="pressed" from="Panel/Panel/ResumeButton" to="." method="_on_ResumeButton_pressed"]
 [connection signal="pressed" from="Panel/Panel/SettingsButton" to="." method="_on_SettingsButton_pressed"]
 [connection signal="pressed" from="Panel/Panel/MainMenuButton" to="." method="_on_MainMenuButton_pressed"]

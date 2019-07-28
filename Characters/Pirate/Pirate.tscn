@@ -241,6 +241,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="HUD" parent="." instance=ExtResource( 8 )]
+layer = 0
 [connection signal="ammo_updated" from="." to="HUD" method="_on_KinematicBody2D_ammo_updated"]
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
