@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bow_release.wav-9d12f6cb50726808c59da5b3d0352096.sample"
+
+[deps]
+
+source_file="res://Assets/SoundEffects/bow_release.wav"
+dest_files=[ "res://.import/bow_release.wav-9d12f6cb50726808c59da5b3d0352096.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

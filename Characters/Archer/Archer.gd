@@ -41,6 +41,7 @@ var p_id_last_hit # Last player to hit this guy, for KDR
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	gravity = MAX_JUMP_HEIGHT / pow(TIME_TO_JUMP_APEX, 2)
 	max_jump_velocity = -sqrt(2 * gravity * MAX_JUMP_HEIGHT)
 	min_jump_velocity = -sqrt(2 * gravity * MIN_JUMP_HEIGHT)
@@ -94,6 +95,7 @@ func attack_input():
 		rpc("play_attack_animation", get_tree().get_network_unique_id())
 
 remotesync func play_attack_animation(net_id):
+	$AudioStreamPlayer2D.pitch_scale = rng.randf_range(1.0, 1.4)
 	var player_node = get_node("/root/Map/" + str(net_id))
 	player_node.is_attacking = true
 	player_node.get_node("./AnimationPlayer").current_animation = "attack"

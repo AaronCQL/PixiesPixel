@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Characters/Archer/Archer.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Sprites/Archer/archer.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Fonts/PlayerNameLabel.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Characters/InGameMenu/InGameMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Assets/SoundEffects/bow_release.wav" type="AudioStream" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.94723, 24.3224 )
@@ -42,6 +43,18 @@ tracks/1/keys = {
 "args": [  ],
 "method": "spawn_arrow"
 } ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -187,7 +200,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 6
 hframes = 6
-frame = 14
+frame = 5
 
 [node name="Position2D" type="Position2D" parent="Sprite"]
 position = Vector2( 25.2365, -17.4914 )
@@ -241,6 +254,11 @@ one_shot = true
 [node name="InGameMenu" parent="." instance=ExtResource( 6 )]
 
 [node name="ScoreBoard" parent="." instance=ExtResource( 7 )]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 8 )
+max_distance = 380.0
+bus = "SoundEffects"
 [connection signal="health_updated" from="." to="HealthBar" method="_on_KinematicBody2D_health_updated"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
