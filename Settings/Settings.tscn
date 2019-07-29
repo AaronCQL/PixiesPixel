@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Settings/Settings.gd" type="Script" id=1]
 [ext_resource path="res://MainMenu/Label.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=3]
 [ext_resource path="res://MainMenu/BackButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Assets/Music/Automation.ogg" type="AudioStream" id=5]
+[ext_resource path="res://Theme/button_theme.tres" type="Theme" id=5]
+[ext_resource path="res://Assets/Music/Automation.ogg" type="AudioStream" id=6]
 
 [node name="Settings" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -25,47 +26,56 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 margin_left = -112.0
-margin_top = -56.0
+margin_top = -88.0
 margin_right = 112.0
-margin_bottom = -14.0
+margin_bottom = -46.0
 theme = ExtResource( 3 )
 pressed = true
 text = "Music"
 
 [node name="MusicSlider" type="HSlider" parent="Panel"]
 margin_left = 208.0
-margin_top = 170.0
+margin_top = 138.0
 margin_right = 416.0
-margin_bottom = 186.0
+margin_bottom = 154.0
 min_value = -60.0
 max_value = 10.0
 ticks_on_borders = true
 
 [node name="SoundEffectsToggle" type="CheckButton" parent="Panel"]
 margin_left = 208.0
-margin_top = 208.0
+margin_top = 176.0
 margin_right = 432.0
-margin_bottom = 250.0
+margin_bottom = 218.0
 theme = ExtResource( 3 )
 pressed = true
 text = "Sound Effects"
 
 [node name="SoundEffectsSlider" type="HSlider" parent="Panel"]
 margin_left = 208.0
-margin_top = 250.0
+margin_top = 218.0
 margin_right = 416.0
-margin_bottom = 266.0
+margin_bottom = 234.0
 min_value = -60.0
 max_value = 10.0
 ticks_on_borders = true
 
 [node name="BackButton" parent="Panel" instance=ExtResource( 4 )]
 
+[node name="FullscreenButton" type="CheckButton" parent="Panel"]
+margin_left = 208.0
+margin_top = 256.0
+margin_right = 432.0
+margin_bottom = 296.0
+theme = ExtResource( 5 )
+text = "Fullscreen"
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 bus = "Music"
 [connection signal="toggled" from="Panel/MusicToggle" to="." method="_on_MusicToggle_toggled"]
 [connection signal="value_changed" from="Panel/MusicSlider" to="." method="_on_MusicSlider_value_changed"]
 [connection signal="toggled" from="Panel/SoundEffectsToggle" to="." method="_on_SoundEffectsToggle_toggled"]
 [connection signal="value_changed" from="Panel/SoundEffectsSlider" to="." method="_on_SoundEffectsSlider_value_changed"]
 [connection signal="pressed" from="Panel/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="toggled" from="Panel/FullscreenButton" to="." method="_on_FullscreenButton_toggled"]

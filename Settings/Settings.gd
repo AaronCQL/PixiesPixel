@@ -7,6 +7,7 @@ var is_music_mute : bool
 var music_volume : float
 var is_sound_effects_mute : bool
 var sound_effects_volume : float
+var is_fullscreen : bool
 
 func _ready():
 	$Panel.hide()
@@ -34,6 +35,10 @@ func init_config():
 		is_sound_effects_mute = config.get_value("sound_effects", "mute", false)
 		AudioServer.set_bus_mute(2, is_sound_effects_mute)
 		$Panel/SoundEffectsToggle.pressed = !is_sound_effects_mute
+		
+		is_fullscreen = config.get_value("gameplay", "fullscreen", false)
+		OS.window_fullscreen = is_fullscreen
+		$Panel/FullscreenButton.pressed = is_fullscreen
 	
 func _on_MusicToggle_toggled(button_pressed):
 	if button_pressed == true:
@@ -58,13 +63,23 @@ func _on_SoundEffectsToggle_toggled(button_pressed):
 func _on_SoundEffectsSlider_value_changed(value):
 	AudioServer.set_bus_volume_db(2, value)
 	sound_effects_volume = value
-			
+
+func _on_FullscreenButton_toggled(button_pressed):
+	if button_pressed == true:
+		OS.window_fullscreen = true
+		is_fullscreen = true
+	else:
+		OS.window_fullscreen = false
+		is_fullscreen = false
+		
 func _on_BackButton_pressed():
 	config.set_value("music", "mute", is_music_mute)
 	config.set_value("music", "volume", music_volume)
 	config.set_value("sound_effects", "mute", is_sound_effects_mute)
 	config.set_value("sound_effects", "volume", sound_effects_volume)
+	config.set_value("gameplay", "fullscreen", is_fullscreen)
 	config.save("user://settings.cfg")
 	$Panel.hide()
 	if !get_node("/root").has_node("Map"):
 		get_node("/root/MainMenu/NetworkPanel").show()
+
