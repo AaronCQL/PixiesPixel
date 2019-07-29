@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const SPEED = 220
 const MIN_DAMAGE = 3
-const MAX_DAMAGE = 17
+const MAX_DAMAGE = 21
 const FLOOR = Vector2(0, -1)
 
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
