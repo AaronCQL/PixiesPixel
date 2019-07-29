@@ -33,12 +33,13 @@ margin_bottom = 336.0
 
 [node name="Label" type="Label" parent="Panel/ScrollContainer"]
 margin_right = 468.0
-margin_bottom = 287.0
+margin_bottom = 316.0
 custom_fonts/font = SubResource( 1 )
 text = "Non-mobile:
 ARROW    - left/right/jump movement
 X        - attack
 SHIFT    - sprint (only for Adventurer)
+ESC      - in-game menu
 
 Mobile:
 ARROW    - left/right movement

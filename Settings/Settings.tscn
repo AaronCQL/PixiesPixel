@@ -61,6 +61,9 @@ max_value = 10.0
 ticks_on_borders = true
 
 [node name="BackButton" parent="Panel" instance=ExtResource( 4 )]
+margin_left = 544.0
+margin_right = 624.0
+text = "Save"
 
 [node name="FullscreenButton" type="CheckButton" parent="Panel"]
 margin_left = 208.0
