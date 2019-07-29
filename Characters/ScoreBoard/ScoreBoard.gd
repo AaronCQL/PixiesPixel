@@ -34,6 +34,7 @@ func _on_RematchButton_pressed():
 	rpc("go_to_network_lobby")
 
 remotesync func go_to_network_lobby():
+	Network.is_game_ongoing = false
 	Network.chosen_map = "Dungeon"
 	var network_lobby = preload("res://Lobby/NetworkLobby/NetworkLobby.tscn").instance()
 	get_node("/root").add_child(network_lobby)
