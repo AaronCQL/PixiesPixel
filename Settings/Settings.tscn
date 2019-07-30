@@ -2,9 +2,9 @@
 
 [ext_resource path="res://Settings/Settings.gd" type="Script" id=1]
 [ext_resource path="res://MainMenu/Label.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Theme/Theme.tres" type="Theme" id=3]
+[ext_resource path="res://Theme/VolumeToggleTheme.tres" type="Theme" id=3]
 [ext_resource path="res://MainMenu/BackButton.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Theme/button_theme.tres" type="Theme" id=5]
+[ext_resource path="res://Theme/ButtonTheme.tres" type="Theme" id=5]
 [ext_resource path="res://Assets/Music/Automation.ogg" type="AudioStream" id=6]
 
 [node name="Settings" type="CanvasLayer"]

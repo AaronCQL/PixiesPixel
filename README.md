@@ -1,8 +1,10 @@
-# PixiesPixel
+# PixiesPixel <img src="./Assets/AppIcons/U6_orS.png" width="64" />
 
-A realtime online multiplayer PvP game made with Godot.
+A cross-platform realtime online multiplayer PvP game made with [Godot](https://godotengine.org/).
 
-## Naming conventions
+**Try it out**: executables for Windows, MacOS, Linux, and Android are available over <a href="https://github.com/AaronCQL/PixiesPixel/releases/tag/v1.0.0-beta.1">here</a>.
+
+## Naming Conventions
 - **Classes/scenes/nodes**: pascal case <`MyScene`>  
 - **Variables/functions**: snake case <`my_var`>  
 - **Signals**: past tense <`door_opened`>  
@@ -15,8 +17,16 @@ A realtime online multiplayer PvP game made with Godot.
 file system to move/rename files in order to not break the references.
 
 ## Credits
-**For the assets used (sprites and tilemaps)**:
-1) <a href="https://rvros.itch.io/animated-pixel-hero">Adventurer</a> character
-2) <a href="https://orlando-pixel.itch.io/pirate-bomb">Pirate</a> character
-3) <a href="https://bakudas.itch.io/generic-dungeon-pack">Dungeon</a> map
-> A copy of the original licenses from the authors can be found in the `/Assets` directory.
+For the assets used (sprites/tilemaps/music/fonts):
+- <a href="https://rvros.itch.io/animated-pixel-hero">Adventurer</a> character
+- <a href="https://orlando-pixel.itch.io/pirate-bomb">Pirate</a> character
+- <a href="https://szadiart.itch.io/hero-and-opponents-animation">Archer</a> character
+- <a href="https://bakudas.itch.io/generic-dungeon-pack">Dungeon</a> map
+- <a href="https://vnitti.itch.io/taiga-asset-pack">Grassy Plains</a> map
+- All music by <a href="https://soundimage.org/sample-page/">Eric Matyas</a> of www.soundimage.org
+- <a href="https://managore.itch.io/m5x7">m5x7</a> and <a href="https://datagoblin.itch.io/monogram">Monogram</a> fonts
+
+> A copy of the original licenses/permissions from the authors (if applicable) can also be found in the respective subdirectories of the `/Assets` directory.
+
+## License
+Unless otherwise stated, all `GDScript` code written for this project is licensed under the MIT License. For the licenses regarding the assets used, please refer to the appropriate subdirectories within the `/Assets` directory for a copy of the original license/permissions (if applicable).
