@@ -1,6 +1,6 @@
-# PixiesPixel
+# PixiesPixel <img src="./Assets/AppIcons/U6_orS.png" width="64" />
 
-A realtime online multiplayer PvP game made with Godot.
+A realtime online multiplayer PvP game made with [Godot](https://godotengine.org/).
 
 ## Naming conventions
 - **Classes/scenes/nodes**: pascal case <`MyScene`>  
