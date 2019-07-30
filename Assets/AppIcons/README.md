@@ -1,6 +1,6 @@
 ## Credits
 
-The original character found in the logo is from the artwork found [here](https://jesse-m.itch.io/jungle-pack).
+The character depicted in the logo is taken from the artwork found [here](https://jesse-m.itch.io/jungle-pack).
 
 ## License
 
