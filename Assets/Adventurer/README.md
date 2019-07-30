@@ -1,6 +1,6 @@
 ## Credits
 
-The artwork for this Adventurer character are taken from [here](https://rvros.itch.io/animated-pixel-hero).
+The artwork for this Adventurer character is taken from [here](https://rvros.itch.io/animated-pixel-hero).
 
 ## License
 
