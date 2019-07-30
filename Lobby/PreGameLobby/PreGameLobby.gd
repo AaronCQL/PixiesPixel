@@ -61,6 +61,7 @@ remotesync func go_to_map():
 	get_node("/root").add_child(world)
 	for id in Network.players_info:
 		var actor_path : String = Network.players_info[id].actor_path
+		print(actor_path)
 		var spawnpoint : String = str(Network.players_info[id].spawnpoint)
 		var player_name : String = Network.players_info[id].name
 		var player = load(actor_path).instance()
