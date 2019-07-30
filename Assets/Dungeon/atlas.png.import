@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/tileset.png-2fb47b285df68852cd9e4b7718241f3a.stex"
+path="res://.import/atlas.png-c6e0fc1a6c9aa6e17e94d9f3fa3cb483.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Maps/Dungeon/tileset.png"
-dest_files=[ "res://.import/tileset.png-2fb47b285df68852cd9e4b7718241f3a.stex" ]
+source_file="res://Assets/Dungeon/atlas.png"
+dest_files=[ "res://.import/atlas.png-c6e0fc1a6c9aa6e17e94d9f3fa3cb483.stex" ]
 
 [params]
 

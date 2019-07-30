@@ -1,6 +1,11 @@
 [gd_resource type="TileSet" load_steps=3 format=2]
 
-[ext_resource path="res://Maps/Dungeon/tileset.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Dungeon/tileset.png" type="Texture" id=1]
+
+
+
+
+
 
 
 [sub_resource type="RectangleShape2D" id=1]

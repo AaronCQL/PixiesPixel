@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Extension_blue.png-e9afb204799076a23f807929b4b4a1df.stex"
+path="res://.import/Extension_blue.png-cc276f08ba6843175fc4ffa6c7f214d8.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Maps/GrassyPlains/PNG/Extension_blue.png"
-dest_files=[ "res://.import/Extension_blue.png-e9afb204799076a23f807929b4b4a1df.stex" ]
+source_file="res://Assets/GrassyPlains/Extension_blue.png"
+dest_files=[ "res://.import/Extension_blue.png-cc276f08ba6843175fc4ffa6c7f214d8.stex" ]
 
 [params]
 
