@@ -1,8 +1,11 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Lobby/PreGameLobby/PreGameLobby.gd" type="Script" id=1]
-[ext_resource path="res://Assets/finalNight.PNG" type="Texture" id=2]
+[ext_resource path="res://Assets/LobbyBackground/finalNight.PNG" type="Texture" id=2]
 [ext_resource path="res://Theme/button_theme.tres" type="Theme" id=3]
+
+
+
 
 [node name="PreGameLobby" type="CanvasLayer"]
 script = ExtResource( 1 )

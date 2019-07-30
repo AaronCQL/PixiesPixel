@@ -1,8 +1,14 @@
 [gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Characters/Pirate/Bomb.gd" type="Script" id=1]
-[ext_resource path="res://Characters/Pirate/bomb.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Pirate/bomb.png" type="Texture" id=2]
 [ext_resource path="res://Assets/SoundEffects/bomb_explode.wav" type="AudioStream" id=3]
+
+
+
+
+
+
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 13.9521

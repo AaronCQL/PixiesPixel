@@ -1,7 +1,7 @@
 [gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Characters/Adventurer/Adventurer.gd" type="Script" id=1]
-[ext_resource path="res://Characters/Adventurer/Sprites/adventurer-v1.5-Sheet.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Adventurer/adventurer-v1.5-Sheet.png" type="Texture" id=2]
 [ext_resource path="res://Characters/Adventurer/SwordHitBox.gd" type="Script" id=3]
 [ext_resource path="res://Characters/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=5]
@@ -10,6 +10,10 @@
 [ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Assets/SoundEffects/sword_swing.wav" type="AudioStream" id=9]
 [ext_resource path="res://Characters/MobileHUD/MobileControls.tscn" type="PackedScene" id=10]
+
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.04966, 12.3489 )

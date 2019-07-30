@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Characters/MobileHUD/MobileControls.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/MobileHUD/mobile_controls-export.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Sprites/MobileHUD/mobile_setting_button.png" type="Texture" id=3]
+[ext_resource path="res://Assets/MobileHUD/mobile_controls-export.png" type="Texture" id=2]
+[ext_resource path="res://Assets/MobileHUD/mobile_setting_button.png" type="Texture" id=3]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 25, 25 )

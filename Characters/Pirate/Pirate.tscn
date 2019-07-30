@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Characters/Pirate/Pirate.gd" type="Script" id=1]
-[ext_resource path="res://Characters/Pirate/pirate.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Pirate/pirate.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Characters/HealthBar/HealthBar.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=5]
@@ -9,6 +9,12 @@
 [ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Characters/Pirate/HUD.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Characters/MobileHUD/MobileControls.tscn" type="PackedScene" id=9]
+
+
+
+
+
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 12.8071, 23.712 )

@@ -2,7 +2,7 @@
 
 [ext_resource path="res://MainMenu/MainMenu.gd" type="Script" id=1]
 [ext_resource path="res://MainMenu/Controls.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Assets/finalNight.PNG" type="Texture" id=3]
+[ext_resource path="res://Assets/LobbyBackground/finalNight.PNG" type="Texture" id=3]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=5]
 [ext_resource path="res://Theme/Theme.tres" type="Theme" id=6]

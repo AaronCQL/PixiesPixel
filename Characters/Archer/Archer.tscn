@@ -1,7 +1,7 @@
 [gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Characters/Archer/Archer.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Sprites/Archer/archer.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Archer/archer.png" type="Texture" id=2]
 [ext_resource path="res://Characters/HealthBar/HealthBar.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Characters/HealthBar/HealthBar.gd" type="Script" id=4]
 [ext_resource path="res://Fonts/PlayerNameLabel.tres" type="DynamicFont" id=5]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Characters/ScoreBoard/ScoreBoard.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/SoundEffects/bow_release.wav" type="AudioStream" id=8]
 [ext_resource path="res://Characters/MobileHUD/MobileControls.tscn" type="PackedScene" id=9]
+
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 8.94723, 24.3224 )

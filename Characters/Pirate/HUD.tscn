@@ -1,8 +1,14 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Characters/Pirate/HUD.gd" type="Script" id=1]
-[ext_resource path="res://Characters/Pirate/bomb.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Pirate/bomb.png" type="Texture" id=2]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=3]
+
+
+
+
+
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 32

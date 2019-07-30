@@ -1,7 +1,10 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Characters/Adventurer/Sprites/Bars/Progress.png" type="Texture" id=1]
-[ext_resource path="res://Characters/Adventurer/Sprites/Bars/Border.png" type="Texture" id=2]
+[ext_resource path="res://Characters/HealthBar/Bars/Progress.png" type="Texture" id=1]
+[ext_resource path="res://Characters/HealthBar/Bars/Border.png" type="Texture" id=2]
+
+
+
 
 [node name="HealthBar" type="Node2D"]
 scale = Vector2( 0.6, 0.6 )

@@ -1,10 +1,13 @@
 [gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Lobby/NetworkLobby/NetworkLobby.gd" type="Script" id=1]
-[ext_resource path="res://Assets/finalNight.PNG" type="Texture" id=2]
+[ext_resource path="res://Assets/LobbyBackground/finalNight.PNG" type="Texture" id=2]
 [ext_resource path="res://Fonts/monogram_extended.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://Fonts/m5x7.ttf" type="DynamicFontData" id=4]
 [ext_resource path="res://Fonts/ButtonFont.tres" type="DynamicFont" id=5]
+
+
+
 
 [sub_resource type="DynamicFont" id=1]
 size = 32

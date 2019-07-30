@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="PixiesPixel"
 run/main_scene="res://MainMenu/MainMenu.tscn"
-config/icon="res://Assets/Icons/icon.png"
+config/icon="res://Assets/AppIcons/U6_orS.png"
 
 [autoload]
 
