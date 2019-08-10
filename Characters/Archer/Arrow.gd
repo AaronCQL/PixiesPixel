@@ -36,8 +36,7 @@ func _on_ArrowHitBox_area_entered(area):
 
 func _on_ArrowHitBox_body_entered(body):
 	if body.name == "CollisionBlocks":
-		$ArrowHitBox/CollisionShape2D.disabled = true
-		$CollisionShape2D.disabled = true
+		$ArrowHitBox/CollisionShape2D.set_deferred("disabled", true)
 		$Sprite/AnimationPlayer.stop()
 		$DespawnTimer.start(2)
 

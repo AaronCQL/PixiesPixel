@@ -10,6 +10,7 @@ var sound_effects_volume : float
 var is_fullscreen : bool
 
 func _ready():
+	AudioServer.set_bus_layout(load("res://Settings/default_bus_layout.tres"))
 	$Panel.hide()
 	audio_player = get_node("AudioStreamPlayer")
 	init_config()
