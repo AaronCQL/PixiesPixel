@@ -2,7 +2,7 @@
 
 A cross-platform realtime online multiplayer PvP game made with [Godot](https://godotengine.org/).
 
-**[Try it out](https://github.com/AaronCQL/PixiesPixel/releases/tag/v1.0.0-beta.1)**: executables for Windows, MacOS, Linux, and Android are available.
+**[Try it out](https://github.com/AaronCQL/PixiesPixel/releases/tag/v1.0.0-beta.1): executables for Windows, MacOS, Linux, and Android are available.**
 
 ## Instructions
 
